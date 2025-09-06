@@ -5,7 +5,7 @@
     "year": 1947,
     "country": "India",
     "img": "stamp1.jpg",
-    "description": "Issued to commemorate India's independence from British rule. A very symbolic piece."
+    "description": "Issued to commemorate India's independence from British rule."
   },
   { 
     "type": "Stamp",
@@ -13,7 +13,7 @@
     "year": 1952,
     "country": "UK",
     "img": "stamp2.jpg",
-    "description": "First definitive stamp series featuring Queen Elizabeth II after her coronation."
+    "description": "First definitive stamp series featuring Queen Elizabeth II."
   },
   { 
     "type": "Coin",
@@ -21,7 +21,7 @@
     "year": 1921,
     "country": "USA",
     "img": "coin1.jpg",
-    "description": "Also known as the Morgan Dollar, one of the most collected US coins."
+    "description": "Also known as the Morgan Dollar, popular among collectors."
   },
   { 
     "type": "Coin",
@@ -32,11 +32,11 @@
     "description": "British India Rupee issued during the reign of Edward VII."
   },
   { 
-    "type": "Stamp",
-    "name": "US, 1950 Liberty Stamp",
-    "year": 1950,
-    "country": "USA",
-    "img": "stamp3.jpg",
-    "description": "Commemorates liberty and freedom, popular among collectors."
+    "type": "Currency Note",
+    "name": "India, 100 Rupees 2010",
+    "year": 2010,
+    "country": "India",
+    "img": "note1.jpg",
+    "description": "Commemorative 100 rupee note issued in 2010."
   }
 ]
