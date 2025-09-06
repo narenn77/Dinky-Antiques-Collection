@@ -1,178 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dinky's Antiques Collection</title>
-<style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; }
-    header { display:flex; justify-content: space-between; align-items:center; padding:10px 20px; background:#444; color:#fff; }
-    header a { color:#fff; text-decoration:none; }
-    nav { padding:10px 20px; background:#eee; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
-    nav select, nav input { padding:5px; font-size:14px; }
-    section { padding:20px; }
-    h2 { margin-top:40px; }
-    .scroll-container { display:flex; overflow-x:auto; gap:15px; padding-bottom:10px; }
-    .item { flex:0 0 auto; width:150px; cursor:pointer; text-align:center; }
-    .item img { width:150px; height:120px; object-fit:cover; border:1px solid #ccc; border-radius:5px; }
-    .item-details { font-size:12px; margin-top:5px; }
-    /* Popup styles */
-    .popup-bg { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:1000; }
-    .popup-content { background:#fff; padding:20px; max-width:90%; max-height:90%; overflow:auto; border-radius:10px; text-align:center; }
-    .popup-content img { max-width:100%; margin-bottom:10px; }
-    .close-btn { background:#444; color:#fff; border:none; padding:5px 10px; cursor:pointer; border-radius:5px; margin-bottom:10px; }
-    @media(max-width:600px){
-        .item img { width:120px; height:100px; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dinky's Antiques Collection</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fafafa;
+      color: #333;
     }
-</style>
+    header {
+      background: #444;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.5em;
+    }
+    header a {
+      color: #ffd700;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .jump-links {
+      text-align: center;
+      margin: 20px 0;
+      font-size: 1.2em;
+    }
+    .jump-links a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #0066cc;
+      font-weight: bold;
+    }
+    .jump-links a:hover {
+      text-decoration: underline;
+    }
+    .section {
+      padding: 20px;
+    }
+    .items {
+      display: flex;
+      overflow-x: auto;
+      gap: 15px;
+      padding: 10px 0;
+    }
+    .item {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      min-width: 200px;
+      text-align: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .item img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+    /* Popup modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      max-height: 80%;
+      overflow-y: auto;
+    }
+    .modal img {
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 6px;
+    }
+    .close {
+      float: right;
+      font-size: 1.5em;
+      cursor: pointer;
+      color: #444;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>Dinky's Antiques Collection</h1>
+    <a href="mailto:dnaphx@gmail.com">dnaphx@gmail.com</a>
+  </header>
 
-<header>
-    <div><h1>Dinky's Antiques Collection</h1></div>
-    <div><a href="mailto:dnaphx@gmail.com">Contact: dnaphx@gmail.com</a></div>
-</header>
+  <div class="jump-links">
+    <strong>Check our Collection of :</strong>
+    <a href="#stamps">Stamps</a> |
+    <a href="#coins">Coins</a> |
+    <a href="#notes">Currency Notes</a>
+  </div>
 
-<nav>
-    <a href="#stamps">Jump to Stamps</a>
-    <a href="#coins">Jump to Coins</a>
-    <a href="#notes">Jump to Currency Notes</a>
-    <input type="text" id="searchInput" placeholder="Search by name...">
-    <select id="yearFilter"><option value="">Filter by Year Range</option></select>
-    <select id="countryFilter"><option value="">Filter by Country</option></select>
-</nav>
-
-<section id="stamps">
+  <section id="stamps" class="section">
     <h2>Stamps</h2>
-    <div class="scroll-container" id="stampsContainer"></div>
-</section>
+    <div class="items" id="stamps-list"></div>
+  </section>
 
-<section id="coins">
+  <section id="coins" class="section">
     <h2>Coins</h2>
-    <div class="scroll-container" id="coinsContainer"></div>
-</section>
+    <div class="items" id="coins-list"></div>
+  </section>
 
-<section id="notes">
+  <section id="notes" class="section">
     <h2>Currency Notes</h2>
-    <div class="scroll-container" id="notesContainer"></div>
-</section>
+    <div class="items" id="notes-list"></div>
+  </section>
 
-<!-- Popup -->
-<div class="popup-bg" id="popup">
-    <div class="popup-content" id="popupContent">
-        <button class="close-btn" onclick="closePopup()">Close</button>
-        <div id="popupImages"></div>
-        <div id="popupDescription"></div>
+  <!-- Modal popup -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3 id="modal-title"></h3>
+      <p id="modal-description"></p>
+      <img id="modal-img-front" src="" alt="">
+      <img id="modal-img-back" src="" alt="" style="display:none;">
     </div>
-</div>
+  </div>
 
-<script>
-// Load your data.json
-let items = [];
-fetch('data.json')
-    .then(res => res.json())
-    .then(data => {
-        items = data;
-        setupFilters();
-        displayItems(items);
-    });
+  <script>
+    async function loadData() {
+      const res = await fetch('data.json');
+      const data = await res.json();
 
-const searchInput = document.getElementById('searchInput');
+      const stampsList = document.getElementById("stamps-list");
+      const coinsList = document.getElementById("coins-list");
+      const notesList = document.getElementById("notes-list");
 
-function displayItems(filteredItems){
-    const stampsContainer = document.getElementById('stampsContainer');
-    const coinsContainer = document.getElementById('coinsContainer');
-    const notesContainer = document.getElementById('notesContainer');
-    stampsContainer.innerHTML = '';
-    coinsContainer.innerHTML = '';
-    notesContainer.innerHTML = '';
+      data.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "item";
 
-    filteredItems.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'item';
+        let img = document.createElement("img");
+        img.src = item.type === "Stamp" ? item.img : item.imgFront;
+        img.alt = item.name;
 
-        const img = document.createElement('img');
-        img.src = item.imgFront || item.img;
         div.appendChild(img);
+        div.innerHTML += `<p><strong>${item.name}</strong></p><p>${item.year} - ${item.country}</p>`;
 
-        // Add details below image
-        const details = document.createElement('div');
-        details.className = 'item-details';
-        details.innerHTML = `<strong>${item.name}</strong><br>${item.year}, ${item.country}`;
-        div.appendChild(details);
+        div.onclick = () => openModal(item);
 
-        // Popup onclick
-        div.onclick = ()=> openPopup(item.type==='Stamp'? [item.img] : [item.imgFront, item.imgBack], item.description);
-
-        if(item.type==='Stamp') stampsContainer.appendChild(div);
-        if(item.type==='Coin') coinsContainer.appendChild(div);
-        if(item.type==='Currency Note') notesContainer.appendChild(div);
-    });
-}
-
-// Popup functions
-function openPopup(images, description){
-    document.getElementById('popupImages').innerHTML = images.map(src => `<img src="${src}">`).join('');
-    document.getElementById('popupDescription').textContent = description;
-    document.getElementById('popup').style.display = 'flex';
-}
-function closePopup(){
-    document.getElementById('popup').style.display = 'none';
-}
-
-// Filters setup
-function setupFilters(){
-    // Year ranges 10-year
-    const years = items.map(i => i.year);
-    const minYear = Math.min(...years);
-    const maxYear = Math.max(...years);
-    const yearSelect = document.getElementById('yearFilter');
-    for(let y = minYear - (minYear%10); y <= maxYear; y+=10){
-        const opt = document.createElement('option');
-        opt.value = `${y}-${y+9}`;
-        opt.textContent = `${y}-${y+9}`;
-        yearSelect.appendChild(opt);
+        if (item.type === "Stamp") stampsList.appendChild(div);
+        else if (item.type === "Coin") coinsList.appendChild(div);
+        else if (item.type === "Currency Note") notesList.appendChild(div);
+      });
     }
 
-    // Countries alphabetical
-    const countries = [...new Set(items.map(i=>i.country))].sort();
-    const countrySelect = document.getElementById('countryFilter');
-    countries.forEach(c=>{
-        const opt = document.createElement('option');
-        opt.value = c;
-        opt.textContent = c;
-        countrySelect.appendChild(opt);
-    });
+    function openModal(item) {
+      document.getElementById("modal").style.display = "flex";
+      document.getElementById("modal-title").innerText = item.name + " (" + item.year + ")";
+      document.getElementById("modal-description").innerText = item.description;
+      document.getElementById("modal-img-front").src = item.type === "Stamp" ? item.img : item.imgFront;
 
-    // Event listeners
-    yearSelect.addEventListener('change', applyFilters);
-    countrySelect.addEventListener('change', applyFilters);
-    searchInput.addEventListener('input', applyFilters);
-}
-
-function applyFilters(){
-    const yearValue = document.getElementById('yearFilter').value;
-    const countryValue = document.getElementById('countryFilter').value;
-    const searchValue = searchInput.value.toLowerCase();
-
-    let filtered = items;
-
-    if(yearValue){
-        const [start,end] = yearValue.split('-').map(Number);
-        filtered = filtered.filter(i => i.year >= start && i.year <= end);
-    }
-    if(countryValue){
-        filtered = filtered.filter(i => i.country === countryValue);
-    }
-    if(searchValue){
-        filtered = filtered.filter(i => i.name.toLowerCase().includes(searchValue));
+      if (item.type !== "Stamp" && item.imgBack) {
+        document.getElementById("modal-img-back").style.display = "block";
+        document.getElementById("modal-img-back").src = item.imgBack;
+      } else {
+        document.getElementById("modal-img-back").style.display = "none";
+      }
     }
 
-    // Sort by year ascending
-    filtered.sort((a,b)=> a.year - b.year);
-    displayItems(filtered);
-}
-</script>
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
 
+    loadData();
+  </script>
 </body>
 </html>
