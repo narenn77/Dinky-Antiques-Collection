@@ -2,47 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Stamp & Coin Collection</title>
+  <title>Dinky Antiques Collection</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 20px; }
-    h1 { text-align: center; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    h1 { margin: 0; }
+    a { text-decoration: none; color: #0073e6; }
+    a:hover { color: #005bb5; }
+    .jump-links { margin-bottom: 20px; text-align: center; }
+    .jump-links a { margin: 0 10px; }
     .controls { text-align: center; margin-bottom: 20px; }
     input, select { margin: 5px; padding: 5px; }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 15px;
-    }
-    .item {
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 10px;
-      text-align: center;
-      background: #f9f9f9;
-    }
+    .section { margin-bottom: 40px; }
+    .section h2 { text-align: left; border-bottom: 2px solid #ccc; padding-bottom: 5px; }
+    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+    .item { border: 1px solid #ccc; border-radius: 8px; padding: 10px; text-align: center; background: #f9f9f9; }
     img { max-width: 100%; height: auto; border-radius: 4px; }
-    .desc {
-      font-size: 0.9em;
-      color: #555;
-      margin-top: 5px;
-    }
+    .desc { font-size: 0.9em; color: #555; margin-top: 5px; }
   </style>
 </head>
 <body>
-  <div style="text-align: center; margin-bottom: 10px;">
-  📧 Contact: 
-  <a href="mailto:dnaphx@gmail.com">dnaphx@gmail.com</a>
-</div>
 
-  <h1>Dinky's Stamp & Coin Collection</h1>
+  <div class="header">
+    <h1>Dinky Antiques Collection</h1>
+    <div>📧 <a href="mailto:yourname@example.com">yourname@example.com</a></div>
+  </div>
+
+  <div class="jump-links">
+    Jump to see: 
+    <a href="#stamps">Stamps</a> | 
+    <a href="#coins">Coins</a> | 
+    <a href="#notes">Currency Notes</a>
+  </div>
 
   <div class="controls">
-    <input type="text" id="search" placeholder="Search by name...">
-    <select id="filterType">
-      <option value="">All Categories</option>
-      <option value="Stamp">Stamps</option>
-      <option value="Coin">Coins</option>
-    </select>
+    <input type="text" id="search" placeholder="Search by name or description...">
     <select id="filterYear">
       <option value="">All Years</option>
     </select>
@@ -51,92 +45,78 @@
     </select>
   </div>
 
-  <div id="gallery" class="gallery"></div>
+  <!-- Sections -->
+  <div id="stamps" class="section">
+    <h2>Stamps</h2>
+    <div class="gallery" id="gallery-stamp"></div>
+  </div>
+
+  <div id="coins" class="section">
+    <h2>Coins</h2>
+    <div class="gallery" id="gallery-coin"></div>
+  </div>
+
+  <div id="notes" class="section">
+    <h2>Currency Notes</h2>
+    <div class="gallery" id="gallery-note"></div>
+  </div>
 
   <script>
-    const items = [
-      { 
-        type: "Stamp", 
-        name: "India, 1947 Independence", 
-        year: 1947, 
-        country: "India", 
-        img: "stamp1.jpg", 
-        description: "Issued to commemorate India's independence from British rule. A very symbolic piece." 
-      },
-      { 
-        type: "Stamp", 
-        name: "UK, 1952 Queen Elizabeth II", 
-        year: 1952, 
-        country: "UK", 
-        img: "stamp2.jpg", 
-        description: "First definitive stamp series featuring Queen Elizabeth II after her coronation." 
-      },
-      { 
-        type: "Coin", 
-        name: "US, 1921 Silver Dollar", 
-        year: 1921, 
-        country: "USA", 
-        img: "coin1.jpg", 
-        description: "Also known as the Morgan Dollar, one of the most collected US coins." 
-      },
-      { 
-        type: "Coin", 
-        name: "India, 1901 Rupee", 
-        year: 1901, 
-        country: "India", 
-        img: "coin2.jpg", 
-        description: "British India Rupee issued during the reign of Edward VII." 
-      },
-  { 
-    "type": "Stamp",
-    "name": "US, 1950 Liberty Stamp",
-    "year": 1950,
-    "country": "USA",
-    "img": "stamp3.jpg",
-    "description": "Commemorates liberty and freedom, popular among collectors."
-  }
-    ];
+    let items = [];
 
-    const gallery = document.getElementById("gallery");
     const searchBox = document.getElementById("search");
-    const filterType = document.getElementById("filterType");
     const filterYear = document.getElementById("filterYear");
     const filterCountry = document.getElementById("filterCountry");
 
-    // Populate Year dropdown
-    const years = [...new Set(items.map(item => item.year))].sort((a, b) => a - b);
-    years.forEach(year => {
-      const option = document.createElement("option");
-      option.value = year;
-      option.textContent = year;
-      filterYear.appendChild(option);
-    });
+    const galleries = {
+      "Stamp": document.getElementById("gallery-stamp"),
+      "Coin": document.getElementById("gallery-coin"),
+      "Currency Note": document.getElementById("gallery-note")
+    };
 
-    // Populate Country dropdown
-    const countries = [...new Set(items.map(item => item.country))].sort();
-    countries.forEach(country => {
-      const option = document.createElement("option");
-      option.value = country;
-      option.textContent = country;
-      filterCountry.appendChild(option);
-    });
+    // Fetch JSON with cache-busting
+    fetch("data.json?v=" + new Date().getTime())
+      .then(response => response.json())
+      .then(data => {
+        items = data;
+        populateFilters();
+        displayItems();
+      })
+      .catch(error => console.error("Error loading data:", error));
+
+    function populateFilters() {
+      const years = [...new Set(items.map(item => item.year))].sort((a,b)=>a-b);
+      years.forEach(y => {
+        const option = document.createElement("option");
+        option.value = y;
+        option.textContent = y;
+        filterYear.appendChild(option);
+      });
+
+      const countries = [...new Set(items.map(item => item.country))].sort();
+      countries.forEach(c => {
+        const option = document.createElement("option");
+        option.value = c;
+        option.textContent = c;
+        filterCountry.appendChild(option);
+      });
+    }
 
     function displayItems() {
       const search = searchBox.value.toLowerCase();
-      const type = filterType.value;
       const year = filterYear.value;
       const country = filterCountry.value;
 
-      gallery.innerHTML = "";
-      items
-        .filter(item =>
+      // Clear all galleries
+      Object.values(galleries).forEach(g => g.innerHTML = "");
+
+      items.forEach(item => {
+        if (
           (item.name.toLowerCase().includes(search) || item.description.toLowerCase().includes(search)) &&
-          (type === "" || item.type === type) &&
           (year === "" || item.year.toString() === year) &&
           (country === "" || item.country === country)
-        )
-        .forEach(item => {
-          gallery.innerHTML += `
+        ) {
+          const html = `
             <div class="item">
               <img src="${item.img}" alt="${item.name}">
               <p><strong>${item.name}</strong></p>
@@ -144,16 +124,17 @@
               <p class="desc">${item.description}</p>
             </div>
           `;
-        });
+          if(galleries[item.type]) {
+            galleries[item.type].innerHTML += html;
+          }
+        }
+      });
     }
 
     searchBox.addEventListener("input", displayItems);
-    filterType.addEventListener("change", displayItems);
     filterYear.addEventListener("change", displayItems);
     filterCountry.addEventListener("change", displayItems);
-
-    displayItems();
   </script>
+
 </body>
 </html>
-
