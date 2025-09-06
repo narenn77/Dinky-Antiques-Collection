@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stamp & Coin Collection</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { text-align: center; }
+    .controls { text-align: center; margin-bottom: 20px; }
+    input, select { margin: 5px; padding: 5px; }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    .item {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      background: #f9f9f9;
+    }
+    img { max-width: 100%; height: auto; border-radius: 4px; }
+    .desc {
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>My Stamp & Coin Collection</h1>
+
+  <div class="controls">
+    <input type="text" id="search" placeholder="Search by name...">
+    <select id="filterType">
+      <option value="">All Categories</option>
+      <option value="Stamp">Stamps</option>
+      <option value="Coin">Coins</option>
+    </select>
+    <select id="filterYear">
+      <option value="">All Years</option>
+    </select>
+    <select id="filterCountry">
+      <option value="">All Countries</option>
+    </select>
+  </div>
+
+  <div id="gallery" class="gallery"></div>
+
+  <script>
+    const items = [
+      { 
+        type: "Stamp", 
+        name: "India, 1947 Independence", 
+        year: 1947, 
+        country: "India", 
+        img: "stamp1.jpg", 
+        description: "Issued to commemorate India's independence from British rule. A very symbolic piece." 
+      },
+      { 
+        type: "Stamp", 
+        name: "UK, 1952 Queen Elizabeth II", 
+        year: 1952, 
+        country: "UK", 
+        img: "stamp2.jpg", 
+        description: "First definitive stamp series featuring Queen Elizabeth II after her coronation." 
+      },
+      { 
+        type: "Coin", 
+        name: "US, 1921 Silver Dollar", 
+        year: 1921, 
+        country: "USA", 
+        img: "coin1.jpg", 
+        description: "Also known as the Morgan Dollar, one of the most collected US coins." 
+      },
+      { 
+        type: "Coin", 
+        name: "India, 1901 Rupee", 
+        year: 1901, 
+        country: "India", 
+        img: "coin2.jpg", 
+        description: "British India Rupee issued during the reign of Edward VII." 
+      }
+    ];
+
+    const gallery = document.getElementById("gallery");
+    const searchBox = document.getElementById("search");
+    const filterType = document.getElementById("filterType");
+    const filterYear = document.getElementById("filterYear");
+    const filterCountry = document.getElementById("filterCountry");
+
+    // Populate Year dropdown
+    const years = [...new Set(items.map(item => item.year))].sort((a, b) => a - b);
+    years.forEach(year => {
+      const option = document.createElement("option");
+      option.value = year;
+      option.textContent = year;
+      filterYear.appendChild(option);
+    });
+
+    // Populate Country dropdown
+    const countries = [...new Set(items.map(item => item.country))].sort();
+    countries.forEach(country => {
+      const option = document.createElement("option");
+      option.value = country;
+      option.textContent = country;
+      filterCountry.appendChild(option);
+    });
+
+    function displayItems() {
+      const search = searchBox.value.toLowerCase();
+      const type = filterType.value;
+      const year = filterYear.value;
+      const country = filterCountry.value;
+
+      gallery.innerHTML = "";
+      items
+        .filter(item =>
+          (item.name.toLowerCase().includes(search) || item.description.toLowerCase().includes(search)) &&
+          (type === "" || item.type === type) &&
+          (year === "" || item.year.toString() === year) &&
+          (country === "" || item.country === country)
+        )
+        .forEach(item => {
+          gallery.innerHTML += `
+            <div class="item">
+              <img src="${item.img}" alt="${item.name}">
+              <p><strong>${item.name}</strong></p>
+              <p>${item.year} (${item.type}) - ${item.country}</p>
+              <p class="desc">${item.description}</p>
+            </div>
+          `;
+        });
+    }
+
+    searchBox.addEventListener("input", displayItems);
+    filterType.addEventListener("change", displayItems);
+    filterYear.addEventListener("change", displayItems);
+    filterCountry.addEventListener("change", displayItems);
+
+    displayItems();
+  </script>
+</body>
+</html>
