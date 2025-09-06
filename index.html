@@ -8,12 +8,14 @@
     body { font-family: Arial, sans-serif; margin:0; padding:0; }
     header { display:flex; justify-content: space-between; align-items:center; padding:10px 20px; background:#444; color:#fff; }
     header a { color:#fff; text-decoration:none; }
-    nav { padding:10px 20px; background:#eee; display:flex; gap:10px; flex-wrap:wrap; }
+    nav { padding:10px 20px; background:#eee; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    nav select, nav input { padding:5px; font-size:14px; }
     section { padding:20px; }
     h2 { margin-top:40px; }
     .scroll-container { display:flex; overflow-x:auto; gap:15px; padding-bottom:10px; }
     .item { flex:0 0 auto; width:150px; cursor:pointer; text-align:center; }
     .item img { width:150px; height:120px; object-fit:cover; border:1px solid #ccc; border-radius:5px; }
+    .item-details { font-size:12px; margin-top:5px; }
     /* Popup styles */
     .popup-bg { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:1000; }
     .popup-content { background:#fff; padding:20px; max-width:90%; max-height:90%; overflow:auto; border-radius:10px; text-align:center; }
@@ -27,7 +29,7 @@
 <body>
 
 <header>
-    <div><h1>My Stamp & Coin Collection</h1></div>
+    <div><h1>Dinky's Antiques Collection</h1></div>
     <div><a href="mailto:dnaphx@gmail.com">Contact: dnaphx@gmail.com</a></div>
 </header>
 
@@ -35,6 +37,7 @@
     <a href="#stamps">Jump to Stamps</a>
     <a href="#coins">Jump to Coins</a>
     <a href="#notes">Jump to Currency Notes</a>
+    <input type="text" id="searchInput" placeholder="Search by name...">
     <select id="yearFilter"><option value="">Filter by Year Range</option></select>
     <select id="countryFilter"><option value="">Filter by Country</option></select>
 </nav>
@@ -74,6 +77,8 @@ fetch('data.json')
         displayItems(items);
     });
 
+const searchInput = document.getElementById('searchInput');
+
 function displayItems(filteredItems){
     const stampsContainer = document.getElementById('stampsContainer');
     const coinsContainer = document.getElementById('coinsContainer');
@@ -85,26 +90,23 @@ function displayItems(filteredItems){
     filteredItems.forEach(item => {
         const div = document.createElement('div');
         div.className = 'item';
-        const img = document.createElement('img');
 
-        if(item.type === 'Stamp'){
-            img.src = item.img;
-            div.appendChild(img);
-            div.onclick = ()=> openPopup([item.img], item.description);
-            stampsContainer.appendChild(div);
-        }
-        if(item.type === 'Coin'){
-            img.src = item.imgFront;
-            div.appendChild(img);
-            div.onclick = ()=> openPopup([item.imgFront, item.imgBack], item.description);
-            coinsContainer.appendChild(div);
-        }
-        if(item.type === 'Currency Note'){
-            img.src = item.imgFront;
-            div.appendChild(img);
-            div.onclick = ()=> openPopup([item.imgFront, item.imgBack], item.description);
-            notesContainer.appendChild(div);
-        }
+        const img = document.createElement('img');
+        img.src = item.imgFront || item.img;
+        div.appendChild(img);
+
+        // Add details below image
+        const details = document.createElement('div');
+        details.className = 'item-details';
+        details.innerHTML = `<strong>${item.name}</strong><br>${item.year}, ${item.country}`;
+        div.appendChild(details);
+
+        // Popup onclick
+        div.onclick = ()=> openPopup(item.type==='Stamp'? [item.img] : [item.imgFront, item.imgBack], item.description);
+
+        if(item.type==='Stamp') stampsContainer.appendChild(div);
+        if(item.type==='Coin') coinsContainer.appendChild(div);
+        if(item.type==='Currency Note') notesContainer.appendChild(div);
     });
 }
 
@@ -145,11 +147,14 @@ function setupFilters(){
     // Event listeners
     yearSelect.addEventListener('change', applyFilters);
     countrySelect.addEventListener('change', applyFilters);
+    searchInput.addEventListener('input', applyFilters);
 }
 
 function applyFilters(){
     const yearValue = document.getElementById('yearFilter').value;
     const countryValue = document.getElementById('countryFilter').value;
+    const searchValue = searchInput.value.toLowerCase();
+
     let filtered = items;
 
     if(yearValue){
@@ -157,7 +162,10 @@ function applyFilters(){
         filtered = filtered.filter(i => i.year >= start && i.year <= end);
     }
     if(countryValue){
-        filtered = filtered.filter(i=> i.country === countryValue);
+        filtered = filtered.filter(i => i.country === countryValue);
+    }
+    if(searchValue){
+        filtered = filtered.filter(i => i.name.toLowerCase().includes(searchValue));
     }
 
     // Sort by year ascending
