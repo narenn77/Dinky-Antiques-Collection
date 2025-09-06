@@ -31,12 +31,12 @@
     "img": "coin2.jpg",
     "description": "British India Rupee issued during the reign of Edward VII."
   },
-{ 
-  "type": "Stamp",
-  "name": "US, 1950 Liberty Stamp",
-  "year": 1950,
-  "country": "USA",
-  "img": "stamp3.jpg",
-  "description": "Commemorates liberty and freedom, popular among collectors."
-}
+  { 
+    "type": "Stamp",
+    "name": "US, 1950 Liberty Stamp",
+    "year": 1950,
+    "country": "USA",
+    "img": "stamp3.jpg",
+    "description": "Commemorates liberty and freedom, popular among collectors."
+  }
 ]
