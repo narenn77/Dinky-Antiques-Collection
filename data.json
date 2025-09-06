@@ -31,12 +31,12 @@
     "img": "coin2.jpg",
     "description": "British India Rupee issued during the reign of Edward VII."
   },
-  { 
-    "type": "Coin",
-    "name": "India, 1948 Independence",
-    "year": 1948,
-    "country": "India",
-    "img": "Coin3.jpg",
-    "description": "Issued to commemorate India's independence from British rule. A very symbolic piece."
-  }
+{ 
+  "type": "Stamp",
+  "name": "US, 1950 Liberty Stamp",
+  "year": 1950,
+  "country": "USA",
+  "img": "stamp3.jpg",
+  "description": "Commemorates liberty and freedom, popular among collectors."
+}
 ]
