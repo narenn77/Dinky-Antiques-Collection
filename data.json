@@ -1,340 +1,49 @@
 [
-  {
-    "type": "Stamp",
-    "name": "India, 1947 Independence",
-    "year": 1947,
-    "country": "India",
-    "img": "images/stamps/S-India-1947-Independence.jpg",
-    "description": "Issued to commemorate India's independence."
-  },
-  {
-    "type": "Stamp",
-    "name": "UK, 1952 Queen Elizabeth",
-    "year": 1952,
-    "country": "UK",
-    "img": "images/stamps/S-UK-1952-QueenElizabeth.jpg",
-    "description": "First stamp of Queen Elizabeth II."
-  },
-  {
-    "type": "Stamp",
-    "name": "USA, 1960 Liberty",
-    "year": 1960,
-    "country": "USA",
-    "img": "images/stamps/S-USA-1960-Liberty.jpg",
-    "description": "Liberty stamp issued in 1960."
-  },
-  {
-    "type": "Stamp",
-    "name": "France, 1970 Eiffel Tower",
-    "year": 1970,
-    "country": "France",
-    "img": "images/stamps/S-France-1970-EiffelTower.jpg",
-    "description": "Eiffel Tower commemorative stamp."
-  },
-  {
-    "type": "Stamp",
-    "name": "Germany, 1980 Berlin",
-    "year": 1980,
-    "country": "Germany",
-    "img": "images/stamps/S-Germany-1980-Berlin.jpg",
-    "description": "Berlin city stamp."
-  },
-  {
-    "type": "Stamp",
-    "name": "India, 1990 Mahatma Gandhi",
-    "year": 1990,
-    "country": "India",
-    "img": "images/stamps/S-India-1990-Gandhi.jpg",
-    "description": "Mahatma Gandhi commemorative stamp."
-  },
-  {
-    "type": "Stamp",
-    "name": "UK, 1995 Queen Mother",
-    "year": 1995,
-    "country": "UK",
-    "img": "images/stamps/S-UK-1995-QueenMother.jpg",
-    "description": "Queen Mother commemorative stamp."
-  },
-  {
-    "type": "Stamp",
-    "name": "USA, 2000 Millennium",
-    "year": 2000,
-    "country": "USA",
-    "img": "images/stamps/S-USA-2000-Millennium.jpg",
-    "description": "Millennium stamp issued in 2000."
-  },
-  {
-    "type": "Stamp",
-    "name": "France, 2005 Louvre",
-    "year": 2005,
-    "country": "France",
-    "img": "images/stamps/S-France-2005-Louvre.jpg",
-    "description": "Louvre commemorative stamp."
-  },
-  {
-    "type": "Stamp",
-    "name": "Germany, 2010 Berlin Wall",
-    "year": 2010,
-    "country": "Germany",
-    "img": "images/stamps/S-Germany-2010-BerlinWall.jpg",
-    "description": "Berlin Wall stamp."
-  },
-  {
-    "type": "Stamp",
-    "name": "India, 2012 Taj Mahal",
-    "year": 2012,
-    "country": "India",
-    "img": "images/stamps/S-India-2012-TajMahal.jpg",
-    "description": "Taj Mahal commemorative stamp."
-  },
-  {
-    "type": "Stamp",
-    "name": "UK, 2014 Big Ben",
-    "year": 2014,
-    "country": "UK",
-    "img": "images/stamps/S-UK-2014-BigBen.jpg",
-    "description": "Big Ben stamp."
-  },
-  {
-    "type": "Stamp",
-    "name": "USA, 2015 Statue of Liberty",
-    "year": 2015,
-    "country": "USA",
-    "img": "images/stamps/S-USA-2015-StatueOfLiberty.jpg",
-    "description": "Statue of Liberty stamp."
-  },
-  {
-    "type": "Stamp",
-    "name": "France, 2017 Mont Saint-Michel",
-    "year": 2017,
-    "country": "France",
-    "img": "images/stamps/S-France-2017-MontSaintMichel.jpg",
-    "description": "Mont Saint-Michel commemorative stamp."
-  },
-  {
-    "type": "Stamp",
-    "name": "Germany, 2019 Brandenburg Gate",
-    "year": 2019,
-    "country": "Germany",
-    "img": "images/stamps/S-Germany-2019-BrandenburgGate.jpg",
-    "description": "Brandenburg Gate stamp."
-  },
+  {"type":"Stamp","name":"Stamp 1","year":1947,"country":"Country A","img":"images/stamps/S-Item-1.jpg","description":"Test stamp 1."},
+  {"type":"Stamp","name":"Stamp 2","year":1948,"country":"Country B","img":"images/stamps/S-Item-2.jpg","description":"Test stamp 2."},
+  {"type":"Stamp","name":"Stamp 3","year":1949,"country":"Country C","img":"images/stamps/S-Item-3.jpg","description":"Test stamp 3."},
+  {"type":"Stamp","name":"Stamp 4","year":1950,"country":"Country D","img":"images/stamps/S-Item-4.jpg","description":"Test stamp 4."},
+  {"type":"Stamp","name":"Stamp 5","year":1951,"country":"Country E","img":"images/stamps/S-Item-5.jpg","description":"Test stamp 5."},
+  {"type":"Stamp","name":"Stamp 6","year":1952,"country":"Country F","img":"images/stamps/S-Item-6.jpg","description":"Test stamp 6."},
+  {"type":"Stamp","name":"Stamp 7","year":1953,"country":"Country G","img":"images/stamps/S-Item-7.jpg","description":"Test stamp 7."},
+  {"type":"Stamp","name":"Stamp 8","year":1954,"country":"Country H","img":"images/stamps/S-Item-8.jpg","description":"Test stamp 8."},
+  {"type":"Stamp","name":"Stamp 9","year":1955,"country":"Country I","img":"images/stamps/S-Item-9.jpg","description":"Test stamp 9."},
+  {"type":"Stamp","name":"Stamp 10","year":1956,"country":"Country J","img":"images/stamps/S-Item-10.jpg","description":"Test stamp 10."},
+  {"type":"Stamp","name":"Stamp 11","year":1957,"country":"Country K","img":"images/stamps/S-Item-11.jpg","description":"Test stamp 11."},
+  {"type":"Stamp","name":"Stamp 12","year":1958,"country":"Country L","img":"images/stamps/S-Item-12.jpg","description":"Test stamp 12."},
+  {"type":"Stamp","name":"Stamp 13","year":1959,"country":"Country M","img":"images/stamps/S-Item-13.jpg","description":"Test stamp 13."},
+  {"type":"Stamp","name":"Stamp 14","year":1960,"country":"Country N","img":"images/stamps/S-Item-14.jpg","description":"Test stamp 14."},
+  {"type":"Stamp","name":"Stamp 15","year":1961,"country":"Country O","img":"images/stamps/S-Item-15.jpg","description":"Test stamp 15."},
 
-  {
-    "type": "Coin",
-    "name": "India, 1948 One Rupee",
-    "year": 1948,
-    "country": "India",
-    "imgFront": "images/coins/C-India-1948-OneRupee-front.jpg",
-    "imgBack": "images/coins/C-India-1948-OneRupee-back.jpg",
-    "description": "One rupee coin issued in 1948."
-  },
-  {
-    "type": "Coin",
-    "name": "USA, 1921 Silver Dollar",
-    "year": 1921,
-    "country": "USA",
-    "imgFront": "images/coins/C-USA-1921-SilverDollar-front.jpg",
-    "imgBack": "images/coins/C-USA-1921-SilverDollar-back.jpg",
-    "description": "Also known as the Morgan Dollar."
-  },
-  {
-    "type": "Coin",
-    "name": "UK, 1953 Penny",
-    "year": 1953,
-    "country": "UK",
-    "imgFront": "images/coins/C-UK-1953-Penny-front.jpg",
-    "imgBack": "images/coins/C-UK-1953-Penny-back.jpg",
-    "description": "Penny coin issued in 1953."
-  },
-  {
-    "type": "Coin",
-    "name": "Germany, 1970 5 Marks",
-    "year": 1970,
-    "country": "Germany",
-    "imgFront": "images/coins/C-Germany-1970-5Marks-front.jpg",
-    "imgBack": "images/coins/C-Germany-1970-5Marks-back.jpg",
-    "description": "Five marks coin."
-  },
-  {
-    "type": "Coin",
-    "name": "France, 1985 10 Francs",
-    "year": 1985,
-    "country": "France",
-    "imgFront": "images/coins/C-France-1985-10Francs-front.jpg",
-    "imgBack": "images/coins/C-France-1985-10Francs-back.jpg",
-    "description": "Ten francs coin."
-  },
-  {
-    "type": "Coin",
-    "name": "India, 1990 5 Rupees",
-    "year": 1990,
-    "country": "India",
-    "imgFront": "images/coins/C-India-1990-5Rupees-front.jpg",
-    "imgBack": "images/coins/C-India-1990-5Rupees-back.jpg",
-    "description": "Five rupees coin."
-  },
-  {
-    "type": "Coin",
-    "name": "USA, 2000 Quarter",
-    "year": 2000,
-    "country": "USA",
-    "imgFront": "images/coins/C-USA-2000-Quarter-front.jpg",
-    "imgBack": "images/coins/C-USA-2000-Quarter-back.jpg",
-    "description": "US quarter coin issued in 2000."
-  },
-  {
-    "type": "Coin",
-    "name": "UK, 2005 2 Pounds",
-    "year": 2005,
-    "country": "UK",
-    "imgFront": "images/coins/C-UK-2005-2Pounds-front.jpg",
-    "imgBack": "images/coins/C-UK-2005-2Pounds-back.jpg",
-    "description": "2 pounds coin."
-  },
-  {
-    "type": "Coin",
-    "name": "Germany, 2010 10 Euros",
-    "year": 2010,
-    "country": "Germany",
-    "imgFront": "images/coins/C-Germany-2010-10Euros-front.jpg",
-    "imgBack": "images/coins/C-Germany-2010-10Euros-back.jpg",
-    "description": "Ten euros coin."
-  },
-  {
-    "type": "Coin",
-    "name": "France, 2012 5 Euros",
-    "year": 2012,
-    "country": "France",
-    "imgFront": "images/coins/C-France-2012-5Euros-front.jpg",
-    "imgBack": "images/coins/C-France-2012-5Euros-back.jpg",
-    "description": "Five euros coin."
-  },
-  {
-    "type": "Coin",
-    "name": "India, 2015 10 Rupees",
-    "year": 2015,
-    "country": "India",
-    "imgFront": "images/coins/C-India-2015-10Rupees-front.jpg",
-    "imgBack": "images/coins/C-India-2015-10Rupees-back.jpg",
-    "description": "Ten rupees coin."
-  },
-  {
-    "type": "Coin",
-    "name": "USA, 2018 Dollar Coin",
-    "year": 2018,
-    "country": "USA",
-    "imgFront": "images/coins/C-USA-2018-Dollar-front.jpg",
-    "imgBack": "images/coins/C-USA-2018-Dollar-back.jpg",
-    "description": "US dollar coin."
-  },
-  {
-    "type": "Coin",
-    "name": "UK, 2019 1 Pound",
-    "year": 2019,
-    "country": "UK",
-    "imgFront": "images/coins/C-UK-2019-1Pound-front.jpg",
-    "imgBack": "images/coins/C-UK-2019-1Pound-back.jpg",
-    "description": "1 pound coin."
-  },
+  {"type":"Coin","name":"Coin 1","year":1947,"country":"Country A","imgFront":"images/coins/C-Item-1-front.jpg","imgBack":"images/coins/C-Item-1-back.jpg","description":"Test coin 1."},
+  {"type":"Coin","name":"Coin 2","year":1948,"country":"Country B","imgFront":"images/coins/C-Item-2-front.jpg","imgBack":"images/coins/C-Item-2-back.jpg","description":"Test coin 2."},
+  {"type":"Coin","name":"Coin 3","year":1949,"country":"Country C","imgFront":"images/coins/C-Item-3-front.jpg","imgBack":"images/coins/C-Item-3-back.jpg","description":"Test coin 3."},
+  {"type":"Coin","name":"Coin 4","year":1950,"country":"Country D","imgFront":"images/coins/C-Item-4-front.jpg","imgBack":"images/coins/C-Item-4-back.jpg","description":"Test coin 4."},
+  {"type":"Coin","name":"Coin 5","year":1951,"country":"Country E","imgFront":"images/coins/C-Item-5-front.jpg","imgBack":"images/coins/C-Item-5-back.jpg","description":"Test coin 5."},
+  {"type":"Coin","name":"Coin 6","year":1952,"country":"Country F","imgFront":"images/coins/C-Item-6-front.jpg","imgBack":"images/coins/C-Item-6-back.jpg","description":"Test coin 6."},
+  {"type":"Coin","name":"Coin 7","year":1953,"country":"Country G","imgFront":"images/coins/C-Item-7-front.jpg","imgBack":"images/coins/C-Item-7-back.jpg","description":"Test coin 7."},
+  {"type":"Coin","name":"Coin 8","year":1954,"country":"Country H","imgFront":"images/coins/C-Item-8-front.jpg","imgBack":"images/coins/C-Item-8-back.jpg","description":"Test coin 8."},
+  {"type":"Coin","name":"Coin 9","year":1955,"country":"Country I","imgFront":"images/coins/C-Item-9-front.jpg","imgBack":"images/coins/C-Item-9-back.jpg","description":"Test coin 9."},
+  {"type":"Coin","name":"Coin 10","year":1956,"country":"Country J","imgFront":"images/coins/C-Item-10-front.jpg","imgBack":"images/coins/C-Item-10-back.jpg","description":"Test coin 10."},
+  {"type":"Coin","name":"Coin 11","year":1957,"country":"Country K","imgFront":"images/coins/C-Item-11-front.jpg","imgBack":"images/coins/C-Item-11-back.jpg","description":"Test coin 11."},
+  {"type":"Coin","name":"Coin 12","year":1958,"country":"Country L","imgFront":"images/coins/C-Item-12-front.jpg","imgBack":"images/coins/C-Item-12-back.jpg","description":"Test coin 12."},
+  {"type":"Coin","name":"Coin 13","year":1959,"country":"Country M","imgFront":"images/coins/C-Item-13-front.jpg","imgBack":"images/coins/C-Item-13-back.jpg","description":"Test coin 13."},
+  {"type":"Coin","name":"Coin 14","year":1960,"country":"Country N","imgFront":"images/coins/C-Item-14-front.jpg","imgBack":"images/coins/C-Item-14-back.jpg","description":"Test coin 14."},
+  {"type":"Coin","name":"Coin 15","year":1961,"country":"Country O","imgFront":"images/coins/C-Item-15-front.jpg","imgBack":"images/coins/C-Item-15-back.jpg","description":"Test coin 15."},
 
-  {
-    "type": "Currency Note",
-    "name": "India, 100 Rupees 2010",
-    "year": 2010,
-    "country": "India",
-    "imgFront": "images/notes/N-India-2010-100Rupees-front.jpg",
-    "imgBack": "images/notes/N-India-2010-100Rupees-back.jpg",
-    "description": "Commemorative 100 rupee note."
-  },
-  {
-    "type": "Currency Note",
-    "name": "USA, 100 Dollars 2000",
-    "year": 2000,
-    "country": "USA",
-    "imgFront": "images/notes/N-USA-2000-100Dollar-front.jpg",
-    "imgBack": "images/notes/N-USA-2000-100Dollar-back.jpg",
-    "description": "100 dollar note issued in 2000."
-  },
-  {
-    "type": "Currency Note",
-    "name": "UK, 50 Pounds 2005",
-    "year": 2005,
-    "country": "UK",
-    "imgFront": "images/notes/N-UK-2005-50Pounds-front.jpg",
-    "imgBack": "images/notes/N-UK-2005-50Pounds-back.jpg",
-    "description": "50 pounds note."
-  },
-  {
-    "type": "Currency Note",
-    "name": "Germany, 20 Euros 2010",
-    "year": 2010,
-    "country": "Germany",
-    "imgFront": "images/notes/N-Germany-2010-20Euros-front.jpg",
-    "imgBack": "images/notes/N-Germany-2010-20Euros-back.jpg",
-    "description": "20 euros note."
-  },
-  {
-    "type": "Currency Note",
-    "name": "France, 10 Euros 2012",
-    "year": 2012,
-    "country": "France",
-    "imgFront": "images/notes/N-France-2012-10Euros-front.jpg",
-    "imgBack": "images/notes/N-France-2012-10Euros-back.jpg",
-    "description": "10 euros note."
-  },
-  {
-    "type": "Currency Note",
-    "name": "India, 500 Rupees 2015",
-    "year": 2015,
-    "country": "India",
-    "imgFront": "images/notes/N-India-2015-500Rupees-front.jpg",
-    "imgBack": "images/notes/N-India-2015-500Rupees-back.jpg",
-    "description": "500 rupee note."
-  },
-  {
-    "type": "Currency Note",
-    "name": "USA, 50 Dollars 2010",
-    "year": 2010,
-    "country": "USA",
-    "imgFront": "images/notes/N-USA-2010-50Dollar-front.jpg",
-    "imgBack": "images/notes/N-USA-2010-50Dollar-back.jpg",
-    "description": "50 dollar note."
-  },
-  {
-    "type": "Currency Note",
-    "name": "UK, 20 Pounds 2012",
-    "year": 2012,
-    "country": "UK",
-    "imgFront": "images/notes/N-UK-2012-20Pounds-front.jpg",
-    "imgBack": "images/notes/N-UK-2012-20Pounds-back.jpg",
-    "description": "20 pounds note."
-  },
-  {
-    "type": "Currency Note",
-    "name": "Germany, 50 Euros 2015",
-    "year": 2015,
-    "country": "Germany",
-    "imgFront": "images/notes/N-Germany-2015-50Euros-front.jpg",
-    "imgBack": "images/notes/N-Germany-2015-50Euros-back.jpg",
-    "description": "50 euros note."
-  },
-  {
-    "type": "Currency Note",
-    "name": "France, 5 Euros 2017",
-    "year": 2017,
-    "country": "France",
-    "imgFront": "images/notes/N-France-2017-5Euros-front.jpg",
-    "imgBack": "images/notes/N-France-2017-5Euros-back.jpg",
-    "description": "5 euros note."
-  },
-  {
-    "type": "Currency Note",
-    "name": "India, 2000 Rupees 2018",
-    "year": 2018,
-    "country": "India",
-    "imgFront": "images/notes/N-India-2018-2000Rupees-front.jpg",
-    "imgBack": "images/notes/N-India-2018-2000Rupees-back.jpg",
-    "description": "2000 rupees note."
-  }
+  {"type":"Currency Note","name":"Note 1","year":1947,"country":"Country A","imgFront":"images/notes/N-Item-1-front.jpg","imgBack":"images/notes/N-Item-1-back.jpg","description":"Test note 1."},
+  {"type":"Currency Note","name":"Note 2","year":1948,"country":"Country B","imgFront":"images/notes/N-Item-2-front.jpg","imgBack":"images/notes/N-Item-2-back.jpg","description":"Test note 2."},
+  {"type":"Currency Note","name":"Note 3","year":1949,"country":"Country C","imgFront":"images/notes/N-Item-3-front.jpg","imgBack":"images/notes/N-Item-3-back.jpg","description":"Test note 3."},
+  {"type":"Currency Note","name":"Note 4","year":1950,"country":"Country D","imgFront":"images/notes/N-Item-4-front.jpg","imgBack":"images/notes/N-Item-4-back.jpg","description":"Test note 4."},
+  {"type":"Currency Note","name":"Note 5","year":1951,"country":"Country E","imgFront":"images/notes/N-Item-5-front.jpg","imgBack":"images/notes/N-Item-5-back.jpg","description":"Test note 5."},
+  {"type":"Currency Note","name":"Note 6","year":1952,"country":"Country F","imgFront":"images/notes/N-Item-6-front.jpg","imgBack":"images/notes/N-Item-6-back.jpg","description":"Test note 6."},
+  {"type":"Currency Note","name":"Note 7","year":1953,"country":"Country G","imgFront":"images/notes/N-Item-7-front.jpg","imgBack":"images/notes/N-Item-7-back.jpg","description":"Test note 7."},
+  {"type":"Currency Note","name":"Note 8","year":1954,"country":"Country H","imgFront":"images/notes/N-Item-8-front.jpg","imgBack":"images/notes/N-Item-8-back.jpg","description":"Test note 8."},
+  {"type":"Currency Note","name":"Note 9","year":1955,"country":"Country I","imgFront":"images/notes/N-Item-9-front.jpg","imgBack":"images/notes/N-Item-9-back.jpg","description":"Test note 9."},
+  {"type":"Currency Note","name":"Note 10","year":1956,"country":"Country J","imgFront":"images/notes/N-Item-10-front.jpg","imgBack":"images/notes/N-Item-10-back.jpg","description":"Test note 10."},
+  {"type":"Currency Note","name":"Note 11","year":1957,"country":"Country K","imgFront":"images/notes/N-Item-11-front.jpg","imgBack":"images/notes/N-Item-11-back.jpg","description":"Test note 11."},
+  {"type":"Currency Note","name":"Note 12","year":1958,"country":"Country L","imgFront":"images/notes/N-Item-12-front.jpg","imgBack":"images/notes/N-Item-12-back.jpg","description":"Test note 12."},
+  {"type":"Currency Note","name":"Note 13","year":1959,"country":"Country M","imgFront":"images/notes/N-Item-13-front.jpg","imgBack":"images/notes/N-Item-13-back.jpg","description":"Test note 13."},
+  {"type":"Currency Note","name":"Note 14","year":1960,"country":"Country N","imgFront":"images/notes/N-Item-14-front.jpg","imgBack":"images/notes/N-Item-14-back.jpg","description":"Test note 14."},
+  {"type":"Currency Note","name":"Note 15","year":1961,"country":"Country O","imgFront":"images/notes/N-Item-15-front.jpg","imgBack":"images/notes/N-Item-15-back.jpg","description":"Test note 15."}
 ]
