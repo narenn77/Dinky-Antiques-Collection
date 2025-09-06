@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Dinky Antiques Collection</title>
+<title>Dinky's Antiques Collection</title>
 <style>
 body { font-family: Arial, sans-serif; margin: 20px; }
 .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
@@ -13,11 +13,35 @@ a:hover { color: #005bb5; }
 .jump-links a { margin: 0 10px; }
 .controls { text-align: center; margin-bottom: 20px; }
 input, select { margin: 5px; padding: 5px; }
+
+/* Sections */
 .section { margin-bottom: 40px; }
 .section h2 { text-align: left; border-bottom: 2px solid #ccc; padding-bottom: 5px; }
-.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
-.item { border: 1px solid #ccc; border-radius: 8px; padding: 10px; text-align: center; background: #f9f9f9; cursor: pointer; transition: transform 0.2s; }
+
+/* Horizontal scrolling galleries */
+.gallery {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  padding-bottom: 10px;
+  scroll-behavior: smooth;
+}
+.gallery::-webkit-scrollbar { height: 8px; }
+.gallery::-webkit-scrollbar-thumb { background-color: #ccc; border-radius: 4px; }
+
+/* Gallery items */
+.item {
+  flex: 0 0 200px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  background: #f9f9f9;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
 .item:hover { transform: scale(1.03); }
+
 img { max-width: 100%; height: auto; border-radius: 4px; }
 .desc { font-size: 0.9em; color: #555; margin-top: 5px; }
 
@@ -27,9 +51,15 @@ img { max-width: 100%; height: auto; border-radius: 4px; }
 #closePopup { position:absolute; top:10px; right:20px; cursor:pointer; font-size:28px; font-weight:bold; }
 #popupContent img { max-width:90%; max-height:80vh; margin: 10px auto; display:block; }
 
-/* Responsive for front/back side by side */
+/* Side-by-side for coin/currency */
 @media (min-width:600px) {
   #popupContent img.side-by-side { max-width:45%; display:inline-block; vertical-align:top; margin:5px; }
+}
+
+/* Mobile adjustments */
+@media (max-width:600px) {
+  .item { flex: 0 0 150px; }
+  .item .desc { display: none; }
 }
 </style>
 </head>
@@ -94,6 +124,10 @@ fetch("data.json?v=" + new Date().getTime())
   .then(response => response.json())
   .then(data => {
     items = data;
+
+    // Sort items by year ascending (oldest → newest)
+    items.sort((a, b) => a.year - b.year);
+
     populateFilters();
     displayItems();
   })
@@ -101,20 +135,22 @@ fetch("data.json?v=" + new Date().getTime())
 
 function populateFilters() {
   const years = [...new Set(items.map(i=>i.year))].sort((a,b)=>a-b);
-  years.forEach(y => { const o = document.createElement("option"); o.value=y; o.textContent=y; filterYear.appendChild(o); });
+  years.forEach(y => { const o=document.createElement("option"); o.value=y; o.textContent=y; filterYear.appendChild(o); });
   const countries = [...new Set(items.map(i=>i.country))].sort();
-  countries.forEach(c => { const o = document.createElement("option"); o.value=c; o.textContent=c; filterCountry.appendChild(o); });
+  countries.forEach(c => { const o=document.createElement("option"); o.value=c; o.textContent=c; filterCountry.appendChild(o); });
 }
 
 function createItemHTML(item) {
-  return `
-    <div class="item" onclick='openPopup(${JSON.stringify(item)})'>
-      <img src="${item.img || item.imgFront}" alt="${item.name}">
-      <p><strong>${item.name}</strong></p>
-      <p>${item.year} (${item.type}) - ${item.country}</p>
-      <p class="desc">${item.description}</p>
-    </div>
+  const div = document.createElement("div");
+  div.className="item";
+  div.innerHTML = `
+    <img src="${item.img || item.imgFront}" alt="${item.name}">
+    <p><strong>${item.name}</strong></p>
+    <p>${item.year} (${item.type}) - ${item.country}</p>
+    <p class="desc">${item.description}</p>
   `;
+  div.addEventListener("click", ()=>openPopup(item));
+  return div;
 }
 
 function displayItems() {
@@ -133,7 +169,7 @@ function displayItems() {
       (country==="" || item.country===country)
     );
     if(filtered.length===0) gallery.innerHTML="<p>No items found in this category.</p>";
-    else filtered.forEach(item=>gallery.innerHTML+=createItemHTML(item));
+    else filtered.forEach(item=>gallery.appendChild(createItemHTML(item)));
   });
 }
 
@@ -141,13 +177,20 @@ function displayItems() {
 function openPopup(item){
   const popup = document.getElementById("popup");
   const content = document.getElementById("popupContent");
+
   if(item.type==="Stamp"){
-    content.innerHTML=`<img src="${item.img}">`;
+    content.innerHTML=`
+      <img src="${item.img}">
+      <p style="margin-top:10px;">${item.description}</p>
+    `;
   } else { // Coin or Currency Note
     content.innerHTML=`
       <p><strong>${item.name}</strong></p>
-      <img src="${item.imgFront}" class="side-by-side">
-      <img src="${item.imgBack}" class="side-by-side">
+      <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
+        <img src="${item.imgFront}" class="side-by-side">
+        <img src="${item.imgBack}" class="side-by-side">
+      </div>
+      <p style="margin-top:10px;">${item.description}</p>
     `;
   }
   popup.style.display="flex";
@@ -160,5 +203,6 @@ searchBox.addEventListener("input", displayItems);
 filterYear.addEventListener("change", displayItems);
 filterCountry.addEventListener("change", displayItems);
 </script>
+
 </body>
 </html>
