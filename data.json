@@ -1,42 +1,340 @@
 [
-  { 
+  {
     "type": "Stamp",
     "name": "India, 1947 Independence",
     "year": 1947,
     "country": "India",
-    "img": "stamp1.jpg",
-    "description": "Issued to commemorate India's independence from British rule."
+    "img": "images/stamps/S-India-1947-Independence.jpg",
+    "description": "Issued to commemorate India's independence."
   },
-  { 
+  {
     "type": "Stamp",
-    "name": "UK, 1952 Queen Elizabeth II",
+    "name": "UK, 1952 Queen Elizabeth",
     "year": 1952,
     "country": "UK",
-    "img": "stamp2.jpg",
-    "description": "First definitive stamp series featuring Queen Elizabeth II."
+    "img": "images/stamps/S-UK-1952-QueenElizabeth.jpg",
+    "description": "First stamp of Queen Elizabeth II."
   },
-  { 
+  {
+    "type": "Stamp",
+    "name": "USA, 1960 Liberty",
+    "year": 1960,
+    "country": "USA",
+    "img": "images/stamps/S-USA-1960-Liberty.jpg",
+    "description": "Liberty stamp issued in 1960."
+  },
+  {
+    "type": "Stamp",
+    "name": "France, 1970 Eiffel Tower",
+    "year": 1970,
+    "country": "France",
+    "img": "images/stamps/S-France-1970-EiffelTower.jpg",
+    "description": "Eiffel Tower commemorative stamp."
+  },
+  {
+    "type": "Stamp",
+    "name": "Germany, 1980 Berlin",
+    "year": 1980,
+    "country": "Germany",
+    "img": "images/stamps/S-Germany-1980-Berlin.jpg",
+    "description": "Berlin city stamp."
+  },
+  {
+    "type": "Stamp",
+    "name": "India, 1990 Mahatma Gandhi",
+    "year": 1990,
+    "country": "India",
+    "img": "images/stamps/S-India-1990-Gandhi.jpg",
+    "description": "Mahatma Gandhi commemorative stamp."
+  },
+  {
+    "type": "Stamp",
+    "name": "UK, 1995 Queen Mother",
+    "year": 1995,
+    "country": "UK",
+    "img": "images/stamps/S-UK-1995-QueenMother.jpg",
+    "description": "Queen Mother commemorative stamp."
+  },
+  {
+    "type": "Stamp",
+    "name": "USA, 2000 Millennium",
+    "year": 2000,
+    "country": "USA",
+    "img": "images/stamps/S-USA-2000-Millennium.jpg",
+    "description": "Millennium stamp issued in 2000."
+  },
+  {
+    "type": "Stamp",
+    "name": "France, 2005 Louvre",
+    "year": 2005,
+    "country": "France",
+    "img": "images/stamps/S-France-2005-Louvre.jpg",
+    "description": "Louvre commemorative stamp."
+  },
+  {
+    "type": "Stamp",
+    "name": "Germany, 2010 Berlin Wall",
+    "year": 2010,
+    "country": "Germany",
+    "img": "images/stamps/S-Germany-2010-BerlinWall.jpg",
+    "description": "Berlin Wall stamp."
+  },
+  {
+    "type": "Stamp",
+    "name": "India, 2012 Taj Mahal",
+    "year": 2012,
+    "country": "India",
+    "img": "images/stamps/S-India-2012-TajMahal.jpg",
+    "description": "Taj Mahal commemorative stamp."
+  },
+  {
+    "type": "Stamp",
+    "name": "UK, 2014 Big Ben",
+    "year": 2014,
+    "country": "UK",
+    "img": "images/stamps/S-UK-2014-BigBen.jpg",
+    "description": "Big Ben stamp."
+  },
+  {
+    "type": "Stamp",
+    "name": "USA, 2015 Statue of Liberty",
+    "year": 2015,
+    "country": "USA",
+    "img": "images/stamps/S-USA-2015-StatueOfLiberty.jpg",
+    "description": "Statue of Liberty stamp."
+  },
+  {
+    "type": "Stamp",
+    "name": "France, 2017 Mont Saint-Michel",
+    "year": 2017,
+    "country": "France",
+    "img": "images/stamps/S-France-2017-MontSaintMichel.jpg",
+    "description": "Mont Saint-Michel commemorative stamp."
+  },
+  {
+    "type": "Stamp",
+    "name": "Germany, 2019 Brandenburg Gate",
+    "year": 2019,
+    "country": "Germany",
+    "img": "images/stamps/S-Germany-2019-BrandenburgGate.jpg",
+    "description": "Brandenburg Gate stamp."
+  },
+
+  {
     "type": "Coin",
-    "name": "US, 1921 Silver Dollar",
+    "name": "India, 1948 One Rupee",
+    "year": 1948,
+    "country": "India",
+    "imgFront": "images/coins/C-India-1948-OneRupee-front.jpg",
+    "imgBack": "images/coins/C-India-1948-OneRupee-back.jpg",
+    "description": "One rupee coin issued in 1948."
+  },
+  {
+    "type": "Coin",
+    "name": "USA, 1921 Silver Dollar",
     "year": 1921,
     "country": "USA",
-    "img": "coin1.jpg",
-    "description": "Also known as the Morgan Dollar, popular among collectors."
+    "imgFront": "images/coins/C-USA-1921-SilverDollar-front.jpg",
+    "imgBack": "images/coins/C-USA-1921-SilverDollar-back.jpg",
+    "description": "Also known as the Morgan Dollar."
   },
-  { 
+  {
     "type": "Coin",
-    "name": "India, 1901 Rupee",
-    "year": 1901,
-    "country": "India",
-    "img": "coin2.jpg",
-    "description": "British India Rupee issued during the reign of Edward VII."
+    "name": "UK, 1953 Penny",
+    "year": 1953,
+    "country": "UK",
+    "imgFront": "images/coins/C-UK-1953-Penny-front.jpg",
+    "imgBack": "images/coins/C-UK-1953-Penny-back.jpg",
+    "description": "Penny coin issued in 1953."
   },
-  { 
+  {
+    "type": "Coin",
+    "name": "Germany, 1970 5 Marks",
+    "year": 1970,
+    "country": "Germany",
+    "imgFront": "images/coins/C-Germany-1970-5Marks-front.jpg",
+    "imgBack": "images/coins/C-Germany-1970-5Marks-back.jpg",
+    "description": "Five marks coin."
+  },
+  {
+    "type": "Coin",
+    "name": "France, 1985 10 Francs",
+    "year": 1985,
+    "country": "France",
+    "imgFront": "images/coins/C-France-1985-10Francs-front.jpg",
+    "imgBack": "images/coins/C-France-1985-10Francs-back.jpg",
+    "description": "Ten francs coin."
+  },
+  {
+    "type": "Coin",
+    "name": "India, 1990 5 Rupees",
+    "year": 1990,
+    "country": "India",
+    "imgFront": "images/coins/C-India-1990-5Rupees-front.jpg",
+    "imgBack": "images/coins/C-India-1990-5Rupees-back.jpg",
+    "description": "Five rupees coin."
+  },
+  {
+    "type": "Coin",
+    "name": "USA, 2000 Quarter",
+    "year": 2000,
+    "country": "USA",
+    "imgFront": "images/coins/C-USA-2000-Quarter-front.jpg",
+    "imgBack": "images/coins/C-USA-2000-Quarter-back.jpg",
+    "description": "US quarter coin issued in 2000."
+  },
+  {
+    "type": "Coin",
+    "name": "UK, 2005 2 Pounds",
+    "year": 2005,
+    "country": "UK",
+    "imgFront": "images/coins/C-UK-2005-2Pounds-front.jpg",
+    "imgBack": "images/coins/C-UK-2005-2Pounds-back.jpg",
+    "description": "2 pounds coin."
+  },
+  {
+    "type": "Coin",
+    "name": "Germany, 2010 10 Euros",
+    "year": 2010,
+    "country": "Germany",
+    "imgFront": "images/coins/C-Germany-2010-10Euros-front.jpg",
+    "imgBack": "images/coins/C-Germany-2010-10Euros-back.jpg",
+    "description": "Ten euros coin."
+  },
+  {
+    "type": "Coin",
+    "name": "France, 2012 5 Euros",
+    "year": 2012,
+    "country": "France",
+    "imgFront": "images/coins/C-France-2012-5Euros-front.jpg",
+    "imgBack": "images/coins/C-France-2012-5Euros-back.jpg",
+    "description": "Five euros coin."
+  },
+  {
+    "type": "Coin",
+    "name": "India, 2015 10 Rupees",
+    "year": 2015,
+    "country": "India",
+    "imgFront": "images/coins/C-India-2015-10Rupees-front.jpg",
+    "imgBack": "images/coins/C-India-2015-10Rupees-back.jpg",
+    "description": "Ten rupees coin."
+  },
+  {
+    "type": "Coin",
+    "name": "USA, 2018 Dollar Coin",
+    "year": 2018,
+    "country": "USA",
+    "imgFront": "images/coins/C-USA-2018-Dollar-front.jpg",
+    "imgBack": "images/coins/C-USA-2018-Dollar-back.jpg",
+    "description": "US dollar coin."
+  },
+  {
+    "type": "Coin",
+    "name": "UK, 2019 1 Pound",
+    "year": 2019,
+    "country": "UK",
+    "imgFront": "images/coins/C-UK-2019-1Pound-front.jpg",
+    "imgBack": "images/coins/C-UK-2019-1Pound-back.jpg",
+    "description": "1 pound coin."
+  },
+
+  {
     "type": "Currency Note",
     "name": "India, 100 Rupees 2010",
     "year": 2010,
     "country": "India",
-    "img": "note1.jpg",
-    "description": "Commemorative 100 rupee note issued in 2010."
+    "imgFront": "images/notes/N-India-2010-100Rupees-front.jpg",
+    "imgBack": "images/notes/N-India-2010-100Rupees-back.jpg",
+    "description": "Commemorative 100 rupee note."
+  },
+  {
+    "type": "Currency Note",
+    "name": "USA, 100 Dollars 2000",
+    "year": 2000,
+    "country": "USA",
+    "imgFront": "images/notes/N-USA-2000-100Dollar-front.jpg",
+    "imgBack": "images/notes/N-USA-2000-100Dollar-back.jpg",
+    "description": "100 dollar note issued in 2000."
+  },
+  {
+    "type": "Currency Note",
+    "name": "UK, 50 Pounds 2005",
+    "year": 2005,
+    "country": "UK",
+    "imgFront": "images/notes/N-UK-2005-50Pounds-front.jpg",
+    "imgBack": "images/notes/N-UK-2005-50Pounds-back.jpg",
+    "description": "50 pounds note."
+  },
+  {
+    "type": "Currency Note",
+    "name": "Germany, 20 Euros 2010",
+    "year": 2010,
+    "country": "Germany",
+    "imgFront": "images/notes/N-Germany-2010-20Euros-front.jpg",
+    "imgBack": "images/notes/N-Germany-2010-20Euros-back.jpg",
+    "description": "20 euros note."
+  },
+  {
+    "type": "Currency Note",
+    "name": "France, 10 Euros 2012",
+    "year": 2012,
+    "country": "France",
+    "imgFront": "images/notes/N-France-2012-10Euros-front.jpg",
+    "imgBack": "images/notes/N-France-2012-10Euros-back.jpg",
+    "description": "10 euros note."
+  },
+  {
+    "type": "Currency Note",
+    "name": "India, 500 Rupees 2015",
+    "year": 2015,
+    "country": "India",
+    "imgFront": "images/notes/N-India-2015-500Rupees-front.jpg",
+    "imgBack": "images/notes/N-India-2015-500Rupees-back.jpg",
+    "description": "500 rupee note."
+  },
+  {
+    "type": "Currency Note",
+    "name": "USA, 50 Dollars 2010",
+    "year": 2010,
+    "country": "USA",
+    "imgFront": "images/notes/N-USA-2010-50Dollar-front.jpg",
+    "imgBack": "images/notes/N-USA-2010-50Dollar-back.jpg",
+    "description": "50 dollar note."
+  },
+  {
+    "type": "Currency Note",
+    "name": "UK, 20 Pounds 2012",
+    "year": 2012,
+    "country": "UK",
+    "imgFront": "images/notes/N-UK-2012-20Pounds-front.jpg",
+    "imgBack": "images/notes/N-UK-2012-20Pounds-back.jpg",
+    "description": "20 pounds note."
+  },
+  {
+    "type": "Currency Note",
+    "name": "Germany, 50 Euros 2015",
+    "year": 2015,
+    "country": "Germany",
+    "imgFront": "images/notes/N-Germany-2015-50Euros-front.jpg",
+    "imgBack": "images/notes/N-Germany-2015-50Euros-back.jpg",
+    "description": "50 euros note."
+  },
+  {
+    "type": "Currency Note",
+    "name": "France, 5 Euros 2017",
+    "year": 2017,
+    "country": "France",
+    "imgFront": "images/notes/N-France-2017-5Euros-front.jpg",
+    "imgBack": "images/notes/N-France-2017-5Euros-back.jpg",
+    "description": "5 euros note."
+  },
+  {
+    "type": "Currency Note",
+    "name": "India, 2000 Rupees 2018",
+    "year": 2018,
+    "country": "India",
+    "imgFront": "images/notes/N-India-2018-2000Rupees-front.jpg",
+    "imgBack": "images/notes/N-India-2018-2000Rupees-back.jpg",
+    "description": "2000 rupees note."
   }
 ]
