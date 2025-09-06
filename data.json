@@ -32,11 +32,11 @@
     "description": "British India Rupee issued during the reign of Edward VII."
   },
   { 
-    "type": "Currency Note",
-    "name": "India, 1947 Independence",
+    "type": "Coin",
+    "name": "India, 1948 Independence",
     "year": 1948,
     "country": "India",
-    "img": "Note1.jpg",
+    "img": "Coin3.jpg",
     "description": "Issued to commemorate India's independence from British rule. A very symbolic piece."
   }
 ]
