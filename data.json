@@ -1,0 +1,34 @@
+[
+  { 
+    "type": "Stamp",
+    "name": "India, 1947 Independence",
+    "year": 1947,
+    "country": "India",
+    "img": "stamp1.jpg",
+    "description": "Issued to commemorate India's independence from British rule. A very symbolic piece."
+  },
+  { 
+    "type": "Stamp",
+    "name": "UK, 1952 Queen Elizabeth II",
+    "year": 1952,
+    "country": "UK",
+    "img": "stamp2.jpg",
+    "description": "First definitive stamp series featuring Queen Elizabeth II after her coronation."
+  },
+  { 
+    "type": "Coin",
+    "name": "US, 1921 Silver Dollar",
+    "year": 1921,
+    "country": "USA",
+    "img": "coin1.jpg",
+    "description": "Also known as the Morgan Dollar, one of the most collected US coins."
+  },
+  { 
+    "type": "Coin",
+    "name": "India, 1901 Rupee",
+    "year": 1901,
+    "country": "India",
+    "img": "coin2.jpg",
+    "description": "British India Rupee issued during the reign of Edward VII."
+  }
+]
