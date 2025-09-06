@@ -2,206 +2,168 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dinky's Antiques Collection</title>
 <style>
-body { font-family: Arial, sans-serif; margin: 20px; }
-.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-h1 { margin: 0; }
-a { text-decoration: none; color: #0073e6; }
-a:hover { color: #005bb5; }
-.jump-links { margin-bottom: 20px; text-align: center; }
-.jump-links a { margin: 0 10px; }
-.controls { text-align: center; margin-bottom: 20px; }
-input, select { margin: 5px; padding: 5px; }
-
-/* Sections */
-.section { margin-bottom: 40px; }
-.section h2 { text-align: left; border-bottom: 2px solid #ccc; padding-bottom: 5px; }
-
-/* Horizontal scrolling galleries */
-.gallery {
-  display: flex;
-  overflow-x: auto;
-  gap: 15px;
-  padding-bottom: 10px;
-  scroll-behavior: smooth;
-}
-.gallery::-webkit-scrollbar { height: 8px; }
-.gallery::-webkit-scrollbar-thumb { background-color: #ccc; border-radius: 4px; }
-
-/* Gallery items */
-.item {
-  flex: 0 0 200px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
-  text-align: center;
-  background: #f9f9f9;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-.item:hover { transform: scale(1.03); }
-
-img { max-width: 100%; height: auto; border-radius: 4px; }
-.desc { font-size: 0.9em; color: #555; margin-top: 5px; }
-
-/* Popup modal */
-#popup { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:1000; }
-#popupContentContainer { background:#fff; padding:20px; border-radius:10px; max-width:95%; max-height:95%; overflow:auto; text-align:center; position:relative; }
-#closePopup { position:absolute; top:10px; right:20px; cursor:pointer; font-size:28px; font-weight:bold; }
-#popupContent img { max-width:90%; max-height:80vh; margin: 10px auto; display:block; }
-
-/* Side-by-side for coin/currency */
-@media (min-width:600px) {
-  #popupContent img.side-by-side { max-width:45%; display:inline-block; vertical-align:top; margin:5px; }
-}
-
-/* Mobile adjustments */
-@media (max-width:600px) {
-  .item { flex: 0 0 150px; }
-  .item .desc { display: none; }
-}
+    body { font-family: Arial, sans-serif; margin:0; padding:0; }
+    header { display:flex; justify-content: space-between; align-items:center; padding:10px 20px; background:#444; color:#fff; }
+    header a { color:#fff; text-decoration:none; }
+    nav { padding:10px 20px; background:#eee; display:flex; gap:10px; flex-wrap:wrap; }
+    section { padding:20px; }
+    h2 { margin-top:40px; }
+    .scroll-container { display:flex; overflow-x:auto; gap:15px; padding-bottom:10px; }
+    .item { flex:0 0 auto; width:150px; cursor:pointer; text-align:center; }
+    .item img { width:150px; height:120px; object-fit:cover; border:1px solid #ccc; border-radius:5px; }
+    /* Popup styles */
+    .popup-bg { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:1000; }
+    .popup-content { background:#fff; padding:20px; max-width:90%; max-height:90%; overflow:auto; border-radius:10px; text-align:center; }
+    .popup-content img { max-width:100%; margin-bottom:10px; }
+    .close-btn { background:#444; color:#fff; border:none; padding:5px 10px; cursor:pointer; border-radius:5px; margin-bottom:10px; }
+    @media(max-width:600px){
+        .item img { width:120px; height:100px; }
+    }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>Dinky's Antiques Collection</h1>
-  <div>📧 <a href="mailto:dnaphx@gmail.com">dnaphx@gmail.com</a></div>
-</div>
+<header>
+    <div><h1>My Stamp & Coin Collection</h1></div>
+    <div><a href="mailto:dnaphx@gmail.com">Contact: dnaphx@gmail.com</a></div>
+</header>
 
-<div class="jump-links">
-  Jump to see: 
-  <a href="#stamps">Stamps</a> | 
-  <a href="#coins">Coins</a> | 
-  <a href="#notes">Currency Notes</a>
-</div>
+<nav>
+    <a href="#stamps">Jump to Stamps</a>
+    <a href="#coins">Jump to Coins</a>
+    <a href="#notes">Jump to Currency Notes</a>
+    <select id="yearFilter"><option value="">Filter by Year Range</option></select>
+    <select id="countryFilter"><option value="">Filter by Country</option></select>
+</nav>
 
-<div class="controls">
-  <input type="text" id="search" placeholder="Search by name or description...">
-  <select id="filterYear"><option value="">All Years</option></select>
-  <select id="filterCountry"><option value="">All Countries</option></select>
-</div>
+<section id="stamps">
+    <h2>Stamps</h2>
+    <div class="scroll-container" id="stampsContainer"></div>
+</section>
 
-<!-- Sections -->
-<div id="stamps" class="section">
-  <h2>Stamps</h2>
-  <div class="gallery" id="gallery-stamp"></div>
-</div>
+<section id="coins">
+    <h2>Coins</h2>
+    <div class="scroll-container" id="coinsContainer"></div>
+</section>
 
-<div id="coins" class="section">
-  <h2>Coins</h2>
-  <div class="gallery" id="gallery-coin"></div>
-</div>
+<section id="notes">
+    <h2>Currency Notes</h2>
+    <div class="scroll-container" id="notesContainer"></div>
+</section>
 
-<div id="notes" class="section">
-  <h2>Currency Notes</h2>
-  <div class="gallery" id="gallery-note"></div>
-</div>
-
-<!-- Popup Modal -->
-<div id="popup">
-  <div id="popupContentContainer">
-    <span id="closePopup">&times;</span>
-    <div id="popupContent"></div>
-  </div>
+<!-- Popup -->
+<div class="popup-bg" id="popup">
+    <div class="popup-content" id="popupContent">
+        <button class="close-btn" onclick="closePopup()">Close</button>
+        <div id="popupImages"></div>
+        <div id="popupDescription"></div>
+    </div>
 </div>
 
 <script>
+// Load your data.json
 let items = [];
-const searchBox = document.getElementById("search");
-const filterYear = document.getElementById("filterYear");
-const filterCountry = document.getElementById("filterCountry");
+fetch('data.json')
+    .then(res => res.json())
+    .then(data => {
+        items = data;
+        setupFilters();
+        displayItems(items);
+    });
 
-const galleries = {
-  "Stamp": document.getElementById("gallery-stamp"),
-  "Coin": document.getElementById("gallery-coin"),
-  "Currency Note": document.getElementById("gallery-note")
-};
+function displayItems(filteredItems){
+    const stampsContainer = document.getElementById('stampsContainer');
+    const coinsContainer = document.getElementById('coinsContainer');
+    const notesContainer = document.getElementById('notesContainer');
+    stampsContainer.innerHTML = '';
+    coinsContainer.innerHTML = '';
+    notesContainer.innerHTML = '';
 
-// Fetch JSON with cache-busting
-fetch("data.json?v=" + new Date().getTime())
-  .then(response => response.json())
-  .then(data => {
-    items = data;
+    filteredItems.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'item';
+        const img = document.createElement('img');
 
-    // Sort items by year ascending (oldest → newest)
-    items.sort((a, b) => a.year - b.year);
-
-    populateFilters();
-    displayItems();
-  })
-  .catch(error => console.error("Error loading data:", error));
-
-function populateFilters() {
-  const years = [...new Set(items.map(i=>i.year))].sort((a,b)=>a-b);
-  years.forEach(y => { const o=document.createElement("option"); o.value=y; o.textContent=y; filterYear.appendChild(o); });
-  const countries = [...new Set(items.map(i=>i.country))].sort();
-  countries.forEach(c => { const o=document.createElement("option"); o.value=c; o.textContent=c; filterCountry.appendChild(o); });
-}
-
-function createItemHTML(item) {
-  const div = document.createElement("div");
-  div.className="item";
-  div.innerHTML = `
-    <img src="${item.img || item.imgFront}" alt="${item.name}">
-    <p><strong>${item.name}</strong></p>
-    <p>${item.year} (${item.type}) - ${item.country}</p>
-    <p class="desc">${item.description}</p>
-  `;
-  div.addEventListener("click", ()=>openPopup(item));
-  return div;
-}
-
-function displayItems() {
-  const search = searchBox.value.toLowerCase();
-  const year = filterYear.value;
-  const country = filterCountry.value;
-
-  Object.values(galleries).forEach(g => g.innerHTML = "");
-
-  ["Stamp","Coin","Currency Note"].forEach(type => {
-    const gallery = galleries[type];
-    const filtered = items.filter(item =>
-      item.type===type &&
-      (item.name.toLowerCase().includes(search) || item.description.toLowerCase().includes(search)) &&
-      (year==="" || item.year.toString()===year) &&
-      (country==="" || item.country===country)
-    );
-    if(filtered.length===0) gallery.innerHTML="<p>No items found in this category.</p>";
-    else filtered.forEach(item=>gallery.appendChild(createItemHTML(item)));
-  });
+        if(item.type === 'Stamp'){
+            img.src = item.img;
+            div.appendChild(img);
+            div.onclick = ()=> openPopup([item.img], item.description);
+            stampsContainer.appendChild(div);
+        }
+        if(item.type === 'Coin'){
+            img.src = item.imgFront;
+            div.appendChild(img);
+            div.onclick = ()=> openPopup([item.imgFront, item.imgBack], item.description);
+            coinsContainer.appendChild(div);
+        }
+        if(item.type === 'Currency Note'){
+            img.src = item.imgFront;
+            div.appendChild(img);
+            div.onclick = ()=> openPopup([item.imgFront, item.imgBack], item.description);
+            notesContainer.appendChild(div);
+        }
+    });
 }
 
 // Popup functions
-function openPopup(item){
-  const popup = document.getElementById("popup");
-  const content = document.getElementById("popupContent");
-
-  if(item.type==="Stamp"){
-    content.innerHTML=`
-      <img src="${item.img}">
-      <p style="margin-top:10px;">${item.description}</p>
-    `;
-  } else { // Coin or Currency Note
-    content.innerHTML=`
-      <p><strong>${item.name}</strong></p>
-      <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
-        <img src="${item.imgFront}" class="side-by-side">
-        <img src="${item.imgBack}" class="side-by-side">
-      </div>
-      <p style="margin-top:10px;">${item.description}</p>
-    `;
-  }
-  popup.style.display="flex";
+function openPopup(images, description){
+    document.getElementById('popupImages').innerHTML = images.map(src => `<img src="${src}">`).join('');
+    document.getElementById('popupDescription').textContent = description;
+    document.getElementById('popup').style.display = 'flex';
+}
+function closePopup(){
+    document.getElementById('popup').style.display = 'none';
 }
 
-document.getElementById("closePopup").onclick=function(){document.getElementById("popup").style.display="none";}
-document.getElementById("popup").onclick=function(e){if(e.target.id==="popup") this.style.display="none";}
+// Filters setup
+function setupFilters(){
+    // Year ranges 10-year
+    const years = items.map(i => i.year);
+    const minYear = Math.min(...years);
+    const maxYear = Math.max(...years);
+    const yearSelect = document.getElementById('yearFilter');
+    for(let y = minYear - (minYear%10); y <= maxYear; y+=10){
+        const opt = document.createElement('option');
+        opt.value = `${y}-${y+9}`;
+        opt.textContent = `${y}-${y+9}`;
+        yearSelect.appendChild(opt);
+    }
 
-searchBox.addEventListener("input", displayItems);
-filterYear.addEventListener("change", displayItems);
-filterCountry.addEventListener("change", displayItems);
+    // Countries alphabetical
+    const countries = [...new Set(items.map(i=>i.country))].sort();
+    const countrySelect = document.getElementById('countryFilter');
+    countries.forEach(c=>{
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        countrySelect.appendChild(opt);
+    });
+
+    // Event listeners
+    yearSelect.addEventListener('change', applyFilters);
+    countrySelect.addEventListener('change', applyFilters);
+}
+
+function applyFilters(){
+    const yearValue = document.getElementById('yearFilter').value;
+    const countryValue = document.getElementById('countryFilter').value;
+    let filtered = items;
+
+    if(yearValue){
+        const [start,end] = yearValue.split('-').map(Number);
+        filtered = filtered.filter(i => i.year >= start && i.year <= end);
+    }
+    if(countryValue){
+        filtered = filtered.filter(i=> i.country === countryValue);
+    }
+
+    // Sort by year ascending
+    filtered.sort((a,b)=> a.year - b.year);
+    displayItems(filtered);
+}
 </script>
 
 </body>
