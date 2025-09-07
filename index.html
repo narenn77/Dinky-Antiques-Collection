@@ -27,7 +27,7 @@
       margin: 0;
       font-size: 1.8em;
       text-align: center;
-      color: #4da6ff; /* light blue title */
+      color: white; /* title white */
     }
 
     header img.logo {
@@ -39,13 +39,13 @@
     header a {
       position: absolute;
       right: 20px;
-      color: #0059b3; /* darker blue for email */
+      color: white; /* email white */
       text-decoration: none;
       font-weight: bold;
     }
 
     header a:hover {
-      color: #4da6ff;
+      color: #b3d9ff; /* lighter blue on hover */
     }
 
     /* Filters wrapper with decorative images */
@@ -54,7 +54,7 @@
       align-items: flex-start;
       justify-content: center;
       gap: 15px;
-      margin-top: 15px; 
+      margin-top: 10px; 
       margin-bottom: 5px;
     }
 
@@ -74,7 +74,7 @@
 
     .filters-images-left .decor-image {
       width: 150px;
-      height: 100px; /* reduced height */
+      height: 100px; /* further reduced height */
       object-fit: cover;
       border-radius: 8px;
     }
@@ -98,22 +98,15 @@
     .filters input, .filters select {
       padding: 8px 12px;
       font-size: 1em;
-      border: 1px solid #4da6ff; /* light-blue border */
+      border: 1px solid #ccc;
       border-radius: 4px;
       min-width: 180px;
-      transition: border 0.2s, box-shadow 0.2s;
-    }
-
-    .filters input:focus, .filters select:focus {
-      outline: none;
-      border-color: #1a8cff;
-      box-shadow: 0 0 5px #1a8cff;
     }
 
     /* "Check our Collection" links */
     .jump-links {
       text-align: center;
-      margin: 5px 0 15px; 
+      margin: 5px 0 12px; 
       font-size: 1em;
       z-index: 1;
     }
@@ -121,12 +114,11 @@
     .jump-links a {
       margin: 0 10px;
       text-decoration: none;
-      color: #4da6ff; /* light-blue links */
+      color: #0066cc;
       font-weight: bold;
     }
 
     .jump-links a:hover {
-      color: #1a8cff; /* darker hover blue */
       text-decoration: underline;
     }
 
