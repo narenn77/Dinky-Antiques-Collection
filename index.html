@@ -9,84 +9,142 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #fafafa;
-      color: #333;
+      background: #fdfcf7;
     }
+
     header {
-      background: #444;
+      background: #6b4f2f;
       color: white;
-      padding: 15px 20px;
+      padding: 15px;
       display: flex;
-      justify-content: center;
       align-items: center;
-      position: relative;
+      justify-content: space-between;
     }
+
+    header .header-content {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    header .logo {
+      height: 60px;
+    }
+
     header h1 {
       margin: 0;
-      font-size: 1.8em;
       text-align: center;
+      flex-grow: 1;
     }
-    header img.logo {
-      position: absolute;
-      left: 20px;
-      height: 40px;
-    }
-    header a {
-      position: absolute;
-      right: 20px;
-      color: #ffd700;
+
+    header .contact {
+      color: white;
       text-decoration: none;
       font-weight: bold;
     }
-    .jump-links {
-      text-align: center;
-      margin: 20px 0 10px;
-      font-size: 1.2em;
+
+    /* Collection Section */
+    .collection-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      flex-wrap: wrap;
     }
-    .jump-links a {
+
+    .collection-images {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .collection-images img {
+      max-width: 150px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .collection-center {
+      flex: 2;
+      text-align: center;
+    }
+
+    .collection-center h2 {
+      margin-bottom: 10px;
+    }
+
+    .shortcuts a {
       margin: 0 10px;
       text-decoration: none;
-      color: #0066cc;
+      color: #6b4f2f;
       font-weight: bold;
     }
-    .jump-links a:hover {
-      text-decoration: underline;
+
+    .collection-right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
     }
-    /* Filters section */
+
+    .collection-right img {
+      max-width: 180px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    /* Filters and search */
     .filters {
       text-align: center;
-      margin: 15px 0 25px;
+      margin: 20px;
     }
+
     .filters input, .filters select {
-      margin: 0 8px;
-      padding: 5px 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      padding: 8px;
+      margin: 5px;
+      font-size: 1em;
     }
+
+    /* Section display */
     .section {
       padding: 20px;
     }
-    .items {
-      display: flex;
-      overflow-x: auto;
-      gap: 15px;
-      padding: 10px 0;
+
+    .section h2 {
+      text-align: center;
+      margin-bottom: 15px;
     }
+
+    .items-container {
+      display: flex;
+      gap: 15px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+
     .item {
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 10px;
-      min-width: 200px;
+      flex: 0 0 auto;
+      width: 180px;
       text-align: center;
       cursor: pointer;
-      flex-shrink: 0;
     }
+
     .item img {
       width: 100%;
       height: auto;
-      border-radius: 4px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
+
+    .item p {
+      margin-top: 5px;
+      font-size: 0.9em;
+    }
+
     /* Popup modal */
     .modal {
       display: none;
@@ -96,180 +154,213 @@
       background: rgba(0,0,0,0.7);
       justify-content: center;
       align-items: center;
+      z-index: 1000;
     }
+
     .modal-content {
       background: white;
       padding: 20px;
       border-radius: 10px;
       max-width: 600px;
-      max-height: 80%;
-      overflow-y: auto;
+      width: 90%;
+      text-align: center;
     }
-    .modal img {
-      width: 100%;
-      margin: 10px 0;
-      border-radius: 6px;
+
+    .modal-content img {
+      width: 45%;
+      margin: 5px;
     }
+
     .close {
       float: right;
-      font-size: 1.5em;
+      font-size: 24px;
       cursor: pointer;
-      color: #444;
+    }
+
+    @media (max-width: 768px) {
+      .collection-section {
+        flex-direction: column;
+        align-items: center;
+      }
+      .collection-images {
+        flex-direction: row;
+      }
+      .collection-right {
+        margin-top: 15px;
+      }
+      .item p {
+        display: none; /* hide description preview on mobile */
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header>
-    <img src="images/logo.jpg" alt="Logo" class="logo">
-    <h1>Dinky's Antiques Collection</h1>
-    <a href="mailto:dnaphx@gmail.com">dnaphx@gmail.com</a>
+    <div class="header-content">
+      <img src="images/logo.jpg" alt="Logo" class="logo">
+      <h1>Dinky's Antiques Collection</h1>
+      <a href="mailto:dnaphx@gmail.com" class="contact">Contact: dnaphx@gmail.com</a>
+    </div>
   </header>
 
-  <div class="jump-links">
-    <strong>Check our Collection of :</strong>
-    <a href="#stamps">Stamps</a> |
-    <a href="#coins">Coins</a> |
-    <a href="#notes">Currency Notes</a>
-  </div>
+  <!-- Collection section -->
+  <section class="collection-section">
+    <div class="collection-images">
+      <img src="images/coin.jpg" alt="Coin">
+      <img src="images/stamp.jpg" alt="Stamp">
+    </div>
+
+    <div class="collection-center">
+      <h2>Check our Collection of :</h2>
+      <div class="shortcuts">
+        <a href="#stamps">Stamps</a>
+        <a href="#coins">Coins</a>
+        <a href="#notes">Currency Notes</a>
+      </div>
+    </div>
+
+    <div class="collection-right">
+      <img src="images/note.jpg" alt="Currency Note">
+    </div>
+  </section>
 
   <!-- Filters -->
   <div class="filters">
-    <input type="text" id="search" placeholder="Search by name...">
-    <select id="yearFilter">
-      <option value="">All Years</option>
-    </select>
-    <select id="countryFilter">
-      <option value="">All Countries</option>
-    </select>
+    <input type="text" id="search" placeholder="Search by name or description...">
+    <select id="yearFilter"></select>
+    <select id="countryFilter"></select>
   </div>
 
-  <section id="stamps" class="section">
+  <!-- Sections -->
+  <div id="stamps" class="section">
     <h2>Stamps</h2>
-    <div class="items" id="stamps-list"></div>
-  </section>
+    <div class="items-container" id="stamps-container"></div>
+  </div>
 
-  <section id="coins" class="section">
+  <div id="coins" class="section">
     <h2>Coins</h2>
-    <div class="items" id="coins-list"></div>
-  </section>
+    <div class="items-container" id="coins-container"></div>
+  </div>
 
-  <section id="notes" class="section">
+  <div id="notes" class="section">
     <h2>Currency Notes</h2>
-    <div class="items" id="notes-list"></div>
-  </section>
+    <div class="items-container" id="notes-container"></div>
+  </div>
 
-  <!-- Modal popup -->
+  <!-- Popup modal -->
   <div id="modal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h3 id="modal-title"></h3>
-      <p id="modal-description"></p>
-      <img id="modal-img-front" src="" alt="">
-      <img id="modal-img-back" src="" alt="" style="display:none;">
+      <span class="close" id="modalClose">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <div id="modalImages"></div>
+      <p id="modalDescription"></p>
     </div>
   </div>
 
+  <!-- Script -->
   <script>
-    let allData = [];
+    let itemsData = [];
 
-    async function loadData() {
-      const res = await fetch('data.json');
-      const data = await res.json();
-      allData = data;
-
-      populateFilters(data);
-      renderItems(data);
-    }
-
-    function populateFilters(data) {
-      const years = [...new Set(data.map(item => item.year))].sort((a,b) => a-b);
-      const countries = [...new Set(data.map(item => item.country))].sort();
-
-      const yearFilter = document.getElementById("yearFilter");
-      const decadeRanges = [];
-      years.forEach(y => {
-        const decade = Math.floor(y/10)*10;
-        if (!decadeRanges.includes(decade)) decadeRanges.push(decade);
-      });
-      decadeRanges.sort((a,b)=>a-b).forEach(decade => {
-        let opt = document.createElement("option");
-        opt.value = decade;
-        opt.textContent = `${decade} - ${decade+9}`;
-        yearFilter.appendChild(opt);
+    // Fetch data.json
+    fetch('data.json')
+      .then(response => response.json())
+      .then(data => {
+        itemsData = data;
+        populateFilters();
+        displayItems();
       });
 
-      const countryFilter = document.getElementById("countryFilter");
-      countries.forEach(c => {
-        let opt = document.createElement("option");
-        opt.value = c;
-        opt.textContent = c;
-        countryFilter.appendChild(opt);
-      });
-    }
+    // Populate filters
+    function populateFilters() {
+      const yearFilter = document.getElementById('yearFilter');
+      const countryFilter = document.getElementById('countryFilter');
 
-    function renderItems(data) {
-      const stampsList = document.getElementById("stamps-list");
-      const coinsList = document.getElementById("coins-list");
-      const notesList = document.getElementById("notes-list");
-      stampsList.innerHTML = coinsList.innerHTML = notesList.innerHTML = "";
+      const years = itemsData.map(i => parseInt(i.year));
+      const minYear = Math.min(...years);
+      const maxYear = Math.max(...years);
 
-      data.forEach(item => {
-        const div = document.createElement("div");
-        div.className = "item";
-
-        let img = document.createElement("img");
-        img.src = item.type === "Stamp" ? item.img : item.imgFront;
-        img.alt = item.name;
-
-        div.appendChild(img);
-        div.innerHTML += `<p><strong>${item.name}</strong></p><p>${item.year} - ${item.country}</p>`;
-        div.onclick = () => openModal(item);
-
-        if (item.type === "Stamp") stampsList.appendChild(div);
-        else if (item.type === "Coin") coinsList.appendChild(div);
-        else if (item.type === "Currency Note") notesList.appendChild(div);
-      });
-    }
-
-    function applyFilters() {
-      const searchVal = document.getElementById("search").value.toLowerCase();
-      const yearVal = document.getElementById("yearFilter").value;
-      const countryVal = document.getElementById("countryFilter").value;
-
-      const filtered = allData.filter(item => {
-        const matchesSearch = item.name.toLowerCase().includes(searchVal);
-        const matchesYear = !yearVal || (Math.floor(item.year/10)*10 == yearVal);
-        const matchesCountry = !countryVal || item.country === countryVal;
-        return matchesSearch && matchesYear && matchesCountry;
-      });
-
-      renderItems(filtered);
-    }
-
-    function openModal(item) {
-      document.getElementById("modal").style.display = "flex";
-      document.getElementById("modal-title").innerText = item.name + " (" + item.year + ")";
-      document.getElementById("modal-description").innerText = item.description;
-      document.getElementById("modal-img-front").src = item.type === "Stamp" ? item.img : item.imgFront;
-
-      if (item.type !== "Stamp" && item.imgBack) {
-        document.getElementById("modal-img-back").style.display = "block";
-        document.getElementById("modal-img-back").src = item.imgBack;
-      } else {
-        document.getElementById("modal-img-back").style.display = "none";
+      // Year ranges (decades)
+      yearFilter.innerHTML = '<option value="">All Years</option>';
+      for (let y = Math.floor(minYear/10)*10; y <= maxYear; y += 10) {
+        yearFilter.innerHTML += `<option value="${y}-${y+9}">${y}-${y+9}</option>`;
       }
+
+      // Countries
+      const countries = [...new Set(itemsData.map(i => i.country))].sort();
+      countryFilter.innerHTML = '<option value="">All Countries</option>';
+      countries.forEach(c => {
+        countryFilter.innerHTML += `<option value="${c}">${c}</option>`;
+      });
     }
 
-    function closeModal() {
-      document.getElementById("modal").style.display = "none";
+    // Display items
+    function displayItems() {
+      const searchValue = document.getElementById('search').value.toLowerCase();
+      const yearRange = document.getElementById('yearFilter').value;
+      const country = document.getElementById('countryFilter').value;
+
+      let filtered = itemsData.filter(item =>
+        item.title.toLowerCase().includes(searchValue) ||
+        item.description.toLowerCase().includes(searchValue)
+      );
+
+      if (yearRange) {
+        const [start, end] = yearRange.split('-').map(Number);
+        filtered = filtered.filter(item => item.year >= start && item.year <= end);
+      }
+
+      if (country) {
+        filtered = filtered.filter(item => item.country === country);
+      }
+
+      // Sort by year
+      filtered.sort((a,b) => a.year - b.year);
+
+      // Clear containers
+      document.getElementById('stamps-container').innerHTML = '';
+      document.getElementById('coins-container').innerHTML = '';
+      document.getElementById('notes-container').innerHTML = '';
+
+      filtered.forEach(item => {
+        const container = document.getElementById(item.category + 's-container');
+        if (container) {
+          const div = document.createElement('div');
+          div.className = 'item';
+          div.innerHTML = `
+            <img src="${item.imageFront}" alt="${item.title}">
+            <p>${item.title} (${item.year})</p>
+          `;
+          div.onclick = () => showModal(item);
+          container.appendChild(div);
+        }
+      });
     }
 
-    // Event listeners
-    document.getElementById("search").addEventListener("input", applyFilters);
-    document.getElementById("yearFilter").addEventListener("change", applyFilters);
-    document.getElementById("countryFilter").addEventListener("change", applyFilters);
+    // Modal
+    function showModal(item) {
+      document.getElementById('modalTitle').textContent = item.title + ' (' + item.year + ')';
+      document.getElementById('modalDescription').textContent = item.description;
+      document.getElementById('modalImages').innerHTML = `
+        <img src="${item.imageFront}" alt="Front">
+        <img src="${item.imageBack}" alt="Back">
+      `;
+      document.getElementById('modal').style.display = 'flex';
+    }
 
-    loadData();
+    document.getElementById('modalClose').onclick = () => {
+      document.getElementById('modal').style.display = 'none';
+    };
+
+    window.onclick = (e) => {
+      if (e.target === document.getElementById('modal')) {
+        document.getElementById('modal').style.display = 'none';
+      }
+    };
+
+    document.getElementById('search').oninput = displayItems;
+    document.getElementById('yearFilter').onchange = displayItems;
+    document.getElementById('countryFilter').onchange = displayItems;
   </script>
 </body>
 </html>
