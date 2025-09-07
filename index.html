@@ -90,16 +90,17 @@
       flex-shrink: 0;
     }
 
-    .decor-image {
-      width: 100px;
-      height: 100px;
+    /* Decorative image sizes updated */
+    .filters-images-left .decor-image {
+      width: 150px;  /* 1.5× bigger */
+      height: 150px;
       object-fit: cover;
       border-radius: 8px;
     }
 
-    .decor-image-note {
-      width: 120px;
-      height: 40px; /* 1:3 ratio */
+    .filters-images-right .decor-image-note {
+      width: 360px;  /* 3× bigger */
+      height: 120px; /* 1:3 ratio */
       object-fit: cover;
       border-radius: 6px;
     }
@@ -234,8 +235,8 @@
   <!-- Filters with decorative images -->
   <div class="filters-wrapper">
     <div class="filters-images-left">
-      <img src="images/Stamp-Decor.jpg" alt="Stamp" class="decor-image">
-      <img src="images/Coin-Decor.jpg" alt="Coin" class="decor-image">
+      <img src="images/stamp-decor.jpg" alt="Stamp" class="decor-image">
+      <img src="images/coin-decor.jpg" alt="Coin" class="decor-image">
     </div>
 
     <div class="filters">
@@ -249,7 +250,7 @@
     </div>
 
     <div class="filters-images-right">
-      <img src="images/Note-Decor.jpg" alt="Note" class="decor-image-note">
+      <img src="images/note-decor.jpg" alt="Note" class="decor-image-note">
     </div>
   </div>
 
