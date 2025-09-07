@@ -17,21 +17,30 @@
       color: white;
       padding: 15px 20px;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
+      position: relative;
     }
     header h1 {
       margin: 0;
-      font-size: 1.5em;
+      font-size: 1.8em;
+      text-align: center;
+    }
+    header img.logo {
+      position: absolute;
+      left: 20px;
+      height: 40px;
     }
     header a {
+      position: absolute;
+      right: 20px;
       color: #ffd700;
       text-decoration: none;
       font-weight: bold;
     }
     .jump-links {
       text-align: center;
-      margin: 20px 0;
+      margin: 20px 0 10px;
       font-size: 1.2em;
     }
     .jump-links a {
@@ -42,6 +51,17 @@
     }
     .jump-links a:hover {
       text-decoration: underline;
+    }
+    /* Filters section */
+    .filters {
+      text-align: center;
+      margin: 15px 0 25px;
+    }
+    .filters input, .filters select {
+      margin: 0 8px;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
     .section {
       padding: 20px;
@@ -100,6 +120,7 @@
 </head>
 <body>
   <header>
+    <img src="images/logo.png" alt="Logo" class="logo">
     <h1>Dinky's Antiques Collection</h1>
     <a href="mailto:dnaphx@gmail.com">dnaphx@gmail.com</a>
   </header>
@@ -109,6 +130,17 @@
     <a href="#stamps">Stamps</a> |
     <a href="#coins">Coins</a> |
     <a href="#notes">Currency Notes</a>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters">
+    <input type="text" id="search" placeholder="Search by name...">
+    <select id="yearFilter">
+      <option value="">All Years</option>
+    </select>
+    <select id="countryFilter">
+      <option value="">All Countries</option>
+    </select>
   </div>
 
   <section id="stamps" class="section">
@@ -138,13 +170,48 @@
   </div>
 
   <script>
+    let allData = [];
+
     async function loadData() {
       const res = await fetch('data.json');
       const data = await res.json();
+      allData = data;
 
+      populateFilters(data);
+      renderItems(data);
+    }
+
+    function populateFilters(data) {
+      const years = [...new Set(data.map(item => item.year))].sort((a,b) => a-b);
+      const countries = [...new Set(data.map(item => item.country))].sort();
+
+      const yearFilter = document.getElementById("yearFilter");
+      const decadeRanges = [];
+      years.forEach(y => {
+        const decade = Math.floor(y/10)*10;
+        if (!decadeRanges.includes(decade)) decadeRanges.push(decade);
+      });
+      decadeRanges.sort((a,b)=>a-b).forEach(decade => {
+        let opt = document.createElement("option");
+        opt.value = decade;
+        opt.textContent = `${decade} - ${decade+9}`;
+        yearFilter.appendChild(opt);
+      });
+
+      const countryFilter = document.getElementById("countryFilter");
+      countries.forEach(c => {
+        let opt = document.createElement("option");
+        opt.value = c;
+        opt.textContent = c;
+        countryFilter.appendChild(opt);
+      });
+    }
+
+    function renderItems(data) {
       const stampsList = document.getElementById("stamps-list");
       const coinsList = document.getElementById("coins-list");
       const notesList = document.getElementById("notes-list");
+      stampsList.innerHTML = coinsList.innerHTML = notesList.innerHTML = "";
 
       data.forEach(item => {
         const div = document.createElement("div");
@@ -156,13 +223,27 @@
 
         div.appendChild(img);
         div.innerHTML += `<p><strong>${item.name}</strong></p><p>${item.year} - ${item.country}</p>`;
-
         div.onclick = () => openModal(item);
 
         if (item.type === "Stamp") stampsList.appendChild(div);
         else if (item.type === "Coin") coinsList.appendChild(div);
         else if (item.type === "Currency Note") notesList.appendChild(div);
       });
+    }
+
+    function applyFilters() {
+      const searchVal = document.getElementById("search").value.toLowerCase();
+      const yearVal = document.getElementById("yearFilter").value;
+      const countryVal = document.getElementById("countryFilter").value;
+
+      const filtered = allData.filter(item => {
+        const matchesSearch = item.name.toLowerCase().includes(searchVal);
+        const matchesYear = !yearVal || (Math.floor(item.year/10)*10 == yearVal);
+        const matchesCountry = !countryVal || item.country === countryVal;
+        return matchesSearch && matchesYear && matchesCountry;
+      });
+
+      renderItems(filtered);
     }
 
     function openModal(item) {
@@ -182,6 +263,11 @@
     function closeModal() {
       document.getElementById("modal").style.display = "none";
     }
+
+    // Event listeners
+    document.getElementById("search").addEventListener("input", applyFilters);
+    document.getElementById("yearFilter").addEventListener("change", applyFilters);
+    document.getElementById("countryFilter").addEventListener("change", applyFilters);
 
     loadData();
   </script>
