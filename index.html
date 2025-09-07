@@ -57,25 +57,42 @@
     .filters-wrapper {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start; /* shift left */
       gap: 15px;
       margin-bottom: 25px;
     }
 
     .filters-images-left {
-      display: flex; /* stamp & coin side by side */
+      display: flex; /* Stamp & Coin side by side */
       gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .filters input, .filters select {
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
 
     .filters-images-right {
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-left: auto; /* push Note image to far right */
+      flex-shrink: 0;
     }
 
     .decor-image {
-      width: 120px;
-      height: 120px;
+      width: 100px;
+      height: 100px;
       object-fit: cover;
       border-radius: 8px;
     }
@@ -85,19 +102,6 @@
       height: 40px; /* 1:3 ratio */
       object-fit: cover;
       border-radius: 6px;
-    }
-
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .filters input, .filters select {
-      padding: 5px 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
     }
 
     .section {
