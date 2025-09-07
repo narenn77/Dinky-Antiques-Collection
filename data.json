@@ -1,5 +1,5 @@
 [
-  {"type":"Stamp","name":"Stamp 1","year":1947,"country":"Country A","img":"images/stamps/S-Item-1.jpg","description":"Test stamp 1."},
+  {"type":"Stamp","name":"Territorial Army","year":1974,"country":"India","img":"images/stamps/India-1974-Territorial-Army.jpg","description":"This stamp is a commemorative postage stamp issued by India in 1974 to mark the 25th anniversary (Silver Jubilee) of the founding of the Indian Territorial Army in 1949."},
   {"type":"Stamp","name":"Stamp 2","year":1948,"country":"Country B","img":"images/stamps/S-Item-2.jpg","description":"Test stamp 2."},
   {"type":"Stamp","name":"Stamp 3","year":1949,"country":"Country C","img":"images/stamps/S-Item-3.jpg","description":"Test stamp 3."},
   {"type":"Stamp","name":"Stamp 4","year":1950,"country":"Country D","img":"images/stamps/S-Item-4.jpg","description":"Test stamp 4."},
