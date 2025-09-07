@@ -14,7 +14,7 @@
     }
 
     header {
-      background: #444;
+      background: #333f50; /* dark bluish background */
       color: white;
       padding: 10px 20px;
       display: flex;
@@ -27,6 +27,7 @@
       margin: 0;
       font-size: 1.8em;
       text-align: center;
+      color: #4da6ff; /* light blue title */
     }
 
     header img.logo {
@@ -38,9 +39,13 @@
     header a {
       position: absolute;
       right: 20px;
-      color: #ffd700;
+      color: #0059b3; /* darker blue for email */
       text-decoration: none;
       font-weight: bold;
+    }
+
+    header a:hover {
+      color: #4da6ff;
     }
 
     /* Filters wrapper with decorative images */
@@ -69,14 +74,14 @@
 
     .filters-images-left .decor-image {
       width: 150px;
-      height: 90px; /* reduced further */
+      height: 100px; /* reduced height */
       object-fit: cover;
       border-radius: 8px;
     }
 
     .filters-images-right .decor-image-note {
-      width: 300px;
-      height: 80px; /* slightly smaller */
+      width: 280px;  /* slightly smaller */
+      height: 90px;
       object-fit: cover;
       border-radius: 6px;
     }
@@ -93,9 +98,16 @@
     .filters input, .filters select {
       padding: 8px 12px;
       font-size: 1em;
-      border: 1px solid #ccc;
+      border: 1px solid #4da6ff; /* light-blue border */
       border-radius: 4px;
       min-width: 180px;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+
+    .filters input:focus, .filters select:focus {
+      outline: none;
+      border-color: #1a8cff;
+      box-shadow: 0 0 5px #1a8cff;
     }
 
     /* "Check our Collection" links */
@@ -109,11 +121,12 @@
     .jump-links a {
       margin: 0 10px;
       text-decoration: none;
-      color: #0066cc;
+      color: #4da6ff; /* light-blue links */
       font-weight: bold;
     }
 
     .jump-links a:hover {
+      color: #1a8cff; /* darker hover blue */
       text-decoration: underline;
     }
 
