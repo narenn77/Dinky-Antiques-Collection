@@ -60,15 +60,17 @@
       justify-content: center;
       gap: 15px;
       margin-bottom: 25px;
-      flex-wrap: wrap;
     }
 
-    .filters-images-left,
+    .filters-images-left {
+      display: flex; /* stamp & coin side by side */
+      gap: 10px;
+    }
+
     .filters-images-right {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
     }
 
     .decor-image {
@@ -118,8 +120,8 @@
       flex-shrink: 0;
     }
     .item img {
-      width: 240px;      /* ~2.5 inches */
-      height: 192px;     /* ~2 inches */
+      width: 240px;
+      height: 192px;
       border-radius: 4px;
       object-fit: cover;
       display: block;
@@ -158,7 +160,7 @@
       color: #444;
     }
 
-    /* Mobile responsive header */
+    /* Mobile responsive header and filters */
     @media (max-width: 600px) {
       header {
         flex-direction: column;
@@ -167,33 +169,46 @@
         text-align: center;
         position: relative;
       }
-
       header img.logo {
         position: static;
         height: 50px;
         margin-bottom: 10px;
       }
-
       header a {
         position: static;
         margin-top: 5px;
       }
-
       header h1 {
         font-size: 1.5em;
         margin: 5px 0;
       }
 
-      /* Responsive filters images on mobile */
+      /* Hide decorative images */
+      .filters-images-left,
+      .filters-images-right {
+        display: none;
+      }
+
+      /* Mobile filter layout */
       .filters-wrapper {
         flex-direction: column;
+        align-items: center;
+        gap: 10px;
       }
-      .filters-images-left, .filters-images-right {
-        flex-direction: row;
+      .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
       }
-      .decor-image, .decor-image-note {
-        width: 80px;
-        height: auto;
+      /* Year & Country side by side */
+      #yearFilter, #countryFilter {
+        flex: 1 1 45%;
+      }
+      /* Search full width below filters */
+      #search {
+        flex: 1 1 100%;
+        margin-top: 8px;
       }
     }
   </style>
@@ -266,7 +281,6 @@
       const res = await fetch('data.json');
       const data = await res.json();
       allData = data;
-
       populateFilters(data);
       renderItems(data);
     }
