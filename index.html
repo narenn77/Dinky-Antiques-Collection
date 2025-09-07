@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dinky's Antiques Collection</title>
+  <title>Dinky's Antiques & Collectables</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -38,20 +38,6 @@
       text-decoration: none;
       font-weight: bold;
     }
-    .jump-links {
-      text-align: center;
-      margin: 20px 0 10px;
-      font-size: 1.2em;
-    }
-    .jump-links a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #0066cc;
-      font-weight: bold;
-    }
-    .jump-links a:hover {
-      text-decoration: underline;
-    }
 
     /* Filters wrapper with decorative images */
     .filters-wrapper {
@@ -59,8 +45,8 @@
       align-items: flex-start; /* shift decorative images slightly up */
       justify-content: center;  /* center filters between left and right images */
       gap: 15px;
-      margin-bottom: 25px;
-      margin-top: -30px; /* moves entire block slightly up toward title */
+      margin-bottom: 10px;
+      margin-top: -30px; /* moves decorative images slightly up toward title */
     }
 
     .filters-images-left {
@@ -78,15 +64,15 @@
     }
 
     .filters-images-left .decor-image {
-      width: 150px;  /* 1.5× bigger */
+      width: 150px;  
       height: 150px;
       object-fit: cover;
       border-radius: 8px;
     }
 
     .filters-images-right .decor-image-note {
-      width: 360px;  /* 3× bigger */
-      height: 120px; /* 1:3 ratio */
+      width: 360px;  
+      height: 120px; 
       object-fit: cover;
       border-radius: 6px;
     }
@@ -102,10 +88,28 @@
 
     .filters input, .filters select {
       padding: 8px 12px;   /* larger size */
-      font-size: 1em;      /* visually match "Check our Collection" */
+      font-size: 1em;      
       border: 1px solid #ccc;
       border-radius: 4px;
       min-width: 180px;
+    }
+
+    /* "Check our Collection" links below filters */
+    .jump-links {
+      text-align: center;
+      margin: 15px 0 25px; 
+      font-size: 1.2em;
+      z-index: 1;
+    }
+
+    .jump-links a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #0066cc;
+      font-weight: bold;
+    }
+    .jump-links a:hover {
+      text-decoration: underline;
     }
 
     .section {
@@ -135,6 +139,7 @@
       display: block;
       margin: 0 auto;
     }
+
     .modal {
       display: none;
       position: fixed;
@@ -226,14 +231,7 @@
     <a href="mailto:dnaphx@gmail.com">dnaphx@gmail.com</a>
   </header>
 
-  <div class="jump-links">
-    <strong>Check our Collection of :</strong>
-    <a href="#stamps">Stamps</a> |
-    <a href="#coins">Coins</a> |
-    <a href="#notes">Currency Notes</a>
-  </div>
-
-  <!-- Filters with decorative images -->
+  <!-- Filters with decorative images at top -->
   <div class="filters-wrapper">
     <div class="filters-images-left">
       <img src="images/Stamp-Decor.jpg" alt="Stamp" class="decor-image">
@@ -253,6 +251,14 @@
     <div class="filters-images-right">
       <img src="images/Note-Decor.jpg" alt="Note" class="decor-image-note">
     </div>
+  </div>
+
+  <!-- "Check our Collection" links moved below filters -->
+  <div class="jump-links">
+    <strong>Check our Collection of :</strong>
+    <a href="#stamps">Stamps</a> |
+    <a href="#coins">Coins</a> |
+    <a href="#notes">Currency Notes</a>
   </div>
 
   <section id="stamps" class="section">
