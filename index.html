@@ -9,7 +9,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      padding-top: 0; /* removed extra spacing above header */
+      padding-top: 80px;
       background: #fafafa;
       color: #333;
     }
@@ -44,32 +44,14 @@
       font-weight: bold;
     }
 
-    /* "Check our Collection" links above filters */
-    .jump-links {
-      text-align: center;
-      margin: 10px 0; 
-      font-size: 1em; /* slightly smaller */
-      z-index: 1;
-    }
-
-    .jump-links a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #0066cc;
-      font-weight: bold;
-    }
-
-    .jump-links a:hover {
-      text-decoration: underline;
-    }
-
     /* Filters wrapper with decorative images */
     .filters-wrapper {
       display: flex;
       align-items: flex-start;
       justify-content: center;
       gap: 15px;
-      margin-bottom: 15px; /* slightly reduced space below filters */
+      margin-top: 20px;
+      margin-bottom: 10px;
     }
 
     .filters-images-left {
@@ -86,16 +68,18 @@
       flex-shrink: 0;
     }
 
+    /* Reduced height for Stamp & Coin images */
     .filters-images-left .decor-image {
       width: 150px;
-      height: 150px;
+      height: 120px;  /* reduced from 150px */
       object-fit: cover;
       border-radius: 8px;
     }
 
+    /* Reduced height for Note image */
     .filters-images-right .decor-image-note {
       width: 360px;
-      height: 120px;
+      height: 100px;  /* reduced from 120px */
       object-fit: cover;
       border-radius: 6px;
     }
@@ -117,8 +101,26 @@
       min-width: 180px;
     }
 
+    .jump-links {
+      text-align: center;
+      margin: 8px 0 18px;
+      font-size: 1.1em;
+      z-index: 1;
+    }
+
+    .jump-links a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #0066cc;
+      font-weight: bold;
+    }
+
+    .jump-links a:hover {
+      text-decoration: underline;
+    }
+
     .section {
-      padding: 15px 20px; /* moved sections slightly up */
+      padding: 15px 20px;
     }
 
     .items {
@@ -246,15 +248,6 @@
     <a href="mailto:dnaphx@gmail.com">dnaphx@gmail.com</a>
   </header>
 
-  <!-- "Check our Collection" links moved above filters -->
-  <div class="jump-links">
-    <strong>Check our Collection</strong> :
-    <a href="#stamps">Stamps</a> |
-    <a href="#coins">Coins</a> |
-    <a href="#notes">Currency Notes</a>
-  </div>
-
-  <!-- Filters with decorative images -->
   <div class="filters-wrapper">
     <div class="filters-images-left">
       <img src="images/Stamp-Decor.jpg" alt="Stamp" class="decor-image">
@@ -274,6 +267,13 @@
     <div class="filters-images-right">
       <img src="images/Note-Decor.jpg" alt="Note" class="decor-image-note">
     </div>
+  </div>
+
+  <div class="jump-links">
+    <strong>Check our Collection :</strong>
+    <a href="#stamps">Stamps</a> |
+    <a href="#coins">Coins</a> |
+    <a href="#notes">Currency Notes</a>
   </div>
 
   <section id="stamps" class="section">
