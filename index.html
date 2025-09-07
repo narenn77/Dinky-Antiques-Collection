@@ -9,9 +9,11 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      padding-top: 80px; /* ensures top content visible below header */
       background: #fafafa;
       color: #333;
     }
+
     header {
       background: #444;
       color: white;
@@ -21,16 +23,19 @@
       align-items: center;
       position: relative;
     }
+
     header h1 {
       margin: 0;
       font-size: 1.8em;
       text-align: center;
     }
+
     header img.logo {
       position: absolute;
       left: 20px;
       height: 40px;
     }
+
     header a {
       position: absolute;
       right: 20px;
@@ -42,15 +47,15 @@
     /* Filters wrapper with decorative images */
     .filters-wrapper {
       display: flex;
-      align-items: flex-start; /* shift decorative images slightly up */
-      justify-content: center;  /* center filters between left and right images */
+      align-items: flex-start;
+      justify-content: center;
       gap: 15px;
+      margin-top: 20px; /* spacing below header */
       margin-bottom: 10px;
-      margin-top: -30px; /* moves decorative images slightly up toward title */
     }
 
     .filters-images-left {
-      display: flex; /* Stamp & Coin side by side */
+      display: flex;
       gap: 10px;
       flex-shrink: 0;
       align-items: flex-start;
@@ -64,15 +69,15 @@
     }
 
     .filters-images-left .decor-image {
-      width: 150px;  
+      width: 150px;
       height: 150px;
       object-fit: cover;
       border-radius: 8px;
     }
 
     .filters-images-right .decor-image-note {
-      width: 360px;  
-      height: 120px; 
+      width: 360px;
+      height: 120px;
       object-fit: cover;
       border-radius: 6px;
     }
@@ -82,13 +87,13 @@
       flex-wrap: wrap;
       gap: 10px;
       align-items: center;
-      justify-content: center; /* center between left and right images */
+      justify-content: center;
       flex-shrink: 0;
     }
 
     .filters input, .filters select {
-      padding: 8px 12px;   /* larger size */
-      font-size: 1em;      
+      padding: 8px 12px;
+      font-size: 1em;
       border: 1px solid #ccc;
       border-radius: 4px;
       min-width: 180px;
@@ -97,7 +102,7 @@
     /* "Check our Collection" links below filters */
     .jump-links {
       text-align: center;
-      margin: 15px 0 25px; 
+      margin: 15px 0 25px;
       font-size: 1.2em;
       z-index: 1;
     }
@@ -108,6 +113,7 @@
       color: #0066cc;
       font-weight: bold;
     }
+
     .jump-links a:hover {
       text-decoration: underline;
     }
@@ -115,12 +121,14 @@
     .section {
       padding: 20px;
     }
+
     .items {
       display: flex;
       overflow-x: auto;
       gap: 15px;
       padding: 10px 0;
     }
+
     .item {
       background: white;
       border: 1px solid #ddd;
@@ -131,6 +139,7 @@
       cursor: pointer;
       flex-shrink: 0;
     }
+
     .item img {
       width: 240px;
       height: 192px;
@@ -149,6 +158,7 @@
       justify-content: center;
       align-items: center;
     }
+
     .modal-content {
       background: white;
       padding: 20px;
@@ -157,6 +167,7 @@
       max-height: 80%;
       overflow-y: auto;
     }
+
     .modal img {
       max-width: 500px;
       width: 100%;
@@ -166,6 +177,7 @@
       object-fit: contain;
       display: block;
     }
+
     .close {
       float: right;
       font-size: 1.5em;
@@ -182,21 +194,24 @@
         text-align: center;
         position: relative;
       }
+
       header img.logo {
         position: static;
         height: 50px;
         margin-bottom: 10px;
       }
+
       header a {
         position: static;
         margin-top: 5px;
       }
+
       header h1 {
         font-size: 1.5em;
         margin: 5px 0;
       }
 
-      /* Hide decorative images */
+      /* Hide decorative images on mobile */
       .filters-images-left,
       .filters-images-right {
         display: none;
@@ -208,15 +223,18 @@
         align-items: center;
         margin-top: 0;
       }
+
       .filters {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
         justify-content: center;
       }
+
       #yearFilter, #countryFilter {
         flex: 1 1 45%;
       }
+
       #search {
         flex: 1 1 100%;
         margin-top: 8px;
