@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dinky's Antiques & Collectables</title>
+  <title>Dinky's Antiques Collection</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -153,7 +153,7 @@
 <body>
   <header>
     <img src="images/logo.jpg" alt="Logo" class="logo">
-    <h1>Dinky's Antiques & Collectables</h1>
+    <h1>Dinky's Antiques Collection</h1>
     <a href="mailto:dnaphx@gmail.com">dnaphx@gmail.com</a>
   </header>
 
@@ -165,7 +165,7 @@
   </div>
 
   <div class="filters">
-    <input type="text" id="search" placeholder="Search by name...">
+    <input type="text" id="search" placeholder="Search by name or description...">
     <select id="yearFilter">
       <option value="">All Years</option>
     </select>
@@ -267,7 +267,9 @@
       const countryVal = document.getElementById("countryFilter").value;
 
       const filtered = allData.filter(item => {
-        const matchesSearch = item.name.toLowerCase().includes(searchVal);
+        const matchesSearch =
+          item.name.toLowerCase().includes(searchVal) ||
+          item.description.toLowerCase().includes(searchVal); // search description too
         const matchesYear = !yearVal || (Math.floor(item.year/10)*10 == yearVal);
         const matchesCountry = !countryVal || item.country === countryVal;
         return matchesSearch && matchesYear && matchesCountry;
