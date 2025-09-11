@@ -1,397 +1,969 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Dinky's Collection Admin</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
-    <style>
-        /* ... All your CSS here unchanged from before ... Use full CSS above ... */
-    </style>
-</head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dinky's Collection - Admin Panel</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --primary-color: #8B4513;
+  --secondary-color: #D2B48C;
+  --accent-color: #CD853F;
+  --success-color: #27ae60;
+  --danger-color: #e74c3c;
+  --warning-color: #f39c12;
+  --text-dark: #2c1810;
+  --text-light: #6b4423;
+  --background: #faf8f5;
+  --white: #ffffff;
+  --gray-light: #f8f9fa;
+  --gray-medium: #e9ecef;
+  --shadow: rgba(139, 69, 19, 0.1);
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: var(--background);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* Login Screen */
+.login-container {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+}
+
+.login-form {
+  background: var(--white);
+  padding: 3rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-form h1 {
+  font-family: 'Playfair Display', serif;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--gray-medium);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+}
+
+.login-btn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.login-btn:hover {
+  background: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.error-message {
+  background: var(--danger-color);
+  color: var(--white);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+  display: none;
+}
+
+/* Admin Layout */
+.admin-dashboard {
+  display: none;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+header.admin-header {
+  background: var(--primary-color);
+  color: var(--white);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px var(--shadow);
+}
+
+header.admin-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+}
+
+.admin-header .admin-nav button {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: var(--white);
+  margin-left: 10px;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.admin-header .admin-nav .logout-btn {
+  background: var(--danger-color);
+}
+
+.admin-header .admin-nav button:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.admin-header .admin-nav .logout-btn:hover {
+  background: #c0392b;
+}
+
+.admin-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 250px;
+  background: var(--white);
+  padding-top: 2rem;
+  box-shadow: 2px 0 10px var(--shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar ul {
+  list-style: none;
+  flex: 1;
+}
+
+.sidebar ul li {
+  margin: 0 0 1rem 0;
+}
+
+.sidebar ul li a {
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 2rem;
+  text-decoration: none;
+  border-left: 4px solid transparent;
+  transition: var(--transition);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sidebar ul li a.active,
+.sidebar ul li a:hover {
+  background: var(--gray-light);
+  border-left-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.sidebar ul li a i {
+  margin-right: 8px;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* Section Styles */
+.content-section {
+  display: none;
+}
+
+.content-section.active,
+.content-section:not(.hidden) {
+  display: block;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.content-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.btn {
+  cursor: pointer;
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.btn-success {
+  background: var(--success-color);
+  color: var(--white);
+}
+
+.btn-danger {
+  background: var(--danger-color);
+  color: var(--white);
+}
+
+.btn-warning {
+  background: var(--warning-color);
+  color: var(--white);
+}
+
+.btn-secondary {
+  background: var(--gray-medium);
+  color: var(--text-dark);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Table Styles */
+.table-container {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  overflow-x: auto;
+}
+
+.table-container .table-header {
+  background: var(--gray-light);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table-container .table-header h3 {
+  margin: 0;
+  color: var(--primary-color);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+}
+
+.table-container .table-header .search-box {
+  position: relative;
+  max-width: 300px;
+  flex-basis: 300px;
+}
+
+.table-container .table-header .search-box input {
+  width: 100%;
+  padding: 0.5rem 1.5rem 0.5rem 1rem;
+  border: 1px solid var(--gray-medium);
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+}
+
+.table-container .table-header .search-box i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-container th,
+.table-container td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--gray-medium);
+  font-size: 0.9rem;
+}
+
+.table-container th {
+  background-color: var(--gray-light);
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.table-container tr:hover {
+  background-color: var(--gray-light);
+}
+
+/* Forms */
+.form-container {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid var(--gray-medium);
+  border-radius: var(--border-radius);
+  font-family: inherit;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px rgba(139, 69, 19, 0.5);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(5px);
+  overflow-y: auto;
+}
+
+.modal-content {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  margin: 5% auto;
+  max-width: 800px;
+  padding: 1rem;
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--gray-medium);
+  padding-bottom: 0.5rem;
+}
+
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.modal-body {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+.close {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .content-header, .form-grid {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    box-shadow: none;
+  }
+  .admin-content {
+    flex-direction: column;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Loading */
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-width: 3px;
+  border-style: solid;
+  border-color: var(--white) transparent var(--white) transparent;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+  vertical-align: middle;
+}
+
+.hidden {
+    display:none !important;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
+
 <body>
-<div id="loginScreen" class="login-container">
-    <form class="login-form" onsubmit="handleLogin(event)">
-        <h1><i class="fas fa-shield-alt"></i> Admin Login</h1>
-        <div id="errorMessage" class="error-message">Invalid credentials.</div>
-        <div class="form-group">
-            <label for="username">Username</label><input type="text" id="username" required/>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label><input type="password" id="password" required/>
-        </div>
-        <button type="submit" class="login-btn">
-            <span id="loginText">Login</span>
-            <span id="loginLoading" class="loading hidden"></span>
-        </button>
-        <div style="margin-top:1rem;font-size:0.9rem;color:#9B6B2F;">Username: admin | Password: admin123</div>
-    </form>
-</div>
-<div id="adminDashboard" class="admin-dashboard" style="display:none;">
-    <!-- Header, Sidebar, and main content as before, unchanged -->
-    <!-- Sidebar -->
-    <header class="admin-header">
-        <h1><i class="fas fa-gem"></i> Dinky's Admin Panel</h1>
-        <div class="admin-nav">
-            <button class="nav-btn" onclick="exportData()">Export</button>
-            <button class="nav-btn" onclick="document.getElementById('importFile').click()">Import</button>
-            <button class="logout-btn" onclick="logout()">Logout</button>
-        </div>
-    </header>
-    <div class="admin-content">
-        <nav class="sidebar">
-            <ul class="sidebar-menu">
-                <li><a href="#" class="menu-item active" data-section="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href="#" class="menu-item" data-section="stamps"><i class="fas fa-stamp"></i> Stamps</a></li>
-                <li><a href="#" class="menu-item" data-section="coins"><i class="fas fa-coins"></i> Coins</a></li>
-                <li><a href="#" class="menu-item" data-section="currency"><i class="fas fa-money-bill-wave"></i> Currency</a></li>
-                <li><a href="#" class="menu-item" data-section="add-item"><i class="fas fa-plus"></i> Add Item</a></li>
-                <li><a href="#" class="menu-item" data-section="countries"><i class="fas fa-flag"></i> Countries</a></li>
-                <li><a href="#" class="menu-item" data-section="settings"><i class="fas fa-cog"></i> Settings</a></li>
-            </ul>
-        </nav>
-        <main class="main-content">
-            <section id="dashboardSection" class="content-section">
-                <!-- Dashboard content here -->
-                <div class="content-header">
-                    <h2 class="content-title">Dashboard Overview</h2>
-                </div>
-                <div class="dashboard-cards">
-                    <div class="dashboard-card">
-                        <div class="card-icon"><i class="fas fa-stamp"></i></div>
-                        <div class="card-number" id="stampsCount">0</div>
-                        <div class="card-label">Stamps</div>
+    <div id="loginScreen" class="login-container">
+        <form class="login-form" onsubmit="handleLogin(event)">
+            <h1><i class="fas fa-shield-alt"></i> Admin Access</h1>
+            <div id="errorMessage" class="error-message">Invalid username or password</div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input id="username" required autocomplete="username"/>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" required autocomplete="current-password"/>
+            </div>
+            <button type="submit" class="login-btn">
+                <span id="loginText">Login</span>
+                <span id="loginLoading" class="loading hidden"></span>
+            </button>
+            <div style="margin-top:15px; font-size:14px; color:#9B6B2F;">(Default: admin / admin123)</div>
+        </form>
+    </div>
+
+    <div id="adminDashboard" class="admin-dashboard" style="display:none">
+        <header class="admin-header">
+            <h1><i class="fas fa-gem"></i> Dinky's Admin Panel</h1>
+            <div class="admin-nav">
+                <button class="btn btn-primary" onclick="exportData()"><i class="fas fa-download"></i> Export</button>
+                <button class="btn btn-primary" onclick="document.getElementById('importFile').click()"><i class="fas fa-upload"></i> Import</button>
+                <button class="btn btn-danger" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </header>
+        <div class="admin-content">
+            <nav class="sidebar">
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="menu-item active" data-section="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#" class="menu-item" data-section="stamps"><i class="fas fa-stamp"></i> Stamps</a></li>
+                    <li><a href="#" class="menu-item" data-section="coins"><i class="fas fa-coins"></i> Coins</a></li>
+                    <li><a href="#" class="menu-item" data-section="currency"><i class="fas fa-money-bill-wave"></i> Currency</a></li>
+                    <li><a href="#" class="menu-item" data-section="add-item"><i class="fas fa-plus"></i> Add Item</a></li>
+                    <li><a href="#" class="menu-item" data-section="countries"><i class="fas fa-flag"></i> Countries</a></li>
+                    <li><a href="#" class="menu-item" data-section="settings"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <main class="main-content">
+                <!-- Dashboard Section -->
+                <section id="dashboardSection" class="content-section">
+                    <div class="content-header">
+                        <h2 class="content-title">Dashboard Overview</h2>
                     </div>
-                    <div class="dashboard-card">
-                        <div class="card-icon"><i class="fas fa-coins"></i></div>
-                        <div class="card-number" id="coinsCount">0</div>
-                        <div class="card-label">Coins</div>
+                    <div class="dashboard-cards">
+                        <div class="dashboard-card"><div class="card-icon"><i class="fas fa-stamp"></i></div><div class="card-number" id="stampsCount">0</div><div class="card-label">Stamps</div></div>
+                        <div class="dashboard-card"><div class="card-icon"><i class="fas fa-coins"></i></div><div class="card-number" id="coinsCount">0</div><div class="card-label">Coins</div></div>
+                        <div class="dashboard-card"><div class="card-icon"><i class="fas fa-money-bill-wave"></i></div><div class="card-number" id="currencyCount">0</div><div class="card-label">Currency</div></div>
+                        <div class="dashboard-card"><div class="card-icon"><i class="fas fa-globe"></i></div><div class="card-number" id="countriesCount">0</div><div class="card-label">Countries</div></div>
                     </div>
-                    <div class="dashboard-card">
-                        <div class="card-icon"><i class="fas fa-money-bill-wave"></i></div>
-                        <div class="card-number" id="currencyCount">0</div>
-                        <div class="card-label">Currency</div>
+                    <div class="table-container">
+                        <div class="table-header">
+                            <h3>Recent Items</h3>
+                            <button class="btn btn-primary" onclick="adminManager.showAddItemForm()"><i class="fas fa-plus"></i> Add Item</button>
+                        </div>
+                        <div id="recentItemsList" style="padding:1rem;">Loading...</div>
                     </div>
-                    <div class="dashboard-card">
-                        <div class="card-icon"><i class="fas fa-globe"></i></div>
-                        <div class="card-number" id="countriesCount">0</div>
-                        <div class="card-label">Countries</div>
+                </section>
+                <!-- Stamps Section -->
+                <section id="stampsSection" class="content-section hidden"></section>
+                <!-- Coins Section -->
+                <section id="coinsSection" class="content-section hidden"></section>
+                <!-- Currency Section -->
+                <section id="currencySection" class="content-section hidden"></section>
+                <!-- Add Item Section -->
+                <section id="add-itemSection" class="content-section hidden">
+                    <div class="content-header">
+                        <h2 id="formTitle" class="content-title">Add Item</h2>
                     </div>
-                </div>
-                <div class="table-container">
-                    <div class="table-header">
-                        <h3>Recent Items</h3>
-                        <button class="btn btn-primary" onclick="adminManager.showAddItemForm()">Add Item</button>
-                    </div>
-                    <div id="recentItemsList" style="padding:1rem;">Loading...</div>
-                </div>
-            </section>
-            <!-- Stamps, Coins, Currency Sections -->
-            <section id="stampsSection" class="content-section hidden"></section>
-            <section id="coinsSection" class="content-section hidden"></section>
-            <section id="currencySection" class="content-section hidden"></section>
-            <!-- Add Item Form -->
-            <section id="add-itemSection" class="content-section hidden">
-                <div class="content-header">
-                    <h2 id="formTitle" class="content-title">Add Item</h2>
-                </div>
-                <div class="form-container">
-                    <form id="itemForm" onsubmit="adminManager.saveItem(event)">
+                    <div class="form-container">
+                       <form id="itemForm" onsubmit="adminManager.saveItem(event)">
                         <div class="form-grid">
-                            <div class="form-group"><label for="itemName">Name *</label><input id="itemName" required/></div>
-                            <div class="form-group"><label for="itemCategory">Category *</label>
-                                <select id="itemCategory" required>
-                                    <option value="">Select</option>
-                                    <option value="stamps">Stamps</option>
-                                    <option value="coins">Coins</option>
-                                    <option value="currency">Currency</option>
-                                </select>
-                            </div>
-                            <div class="form-group"><label for="itemYear">Year *</label><input type="number" id="itemYear" min="1000" max="2030" required/></div>
-                            <div class="form-group"><label for="itemCountry">Country *</label><select id="itemCountry" required></select></div>
-                            <div class="form-group"><label for="itemCondition">Condition *</label><select id="itemCondition" required>
-                                <option value="">Select</option>
-                                <option value="mint">Mint</option>
-                                <option value="near-mint">Near Mint</option>
-                                <option value="excellent">Excellent</option>
-                                <option value="very-fine">Very Fine</option>
-                                <option value="fine">Fine</option>
-                                <option value="good">Good</option>
-                            </select></div>
-                            <div class="form-group"><label for="itemRarity">Rarity *</label><select id="itemRarity" required>
-                                <option value="">Select</option>
-                                <option value="common">Common</option>
-                                <option value="uncommon">Uncommon</option>
-                                <option value="rare">Rare</option>
-                                <option value="very-rare">Very Rare</option>
-                                <option value="extremely-rare">Extremely Rare</option>
-                            </select></div>
-                            <div class="form-group full-width"><label for="itemImage">Image URL</label><input id="itemImage" placeholder="https://..." /></div>
-                            <div class="form-group full-width"><label for="itemDescription">Description *</label><textarea id="itemDescription" required></textarea></div>
-                            <div class="form-group full-width"><label for="itemHistory">Historical Context</label><textarea id="itemHistory"></textarea></div>
-                            <div class="form-group full-width"><label for="itemNotes">Collector Notes</label><textarea id="itemNotes"></textarea></div>
+                          <div class="form-group"><label for="itemName">Name</label><input id="itemName" required/></div>
+                          <div class="form-group"><label for="itemCategory">Category</label><select id="itemCategory" required><option value="">Select</option><option value="stamps">Stamps</option><option value="coins">Coins</option><option value="currency">Currency</option></select></div>
+                          <div class="form-group"><label for="itemYear">Year</label><input id="itemYear" type="number" min="1000" max="2030" required/></div>
+                          <div class="form-group"><label for="itemCountry">Country</label><select id="itemCountry" required></select></div>
+                          <div class="form-group"><label for="itemCondition">Condition</label><select id="itemCondition" required><option value="">Select</option><option value="mint">Mint</option><option value="near-mint">Near Mint</option><option value="excellent">Excellent</option><option value="very-fine">Very Fine</option><option value="fine">Fine</option><option value="good">Good</option></select></div>
+                          <div class="form-group"><label for="itemRarity">Rarity</label><select id="itemRarity" required><option value="">Select</option><option value="common">Common</option><option value="uncommon">Uncommon</option><option value="rare">Rare</option><option value="very-rare">Very Rare</option><option value="extremely-rare">Extremely Rare</option></select></div>
+                          <div class="form-group"><label for="itemImage">Image URL</label><input id="itemImage" type="url" placeholder="https://example.com/image.jpg"/></div>
+                          <div class="form-group full-width"><label for="itemDescription">Description</label><textarea id="itemDescription" required></textarea></div>
+                          <div class="form-group full-width"><label for="itemHistory">Historical Context</label><textarea id="itemHistory"></textarea></div>
+                          <div class="form-group full-width"><label for="itemNotes">Collector Notes</label><textarea id="itemNotes"></textarea></div>
                         </div>
                         <div class="form-actions">
-                            <button type="button" class="btn btn-secondary" onclick="adminManager.cancelEdit()">Cancel</button>
-                            <button type="submit" class="btn btn-success" id="saveBtn">Save Item</button>
+                          <button type="button" class="btn btn-secondary" onclick="adminManager.cancelEdit()">Cancel</button>
+                          <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Save</button>
                         </div>
-                    </form>
-                </div>
-            </section>
-            <!-- Countries Management -->
-            <section id="countriesSection" class="content-section hidden">
-                <div class="content-header">
+                       </form> 
+                    </div>
+                </section>
+                <!-- Countries Section -->
+                <section id="countriesSection" class="content-section hidden">
+                  <div class="content-header">
                     <h2>Manage Countries</h2>
-                    <button class="btn btn-primary" onclick="adminManager.showAddCountryForm()">Add Country</button>
-                </div>
-                <div id="countriesList" class="form-container">
-                    <table class="table table-striped" id="countriesTable">
-                        <thead><tr><th>Country</th><th>Actions</th></tr></thead>
-                        <tbody></tbody>
+                    <button class="btn btn-primary" onclick="adminManager.showAddCountryForm()"><i class="fas fa-plus"></i> Add Country</button>
+                  </div>
+                  <div class="form-container">
+                    <table class="table" id="countriesTable">
+                      <thead><tr><th>Country</th><th>Actions</th></tr></thead>
+                      <tbody></tbody>
                     </table>
-                </div>
-                <div id="countryFormContainer" class="form-container hidden">
+                  </div>
+                  <div class="form-container hidden" id="countryFormContainer">
                     <h3 id="countryFormTitle">Add Country</h3>
                     <form id="countryForm" onsubmit="adminManager.saveCountry(event)">
-                        <div class="form-group">
-                            <label for="countryNameInput">Country Name</label>
-                            <input id="countryNameInput" required />
-                        </div>
-                        <div class="form-actions">
-                            <button type="button" class="btn btn-secondary" onclick="adminManager.cancelCountryEdit()">Cancel</button>
-                            <button type="submit" class="btn btn-success">Save</button>
-                        </div>
+                      <div class="form-group">
+                        <label for="countryName">Country Name</label>
+                        <input id="countryName" type="text" required/>
+                      </div>
+                      <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="adminManager.cancelCountryEdit()">Cancel</button>
+                        <button type="submit" class="btn btn-success">Save</button>
+                      </div>
                     </form>
-                </div>
-            </section>
-            <!-- Settings -->
-            <section id="settingsSection" class="content-section hidden">
-                <div class="content-header">
+                  </div>
+                </section>
+                <!-- Settings Section -->
+                <section id="settingsSection" class="content-section hidden">
+                  <div class="content-header">
                     <h2>Settings</h2>
-                </div>
-                <div class="form-container">
+                  </div>
+                  <div class="form-container">
                     <h3>Data Management</h3>
-                    <button class="btn btn-primary" onclick="exportData()">Export Data</button>
-                    <button class="btn btn-warning" onclick="document.getElementById('importFile').click()">Import Data</button>
-                    <button class="btn btn-danger" onclick="clearAllData()">Clear Data</button>
-                    <input id="importFile" type="file" accept=".json" style="display:none" onchange="handleImportFile(event)" />
+                    <button class="btn btn-primary" onclick="exportData()">Export</button>
+                    <button class="btn btn-primary" onclick="document.getElementById('importFile').click()">Import</button>
+                    <button class="btn btn-danger" onclick="clearData()">Clear All Data</button>
+                    <input id="importFile" type="file" style="display:none" accept=".json" onchange="handleImport(event)"/>
                     <h3>Change Password</h3>
                     <form onsubmit="changePassword(event)">
-                        <div class="form-group">
-                            <label for="currentPassword">Current Password</label>
-                            <input id="currentPassword" type="password" />
-                        </div>
-                        <div class="form-group">
-                            <label for="newPassword">New Password</label>
-                            <input id="newPassword" type="password" />
-                        </div>
-                        <button class="btn btn-primary" type="submit">Change Password</button>
+                      <div class="form-group">
+                        <label for="currentPassword">Current Password</label>
+                        <input id="currentPassword" type="password"/>
+                      </div>
+                      <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input id="newPassword" type="password"/>
+                      </div>
+                      <button class="btn btn-primary" type="submit">Change Password</button>
                     </form>
-                </div>
-            </section>
-        </main>
+                  </div>
+                </section>
+            </main>
+        </div>
     </div>
-</div>
 
 <script>
 class AdminManager {
-    constructor() {
-        this.collectionData = { stamps: [], coins: [], currency: [] };
-        this.countries = [];
-        this.wishlist = [];
-        this.currentEditId = null;
-        this.currentEditCategory = null;
-        this.currentCountryIndex = null;
-        this.init();
+  constructor() {
+    this.collection = { stamps: [], coins: [], currency: [] };
+    this.countries = [];
+    this.currentEditId = null;
+    this.currentEditCategory = null;
+    this.editCountryIdx = null;
+    this.init();
+  }
+  init() {
+    this.loadCollection();
+    this.loadCountries();
+    this.bindEvents();
+    this.renderDashboard();
+    this.renderCountries();
+    this.showSection('dashboard');
+  }
+  loadCollection() {
+    let data = localStorage.getItem('dinky-collection');
+    if (data) {
+      this.collection = JSON.parse(data);
     }
-
-    init() {
-        this.loadData();
-        this.loadCountries();
-        this.loadWishlist();
-        this.renderSidebarListeners();
-        this.renderCountries();
-        this.renderDashboard();
-        this.setDefaultSection();
+    if (!this.collection.stamps) this.collection.stamps = [];
+    if (!this.collection.coins) this.collection.coins = [];
+    if (!this.collection.currency) this.collection.currency = [];
+  }
+  saveCollection() {
+    localStorage.setItem('dinky-collection', JSON.stringify(this.collection));
+  }
+  loadCountries() {
+    let data = localStorage.getItem('dinky-countries');
+    if (data) this.countries = JSON.parse(data);
+    else this.countries = [ 'USA', 'UK', 'Canada', 'Australia', 'Germany', 'France', 'Japan', 'China' ];
+  }
+  saveCountries() {
+    localStorage.setItem('dinky-countries', JSON.stringify(this.countries));
+  }
+  bindEvents() {
+    document.querySelectorAll('.menu-item').forEach(el => el.addEventListener('click', e => {
+      e.preventDefault();
+      this.showSection(e.target.closest('.menu-item').dataset.section);
+    }));
+  }
+  showSection(section) {
+    this.currentSection = section;
+    document.querySelectorAll('.content-section').forEach(c => c.classList.add('hidden'));
+    document.querySelector(`#${section}Section`).classList.remove('hidden');
+    document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
+    document.querySelector(`.menu-item[data-section=${section}]`).classList.add('active');
+    if (section === 'add-item') this.populateCountryDropdown();
+    if (section === 'stamps' || section === 'coins' || section === 'currency') this.renderItems(section);
+    if (section === 'dashboard') this.renderDashboard();
+    if (section === 'countries') this.renderCountries();
+  }
+  renderDashboard() {
+    const counts = {
+      stamps: this.collection.stamps.length,
+      coins: this.collection.coins.length,
+      currency: this.collection.currency.length,
+      countries: new Set([ ...this.collection.stamps, ...this.collection.coins, ...this.collection.currency ].map(i => i.country)).size
+    };
+    for (let key in counts) {
+      document.getElementById(key + 'Count').textContent = counts[key];
     }
-
-    loadData() {
-        let saved = localStorage.getItem('dinky-collection-data');
-        if(saved) this.collectionData = JSON.parse(saved);
-        else /* Default sample data initialization */ this.collectionData.stamps = []; this.collectionData.coins = []; this.collectionData.currency = [];
+    this.renderRecentItems();
+  }
+  renderRecentItems() {
+    let all = [ ...this.collection.stamps, ...this.collection.coins, ...this.collection.currency ];
+    all = all.sort((a, b) => b.id.localeCompare(a.id)).slice(0, 5);
+    const container = document.getElementById('recentItemsList');
+    if (!all.length) container.textContent = 'No items yet.';
+    else {
+      container.innerHTML = `<table><tr><th>Name</th><th>Category</th><th>Actions</th></tr>${all.map(i => `<tr><td>${i.name}</td><td>${i.category}</td><td><button onclick="adminManager.editItem('${i.category}','${i.id}')">Edit</button></td></tr>`).join('')}</table>`;
     }
-
-    saveData() {
-        localStorage.setItem('dinky-collection-data', JSON.stringify(this.collectionData));
-        this.renderDashboard();
+  }
+  renderItems(category) {
+    const container = document.getElementById(category + 'Section');
+    const div = document.createElement('div');
+    let items = this.collection[category];
+    container.innerHTML = '';
+    if (!items.length) {
+      container.innerHTML = `<div><p>No items in ${category}</p><button onclick="adminManager.showAddItemForm('${category}')">Add ${category}</button></div>`;
+      return;
     }
-
-    loadCountries() {
-        let saved = localStorage.getItem('dinky-countries');
-        if(saved) this.countries = JSON.parse(saved);
-        else this.countries = ['USA','UK','Canada','Australia','Germany','France','Japan','China'];
+    const table = document.createElement('table');
+    table.className = 'table';
+    table.innerHTML = `<thead><tr><th>Image</th><th>Name</th><th>Year</th><th>Country</th><th>Condition</th><th>Rarity</th><th>Actions</th></tr></thead>`;
+    const tbody = document.createElement('tbody');
+    items.forEach(item => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td><img src="${item.image || 'https://via.placeholder.com/60'}" style="width: 50px;"/></td><td>${item.name}</td><td>${item.year}</td><td>${item.country}</td><td>${item.condition}</td><td>${item.rarity}</td><td><button onclick="adminManager.editItem('${category}','${item.id}')">Edit</button> <button onclick="adminManager.deleteItem('${category}','${item.id}')">Delete</button></td>`;
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    container.appendChild(table);
+  }
+  showAddItemForm(category) {
+    this.currentEditId = null;
+    this.currentEditCategory = category || null;
+    document.getElementById('formTitle').textContent = 'Add Item';
+    document.getElementById('itemForm').reset();
+    if (category) document.getElementById('itemCategory').value = category;
+    this.showSection('add-item');
+  }
+  editItem(category, id) {
+    this.currentEditCategory = category;
+    this.currentEditId = id;
+    const item = this.collection[category].find(i => i.id === id);
+    if (!item) return alert('Item not found');
+    document.getElementById('formTitle').textContent = 'Edit Item';
+    document.getElementById('itemName').value = item.name;
+    document.getElementById('itemCategory').value = category;
+    document.getElementById('itemYear').value = item.year;
+    document.getElementById('itemCountry').value = item.country;
+    document.getElementById('itemCondition').value = item.condition;
+    document.getElementById('itemRarity').value = item.rarity;
+    document.getElementById('itemImage').value = item.image || '';
+    document.getElementById('itemDescription').value = item.description || '';
+    document.getElementById('itemHistory').value = item.history || '';
+    document.getElementById('itemNotes').value = item.notes || '';
+    this.showSection('add-item');
+  }
+  saveItem(e) {
+    e.preventDefault();
+    const id = this.currentEditId || 'item_' + Date.now();
+    const category = document.getElementById('itemCategory').value;
+    if (!category) return alert('Select category');
+    const item = {
+      id,
+      category,
+      name: document.getElementById('itemName').value,
+      year: document.getElementById('itemYear').value,
+      country: document.getElementById('itemCountry').value,
+      condition: document.getElementById('itemCondition').value,
+      rarity: document.getElementById('itemRarity').value,
+      image: document.getElementById('itemImage').value,
+      description: document.getElementById('itemDescription').value,
+      history: document.getElementById('itemHistory').value,
+      notes: document.getElementById('itemNotes').value
+    };
+    if (this.currentEditId) {
+      let index = this.collection[this.currentEditCategory].findIndex(i => i.id === this.currentEditId);
+      if (index === -1) return alert('Item not found');
+      if (category === this.currentEditCategory) {
+        this.collection[category][index] = item;
+      } else {
+        this.collection[this.currentEditCategory].splice(index, 1);
+        this.collection[category].push(item);
+      }
+    } else {
+      this.collection[category].push(item);
     }
-
-    saveCountries() {
-        localStorage.setItem('dinky-countries', JSON.stringify(this.countries));
+    this.saveCollection();
+    this.showSection(category);
+  }
+  deleteItem(category, id) {
+    if (!confirm('Confirm delete?')) return;
+    let index = this.collection[category].findIndex(i => i.id === id);
+    if (index === -1) return;
+    this.collection[category].splice(index, 1);
+    this.saveCollection();
+    this.renderItems(category);
+    this.renderDashboard();
+  }
+  cancelEdit() {
+    this.currentEditId=null;
+    this.currentEditCategory=null;
+    this.showSection('dashboard');
+  }
+  exportData() {
+    let dataStr = JSON.stringify(this.collection);
+    let blob = new Blob([dataStr], {type:"application/json"});
+    let url = URL.createObjectURL(blob);
+    let a = document.createElement('a');
+    a.href = url;
+    a.download = 'collection_backup_'+new Date().toISOString().slice(0,10)+'.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+  importData(data) {
+    let json;
+    try { json=JSON.parse(data); } catch { alert('Invalid JSON'); return; }
+    if (!json.stamps || !json.coins || !json.currency) {
+      alert('Invalid data structure');
+      return;
     }
-
-    loadWishlist() {
-        let saved = localStorage.getItem('dinky-wishlist');
-        if(saved) this.wishlist = JSON.parse(saved);
-        else this.wishlist = [];
+    this.collection = json;
+    this.saveCollection();
+    this.renderDashboard();
+  }
+  clearData() {
+    if(!confirm('This will clear all data. Continue?')) return;
+    this.collection={stamps:[],coins:[],currency:[]};
+    this.saveCollection();
+    this.renderDashboard();
+  }
+  changePassword(e) {
+    e.preventDefault();
+    const curr = document.getElementById('currentPassword').value;
+    const newp = document.getElementById('newPassword').value;
+    let savedPass=localStorage.getItem('admin-password')||'admin123';
+    if(curr !== savedPass) {
+      alert('Current password incorrect');
+      return;
     }
-
-    saveWishlist() {
-        localStorage.setItem('dinky-wishlist', JSON.stringify(this.wishlist));
+    if(newp.length<6) {
+      alert('New password must be at least 6 chars');
+      return;
     }
-
-    renderSidebarListeners() {
-        document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', e => {
-                e.preventDefault();
-                this.showSection(item.dataset.section);
-            });
-        });
-    }
-
-    renderDashboard() {
-        const count = {
-            stamps: this.collectionData.stamps.length,
-            coins: this.collectionData.coins.length,
-            currency: this.collectionData.currency.length,
-            countries: new Set([...this.collectionData.stamps,...this.collectionData.coins,...this.collectionData.currency].map(v=>v.country)).size
-        };
-        ['stampsCount','coinsCount','currencyCount','countriesCount'].forEach(id => {
-            document.getElementById(id).textContent = count[id.replace('Count','')];
-        });
-        this.renderRecentItems();
-    }
-
-    renderRecentItems() {
-        let recent = [...this.collectionData.stamps,...this.collectionData.coins,...this.collectionData.currency];
-        recent.sort((a,b)=>b.id.localeCompare(a.id));
-        recent = recent.slice(0,5);
-        const container = document.getElementById('recentItemsList');
-        if(!recent.length) container.innerHTML = '<p>No items yet.</p>';
-        else {
-            container.innerHTML = '<table><tr><th>Name</th><th>Category</th><th>Actions</th></tr>' +
-                recent.map(i=>`<tr><td>${i.name}</td><td>${i.category}</td><td><button onclick="adminManager.editItem('${i.category}','${i.id}')">Edit</button></td></tr>`).join('')+'</table>';
-        }
-    }
-    /* Implement other methods: showSection, showAddItemForm, editItem, saveItem, deleteItem, renderItems, renderCountries, addCountry... */
-
-    showSection(section) {
-        this.currentSection = section;
-        document.querySelectorAll('.content-section').forEach(sec => sec.classList.add('hidden'));
-        document.querySelectorAll('.menu-item').forEach(e => e.classList.remove('active'));
-        document.querySelector(`.menu-item[data-section='${section}']`).classList.add('active');
-        document.getElementById(section+'Section').classList.remove('hidden');
-
-        if(section === 'add-item') this.populateCountryDropdown();
-    }
-
-    populateCountryDropdown() {
-        const sel = document.getElementById('itemCountry');
-        sel.innerHTML = '<option value="">Select Country</option>';
-        this.countries.forEach(c => {
-            const opt = document.createElement('option');
-            opt.value = c;
-            opt.textContent = c;
-            sel.appendChild(opt);
-        });
-    }
-    
-    renderCountries() {
-        const tbody = document.querySelector('#countriesTable tbody');
-        tbody.innerHTML = '';
-        this.countries.forEach((c,i) => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `<td>${c}</td><td><button onclick='adminManager.editCountry(${i})'>Edit</button> <button onclick='adminManager.deleteCountry(${i})'>Delete</button></td>`;
-            tbody.appendChild(tr);
-        });
-    }
-    
-    showAddCountryForm() {
-        this.currentCountryIndex=null;
-        document.getElementById('countryFormTitle').textContent = 'Add Country';
-        document.getElementById('countryForm').reset();
-        document.getElementById('countryFormContainer').classList.remove('hidden');
-        document.getElementById('countriesList').classList.add('hidden');
-    }
-    cancelCountryEdit() {
-        document.getElementById('countryFormContainer').classList.add('hidden');
-        document.getElementById('countriesList').classList.remove('hidden');
-        this.currentCountryIndex=null;
-    }
-    saveCountry(e) {
-        e.preventDefault();
-        const val = document.getElementById('countryNameInput').value.trim();
-        if(!val) {alert('Enter a value'); return;}
-        if(this.currentCountryIndex!=null) this.countries[this.currentCountryIndex]=val;
-        else {
-            if(this.countries.includes(val)) {alert('Already exists'); return;}
-            this.countries.push(val);
-        }
-        this.saveCountries();
-        this.renderCountries();
-        this.cancelCountryEdit();
-        window.dispatchEvent(new CustomEvent('countriesUpdated', {detail:{countries:[...this.countries]}}));
-    }
-    editCountry(i) {
-        this.currentCountryIndex = i;
-        document.getElementById('countryFormTitle').textContent = 'Edit Country';
-        document.getElementById('countryNameInput').value = this.countries[i];
-        document.getElementById('countryFormContainer').classList.remove('hidden');
-        document.getElementById('countriesList').classList.add('hidden');
-    }
-    deleteCountry(i) {
-        if(confirm(`Delete ${this.countries[i]}?`)) {
-            this.countries.splice(i,1);
-            this.saveCountries();
-            this.renderCountries();
-            window.dispatchEvent(new CustomEvent('countriesUpdated', {detail:{countries:[...this.countries]}}));
-        }
-    }
-    /* Rest methods for item add/edit/delete, data import/export, password change etc. should be implemented similarly. */
-
+    localStorage.setItem('admin-password', newp);
+    alert('Password changed');
+    e.target.reset();
+  }
+  showAddItemForm() { this.showSection('add-item'); this.cancelEdit(); }
 }
 
 let adminManager;
 
-function handleLogin(e) {
-    e.preventDefault();
-    const user = document.getElementById('username').value;
-    const pass = document.getElementById('password').value;
-    document.getElementById('loginText').style.display='none';
-    document.getElementById('loginLoading').classList.remove('hidden');
-    setTimeout(() => {
-        const savedPass = localStorage.getItem('admin-password') || 'admin123';
-        if(user==='admin' && pass===savedPass){
-            document.getElementById('loginScreen').style.display='none';
-            document.getElementById('adminDashboard').style.display='flex';
-            adminManager = new AdminManager();
-        } else {
-            document.getElementById('errorMessage').style.display='block';
-            document.getElementById('loginText').style.display='inline';
-            document.getElementById('loginLoading').classList.add('hidden');
-        }
-    }, 1000);
+function handleLogin(e){
+  e.preventDefault();
+  let user=document.getElementById('username').value,
+    pass=document.getElementById('password').value;
+  document.getElementById('loginText').style.display='none';
+  document.getElementById('loginLoading').classList.remove('hidden');
+  setTimeout(()=>{
+    let savedPass=localStorage.getItem('admin-password')||'admin123';
+    if(user==='admin' && pass===savedPass) {
+      document.getElementById('loginScreen').style.display='none';
+      document.getElementById('adminDashboard').style.display='flex';
+      adminManager=new AdminManager();
+    } else {
+      document.getElementById('errorMessage').style.display='block';
+      document.getElementById('loginText').style.display='inline';
+      document.getElementById('loginLoading').classList.add('hidden');
+    }
+  },1000);
 }
 
 function logout(){
-    if(confirm('Logout?')) {
-        document.getElementById('loginScreen').style.display='flex';
-        document.getElementById('adminDashboard').style.display='none';
-        document.getElementById('username').value='';
-        document.getElementById('password').value='';
-        document.getElementById('errorMessage').style.display='none';
-    }
+  if(!confirm('Logout?')) return;
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('adminDashboard').style.display='none';
+  document.getElementById('username').value='';
+  document.getElementById('password').value='';
+  document.getElementById('errorMessage').style.display='none';
 }
 
-/* Other global functions for saving items, import/export, password change etc. */
+function exportData(){
+  if(adminManager) adminManager.exportData();
+}
 
+function handleImport(event){
+  let file=event.target.files[0];
+  if(!file) return;
+  let reader=new FileReader();
+  reader.onload=e=>{
+    if(adminManager) adminManager.importData(e.target.result);
+  };
+  reader.readAsText(file);
+  event.target.value='';
+}
+
+function clearData(){
+  if(adminManager) adminManager.clearData();
+}
+
+function changePassword(event){
+  if(adminManager) adminManager.changePassword(event);
+}
+
+function saveItem(event){
+  if(adminManager) adminManager.saveItem(event);
+}
+
+function cancelEdit(){
+  if(adminManager) adminManager.cancelEdit();
+}
+
+function showAddItemForm(){
+  if(adminManager) adminManager.showAddItemForm();
+}
+
+function editItem(category, id){
+  if(adminManager) adminManager.editItem(category, id);
+}
+
+function deleteItem(category, id){
+  if(adminManager) adminManager.deleteItem(category, id);
+}
+
+function showSection(section){
+  if(adminManager) adminManager.showSection(section);
+}
+
+function showAddCountryForm(){
+  if(adminManager) adminManager.showAddItemForm();
+}
+
+function saveCountry(event){
+  if(adminManager) adminManager.saveCountry(event);
+}
+
+function cancelCountryEdit(){
+  if(adminManager) adminManager.cancelCountryEdit();
+}
+
+function editCountry(idx){
+  if(adminManager) adminManager.editCountry(idx);
+}
+
+function deleteCountry(idx){
+  if(adminManager) adminManager.deleteCountry(idx);
+}
 </script>
 </body>
 </html>
