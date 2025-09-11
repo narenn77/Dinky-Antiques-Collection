@@ -1,462 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dinky's Antiques & Collectibles</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #fafafa;
-      color: #333;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Dinky's Antiques & Collectibles - Premium collection of rare stamps, coins, and currency notes from around the world" />
+    <meta name="keywords" content="antiques, collectibles, stamps, coins, currency, vintage, rare" />
+    <meta property="og:title" content="Dinky's Antiques & Collectibles" />
+    <meta property="og:description" content="Discover rare stamps, coins, and currency notes from our premium antique collection" />
+    <meta property="og:type" content="website" />
+
+    <title>Dinky's Antiques & Collectibles - Premium Collection</title>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D2B48C;
+            --accent-color: #CD853F;
+            --text-dark: #2C1810;
+            --text-light: #6B4423;
+            --background: #FAF8F5;
+            --white: #FFFFFF;
+            --shadow: rgba(139, 69, 19, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--background);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 20px var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle
 
-    header {
-      background: #333f50; /* dark bluish background */
-      color: white;
-      padding: 10px 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 1.8em;
-      text-align: center;
-      color: white; /* title white */
-    }
-
-    header img.logo {
-      position: absolute;
-      left: 20px;
-      height: 40px;
-    }
-
-    header a {
-      position: absolute;
-      right: 20px;
-      color: white; /* email white */
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    header a:hover {
-      color: #b3d9ff; /* lighter blue on hover */
-    }
-
-    /* Filters wrapper with decorative images */
-    .filters-wrapper {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 10px; 
-      margin-bottom: 5px;
-    }
-
-    .filters-images-left {
-      display: flex;
-      gap: 10px;
-      flex-shrink: 0;
-      align-items: flex-start;
-    }
-
-    .filters-images-right {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex-shrink: 0;
-    }
-
-    .filters-images-left .decor-image {
-      width: 150px;
-      height: 100px; /* further reduced height */
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .filters-images-right .decor-image-note {
-      width: 280px;  /* slightly smaller */
-      height: 90px;
-      object-fit: cover;
-      border-radius: 6px;
-    }
-
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .filters input, .filters select {
-      padding: 8px 12px;
-      font-size: 1em;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      min-width: 180px;
-    }
-
-    /* "Check our Collection" links */
-    .jump-links {
-      text-align: center;
-      margin: 5px 0 12px; 
-      font-size: 1em;
-      z-index: 1;
-    }
-
-    .jump-links a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #0066cc;
-      font-weight: bold;
-    }
-
-    .jump-links a:hover {
-      text-decoration: underline;
-    }
-
-    .section {
-      padding: 15px 20px;
-    }
-
-    .items {
-      display: flex;
-      overflow-x: auto;
-      gap: 15px;
-      padding: 10px 0;
-    }
-
-    .item {
-      position: relative;
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 10px;
-      min-width: 240px;
-      text-align: center;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
-    .item img {
-      width: 240px;
-      height: 192px;
-      border-radius: 4px;
-      object-fit: cover;
-      display: block;
-      margin: 0 auto;
-    }
-
-    /* Like/Unlike hover icons */
-    .likes-container {
-      position: absolute;
-      bottom: 5px;
-      right: 5px;
-      display: flex;
-      gap: 5px;
-      font-size: 0.9em;
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-
-    .item:hover .likes-container {
-      opacity: 1;
-    }
-
-    .likes-container span {
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 600px;
-      max-height: 80%;
-      overflow-y: auto;
-    }
-
-    .modal img {
-      max-width: 500px;
-      width: 100%;
-      height: auto;
-      margin: 10px 0;
-      border-radius: 6px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .close {
-      float: right;
-      font-size: 1.5em;
-      cursor: pointer;
-      color: #444;
-    }
-
-    /* Mobile responsive header and filters */
-    @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        align-items: center;
-        padding: 10px;
-        text-align: center;
-        position: relative;
-      }
-
-      header img.logo {
-        position: static;
-        height: 50px;
-        margin-bottom: 10px;
-      }
-
-      header a {
-        position: static;
-        margin-top: 5px;
-      }
-
-      header h1 {
-        font-size: 1.5em;
-        margin: 5px 0;
-      }
-
-      .filters-images-left,
-      .filters-images-right {
-        display: none;
-      }
-
-      .filters-wrapper {
-        flex-direction: column;
-        align-items: center;
-        margin-top: 0;
-      }
-
-      .filters {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        justify-content: center;
-      }
-
-      #yearFilter, #countryFilter {
-        flex: 1 1 45%;
-      }
-
-      #search {
-        flex: 1 1 100%;
-        margin-top: 8px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <img src="images/logo.jpg" alt="Logo" class="logo">
-    <h1>Dinky's Antiques & Collectibles</h1>
-    <a href="mailto:dinkyacsales@gmail.com">dinkyacsales@gmail.com</a>
-  </header>
-
-  <!-- Filters with decorative images -->
-  <div class="filters-wrapper">
-    <div class="filters-images-left">
-      <img src="images/Stamp-Decor.jpg" alt="Stamp" class="decor-image">
-      <img src="images/Coin-Decor.jpg" alt="Coin" class="decor-image">
-    </div>
-
-    <div class="filters">
-      <input type="text" id="search" placeholder="Search by name or description...">
-      <select id="yearFilter">
-        <option value="">All Years</option>
-      </select>
-      <select id="countryFilter">
-        <option value="">All Countries</option>
-      </select>
-    </div>
-
-    <div class="filters-images-right">
-      <img src="images/Note-Decor.jpg" alt="Note" class="decor-image-note">
-    </div>
-  </div>
-
-  <div class="jump-links">
-    <strong>Check our Collection :</strong>
-    <a href="#stamps">Stamps</a> |
-    <a href="#coins">Coins</a> |
-    <a href="#notes">Currency Notes</a>
-  </div>
-
-  <section id="stamps" class="section">
-    <h2>Stamps</h2>
-    <div class="items" id="stamps-list"></div>
-  </section>
-
-  <section id="coins" class="section">
-    <h2>Coins</h2>
-    <div class="items" id="coins-list"></div>
-  </section>
-
-  <section id="notes" class="section">
-    <h2>Currency Notes</h2>
-    <div class="items" id="notes-list"></div>
-  </section>
-
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h3 id="modal-title"></h3>
-      <p id="modal-description"></p>
-      <img id="modal-img-front" src="" alt="">
-      <img id="modal-img-back" src="" alt="" style="display:none;">
-    </div>
-  </div>
-
-  <script>
-    let allData = [];
-
-    async function loadData() {
-      const res = await fetch('data.json');
-      const data = await res.json();
-      allData = data;
-      populateFilters(data);
-      renderItems(data);
-    }
-
-    function populateFilters(data) {
-      const years = [...new Set(data.map(item => item.year))].sort((a,b) => a-b);
-      const countries = [...new Set(data.map(item => item.country))].sort();
-
-      const yearFilter = document.getElementById("yearFilter");
-      const decadeRanges = [];
-      years.forEach(y => {
-        const decade = Math.floor(y/10)*10;
-        if (!decadeRanges.includes(decade)) decadeRanges.push(decade);
-      });
-      decadeRanges.sort((a,b)=>a-b).forEach(decade => {
-        let opt = document.createElement("option");
-        opt.value = decade;
-        opt.textContent = `${decade} - ${decade+9}`;
-        yearFilter.appendChild(opt);
-      });
-
-      const countryFilter = document.getElementById("countryFilter");
-      countries.forEach(c => {
-        let opt = document.createElement("option");
-        opt.value = c;
-        opt.textContent = c;
-        countryFilter.appendChild(opt);
-      });
-    }
-
-    function renderItems(data) {
-      const stampsList = document.getElementById("stamps-list");
-      const coinsList = document.getElementById("coins-list");
-      const notesList = document.getElementById("notes-list");
-      stampsList.innerHTML = coinsList.innerHTML = notesList.innerHTML = "";
-
-      data.forEach(item => {
-        const div = document.createElement("div");
-        div.className = "item";
-
-        let img = document.createElement("img");
-        img.src = item.type === "Stamp" ? item.img : item.imgFront;
-        img.alt = item.name;
-        div.appendChild(img);
-
-        div.innerHTML += `<p><strong>${item.name}</strong></p><p>${item.year} - ${item.country}</p>`;
-
-        // Likes container
-        const likesContainer = document.createElement("div");
-        likesContainer.className = "likes-container";
-
-        const thumbsUp = document.createElement("span");
-        thumbsUp.className = "thumbs-up";
-        thumbsUp.innerHTML = `👍 <span class="like-count">0</span>`;
-
-        const thumbsDown = document.createElement("span");
-        thumbsDown.className = "thumbs-down";
-        thumbsDown.innerHTML = `👎 <span class="unlike-count">0</span>`;
-
-        thumbsUp.addEventListener("click", e => {
-          e.stopPropagation();
-          const countSpan = thumbsUp.querySelector(".like-count");
-          countSpan.textContent = parseInt(countSpan.textContent) + 1;
-        });
-
-        thumbsDown.addEventListener("click", e => {
-          e.stopPropagation();
-          const countSpan = thumbsDown.querySelector(".unlike-count");
-          countSpan.textContent = parseInt(countSpan.textContent) + 1;
-        });
-
-        likesContainer.appendChild(thumbsUp);
-        likesContainer.appendChild(thumbsDown);
-        div.appendChild(likesContainer);
-
-        div.onclick = () => openModal(item);
-
-        if (item.type === "Stamp") stampsList.appendChild(div);
-        else if (item.type === "Coin") coinsList.appendChild(div);
-        else if (item.type === "Currency Note") notesList.appendChild(div);
-      });
-    }
-
-    function applyFilters() {
-      const searchVal = document.getElementById("search").value.toLowerCase();
-      const yearVal = document.getElementById("yearFilter").value;
-      const countryVal = document.getElementById("countryFilter").value;
-
-      const filtered = allData.filter(item => {
-        const matchesSearch =
-          item.name.toLowerCase().includes(searchVal) ||
-          item.description.toLowerCase().includes(searchVal);
-        const matchesYear = !yearVal || (Math.floor(item.year/10)*10 == yearVal);
-        const matchesCountry = !countryVal || item.country === countryVal;
-        return matchesSearch && matchesYear && matchesCountry;
-      });
-
-      renderItems(filtered);
-    }
-
-    function openModal(item) {
-      document.getElementById("modal").style.display = "flex";
-      document.getElementById("modal-title").innerText = item.name + " (" + item.year + ")";
-      document.getElementById("modal-description").innerText = item.description;
-      document.getElementById("modal-img-front").src = item.type === "Stamp" ? item.img : item.imgFront;
-
-      if (item.type !== "Stamp" && item.imgBack) {
-        document.getElementById("modal-img-back").style.display = "block";
-        document.getElementById("modal-img-back").src = item.imgBack;
-      } else {
-        document.getElementById("modal-img-back").style.display = "none";
-      }
-    }
-
-    function closeModal() {
-      document.getElementById("modal").style.display = "none";
-    }
-
-    document.getElementById("search").addEventListener("input", applyFilters);
-    document.getElementById("yearFilter").addEventListener("change", applyFilters);
-    document.getElementById("countryFilter").addEventListener("change", applyFilters);
-
-    loadData();
-  </script>
-</body>
-</html>
