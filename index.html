@@ -61,5 +61,1370 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+            z-index: 1;
+        }
 
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+        .nav-container {
+            background: var(--white);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            padding: 0 1rem;
+        }
+
+        .tab-button {
+            background: none;
+            border: 2px solid var(--secondary-color);
+            color: var(--text-dark);
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab-button:hover,
+        .tab-button.active {
+            background: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        /* Filters Section */
+        .filters-section {
+            background: var(--white);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .filters-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .filters-header h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            padding: 0.8rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            background: var(--white);
+            transition: var(--transition);
+        }
+
+        .filter-group select:focus,
+        .filter-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+        }
+
+        .search-bar {
+            position: relative;
+            grid-column: 1 / -1;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding-left: 3rem;
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-color);
+            color: var(--text-dark);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        /* Collection Section */
+        .collection-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .item-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.15);
+        }
+
+        .item-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .item-card:hover .item-image {
+            transform: scale(1.05);
+        }
+
+        .item-content {
+            padding: 1.5rem;
+        }
+
+        .item-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .item-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .item-detail {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .wishlist-btn {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .wishlist-btn:hover,
+        .wishlist-btn.active {
+            color: #e74c3c;
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .view-btn {
+            background: var(--accent-color);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .view-btn:hover {
+            background: var(--primary-color);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--white);
+            margin: 2% auto;
+            padding: 0;
+            border-radius: var(--border-radius);
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .close {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .close:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .modal-body {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .modal-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .info-section {
+            background: var(--background);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .info-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .modal-body {
+                grid-template-columns: 1fr;
+            }
+
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .collection-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .nav-tabs {
+                gap: 1rem;
+            }
+
+            .tab-button {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 1.5rem 1rem;
+            }
+
+            .filters-section {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            .collection-section {
+                padding: 1rem;
+            }
+
+            .collection-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .modal-content {
+                margin: 5% auto;
+                max-width: 95%;
+            }
+
+            .modal-body {
+                padding: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--secondary-color);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none !important;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            :root {
+                --shadow: rgba(0, 0, 0, 0.5);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="header-content">
+            <h1>Dinky's Antiques & Collectibles</h1>
+            <p>Discover rare stamps, coins, and currency notes from around the world</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-tabs">
+            <button class="tab-button active" data-category="stamps">
+                <i class="fas fa-stamp"></i>
+                Stamps
+            </button>
+            <button class="tab-button" data-category="coins">
+                <i class="fas fa-coins"></i>
+                Coins
+            </button>
+            <button class="tab-button" data-category="currency">
+                <i class="fas fa-money-bill-wave"></i>
+                Currency Notes
+            </button>
+        </div>
+    </nav>
+
+    <!-- Filters Section -->
+    <section class="filters-section">
+        <div class="filters-header">
+            <h2>Find Your Perfect Collectible</h2>
+            <p>Use our advanced filters to discover exactly what you're looking for</p>
+        </div>
+        
+        <div class="filters-grid">
+            <div class="search-bar">
+                <label for="search">Search Items</label>
+                <input type="text" id="search" placeholder="Search by name, description, or keywords..." />
+                <i class="fas fa-search"></i>
+            </div>
+            
+            <div class="filter-group">
+                <label for="year-filter">Year</label>
+                <select id="year-filter">
+                    <option value="">All Years</option>
+                    <option value="2020s">2020s</option>
+                    <option value="2010s">2010s</option>
+                    <option value="2000s">2000s</option>
+                    <option value="1990s">1990s</option>
+                    <option value="1980s">1980s</option>
+                    <option value="1970s">1970s</option>
+                    <option value="1960s">1960s</option>
+                    <option value="1950s">1950s</option>
+                    <option value="Pre-1950">Pre-1950</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="country-filter">Country/Origin</label>
+                <select id="country-filter">
+                    <option value="">All Countries</option>
+                    <option value="USA">United States</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Germany">Germany</option>
+                    <option value="France">France</option>
+                    <option value="Japan">Japan</option>
+                    <option value="China">China</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="condition-filter">Condition</label>
+                <select id="condition-filter">
+                    <option value="">All Conditions</option>
+                    <option value="mint">Mint</option>
+                    <option value="near-mint">Near Mint</option>
+                    <option value="excellent">Excellent</option>
+                    <option value="very-fine">Very Fine</option>
+                    <option value="fine">Fine</option>
+                    <option value="good">Good</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="rarity-filter">Rarity</label>
+                <select id="rarity-filter">
+                    <option value="">All Rarities</option>
+                    <option value="common">Common</option>
+                    <option value="uncommon">Uncommon</option>
+                    <option value="rare">Rare</option>
+                    <option value="very-rare">Very Rare</option>
+                    <option value="extremely-rare">Extremely Rare</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="sort-filter">Sort By</label>
+                <select id="sort-filter">
+                    <option value="name">Name A-Z</option>
+                    <option value="name-desc">Name Z-A</option>
+                    <option value="year">Year (Oldest First)</option>
+                    <option value="year-desc">Year (Newest First)</option>
+                    <option value="rarity">Rarity</option>
+                    <option value="condition">Condition</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="filter-actions">
+            <button class="btn btn-primary" onclick="applyFilters()">
+                <i class="fas fa-filter"></i>
+                Apply Filters
+            </button>
+            <button class="btn btn-secondary" onclick="clearFilters()">
+                <i class="fas fa-undo"></i>
+                Clear All
+            </button>
+        </div>
+    </section>
+
+    <!-- Collection Sections -->
+    <main class="collection-section">
+        <div class="loading">
+            <div class="spinner"></div>
+            <p>Loading collection...</p>
+        </div>
+        
+        <!-- Stamps Section -->
+        <section id="stamps" class="collection-category active">
+            <h2 class="section-title">Premium Stamp Collection</h2>
+            <div class="collection-grid" id="stamps-grid">
+                <!-- Stamp items will be dynamically loaded here -->
+            </div>
+        </section>
+
+        <!-- Coins Section -->
+        <section id="coins" class="collection-category hidden">
+            <h2 class="section-title">Rare Coin Collection</h2>
+            <div class="collection-grid" id="coins-grid">
+                <!-- Coin items will be dynamically loaded here -->
+            </div>
+        </section>
+
+        <!-- Currency Section -->
+        <section id="currency" class="collection-category hidden">
+            <h2 class="section-title">Historic Currency Notes</h2>
+            <div class="collection-grid" id="currency-grid">
+                <!-- Currency items will be dynamically loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number" id="total-items">0</div>
+                <div class="stat-label">Total Items</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="countries-count">0</div>
+                <div class="stat-label">Countries Represented</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="decades-count">0</div>
+                <div class="stat-label">Decades Covered</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="wishlist-count">0</div>
+                <div class="stat-label">Wishlist Items</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Item Details -->
+    <div id="itemModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Item Details</h3>
+                <button class="close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image-container">
+                    <img id="modalImage" class="modal-image" src="" alt="" />
+                </div>
+                <div class="modal-info">
+                    <div class="info-section">
+                        <div class="info-title">Basic Information</div>
+                        <div class="info-grid">
+                            <div><strong>Year:</strong> <span id="modalYear"></span></div>
+                            <div><strong>Country:</strong> <span id="modalCountry"></span></div>
+                            <div><strong>Condition:</strong> <span id="modalCondition"></span></div>
+                            <div><strong>Rarity:</strong> <span id="modalRarity"></span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-section">
+                        <div class="info-title">Description</div>
+                        <p id="modalDescription"></p>
+                    </div>
+                    
+                    <div class="info-section">
+                        <div class="info-title">Historical Context</div>
+                        <p id="modalHistory"></p>
+                    </div>
+                    
+                    <div class="info-section">
+                        <div class="info-title">Collector Notes</div>
+                        <p id="modalNotes"></p>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button class="btn btn-primary" onclick="addToWishlist()">
+                            <i class="fas fa-heart"></i>
+                            Add to Wishlist
+                        </button>
+                        <button class="btn btn-secondary" onclick="shareItem()">
+                            <i class="fas fa-share"></i>
+                            Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Dinky's</h3>
+                <p>We are passionate collectors dedicated to preserving and sharing the world's most fascinating stamps, coins, and currency notes. Our collection spans centuries and continents.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#stamps">Stamp Collection</a></p>
+                <p><a href="#coins">Coin Collection</a></p>
+                <p><a href="#currency">Currency Collection</a></p>
+                <p><a href="#contact">Contact Us</a></p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <p><i class="fas fa-envelope"></i> info@dinkysantiques.com</p>
+                <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Collector's Lane<br />Antique City, AC 12345</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Dinky's Antiques & Collectibles. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced JavaScript with all modern features
+        class CollectionManager {
+            constructor() {
+                this.currentCategory = 'stamps';
+                this.allItems = {};
+                this.filteredItems = [];
+                this.wishlist = this.loadWishlist();
+                this.currentModalItem = null;
+
+                this.initializeData();
+                this.bindEvents();
+                this.loadCategory('stamps');
+            }
+
+            // Sample data initialization
+            initializeData() {
+                // For demo purposes, insert some sample data or load from localStorage here
+                this.allItems = {
+                    stamps: [
+                        {
+                            id: 'stamp1',
+                            name: 'Penny Black 1840',
+                            year: '1840',
+                            country: 'UK',
+                            condition: 'fine',
+                            rarity: 'very-rare',
+                            image: 'https://via.placeholder.com/300x200/8B4513/FFFFFF?text=Penny+Black+1840',
+                            description: "The world's first adhesive postage stamp used in a public postal system.",
+                            history: "Issued on 1 May 1840, the Penny Black was the first adhesive postage stamp used in a public postal system. It featured a profile of Queen Victoria and was printed in black ink.",
+                            notes: "This is a significant piece of postal history and highly sought after by collectors worldwide."
+                        },
+                        {
+                            id: 'stamp2',
+                            name: 'Inverted Jenny 1918',
+                            year: '1918',
+                            country: 'USA',
+                            condition: 'excellent',
+                            rarity: 'extremely-rare',
+                            image: 'https://via.placeholder.com/300x200/8B4513/FFFFFF?text=Inverted+Jenny',
+                            description: "Famous for the printing error that made the airplane appear upside down.",
+                            history: "Only 100 copies of this error stamp exist, making it one of the most valuable stamps in the world.",
+                            notes: "This error occurred during the first day of issue and was quickly discovered and corrected."
+                        }
+                    ],
+                    coins: [
+                        {
+                            id: 'coin1',
+                            name: '1916-D Mercury Dime',
+                            year: '1916',
+                            country: 'USA',
+                            condition: 'very-fine',
+                            rarity: 'rare',
+                            image: 'https://via.placeholder.com/300x200/CD853F/FFFFFF?text=Mercury+Dime+1916',
+                            description: "The key date of the Mercury Dime series with only 264,000 minted.",
+                            history: "The Mercury Dime was minted from 1916 to 1945 and features Liberty wearing a winged cap.",
+                            notes: "The 1916-D is the most sought-after coin in the Mercury Dime series due to its low mintage."
+                        }
+                    ],
+                    currency: [
+                        {
+                            id: 'currency1',
+                            name: '1969 $20 Federal Reserve Note',
+                            year: '1969',
+                            country: 'USA',
+                            condition: 'near-mint',
+                            rarity: 'uncommon',
+                            image: 'https://via.placeholder.com/300x200/D2B48C/FFFFFF?text=1969+Twenty+Dollar',
+                            description: "Last series before security features were added to prevent counterfeiting.",
+                            history: "This series was issued just before major design changes were implemented in the 1970s.",
+                            notes: "Crisp uncirculated examples are becoming increasingly difficult to find."
+                        }
+                    ]
+                };
+
+                this.updateStats();
+            }
+
+            bindEvents() {
+                // Tab switching
+                document.querySelectorAll('.tab-button').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const category = e.target.closest('.tab-button').dataset.category;
+                        this.switchCategory(category);
+                    });
+                });
+
+                // Search functionality
+                document.getElementById('search').addEventListener('input', () => {
+                    this.applyFilters();
+                });
+
+                // Filter changes
+                ['year-filter', 'country-filter', 'condition-filter', 'rarity-filter', 'sort-filter'].forEach(id => {
+                    document.getElementById(id).addEventListener('change', () => {
+                        this.applyFilters();
+                    });
+                });
+
+                // Modal close
+                window.addEventListener('click', (e) => {
+                    const modal = document.getElementById('itemModal');
+                    if (e.target === modal) {
+                        this.closeModal();
+                    }
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        this.closeModal();
+                    }
+                });
+            }
+
+            switchCategory(category) {
+                // Update active tab
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`[data-category="${category}"]`).classList.add('active');
+
+                // Update active section
+                document.querySelectorAll('.collection-category').forEach(section => {
+                    section.classList.add('hidden');
+                    section.classList.remove('active');
+                });
+                
+                const targetSection = document.getElementById(category);
+                targetSection.classList.remove('hidden');
+                targetSection.classList.add('active');
+
+                this.currentCategory = category;
+                this.loadCategory(category);
+            }
+
+            loadCategory(category) {
+                this.showLoading();
+                
+                // Simulate loading delay for better UX
+                setTimeout(() => {
+                    this.renderItems(this.allItems[category] || []);
+                    this.hideLoading();
+                }, 300);
+            }
+
+            showLoading() {
+                document.querySelector('.loading').style.display = 'block';
+            }
+
+            hideLoading() {
+                document.querySelector('.loading').style.display = 'none';
+            }
+
+            renderItems(items) {
+                const grid = document.getElementById(`${this.currentCategory}-grid`);
+                
+                if (items.length === 0) {
+                    grid.innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-light);">
+                            <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                            <h3>No items found</h3>
+                            <p>Try adjusting your filters or search terms</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                grid.innerHTML = items.map(item => `
+                    <div class="item-card fade-in" data-item-id="${item.id}">
+                        <img src="${item.image}" alt="${item.name}" class="item-image" 
+                             onerror="this.src='https://via.placeholder.com/300x200/8B4513/FFFFFF?text=No+Image'">
+                        <div class="item-content">
+                            <h3 class="item-title">${item.name}</h3>
+                            <div class="item-details">
+                                <div class="item-detail">
+                                    <span>Year:</span>
+                                    <span>${item.year}</span>
+                                </div>
+                                <div class="item-detail">
+                                    <span>Country:</span>
+                                    <span>${item.country}</span>
+                                </div>
+                                <div class="item-detail">
+                                    <span>Condition:</span>
+                                    <span class="condition-${item.condition}">${this.formatCondition(item.condition)}</span>
+                                </div>
+                                <div class="item-detail">
+                                    <span>Rarity:</span>
+                                    <span class="rarity-${item.rarity}">${this.formatRarity(item.rarity)}</span>
+                                </div>
+                            </div>
+                            <div class="item-actions">
+                                <button class="wishlist-btn ${this.wishlist.includes(item.id) ? 'active' : ''}" 
+                                        onclick="collectionManager.toggleWishlist('${item.id}')" 
+                                        title="Add to wishlist">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                                <button class="view-btn" onclick="collectionManager.openModal('${item.id}')">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            formatCondition(condition) {
+                const conditions = {
+                    'mint': 'Mint',
+                    'near-mint': 'Near Mint',
+                    'excellent': 'Excellent',
+                    'very-fine': 'Very Fine',
+                    'fine': 'Fine',
+                    'good': 'Good'
+                };
+                return conditions[condition] || condition;
+            }
+
+            formatRarity(rarity) {
+                const rarities = {
+                    'common': 'Common',
+                    'uncommon': 'Uncommon',
+                    'rare': 'Rare',
+                    'very-rare': 'Very Rare',
+                    'extremely-rare': 'Extremely Rare'
+                };
+                return rarities[rarity] || rarity;
+            }
+
+            applyFilters() {
+                const search = document.getElementById('search').value.toLowerCase();
+                const yearFilter = document.getElementById('year-filter').value;
+                const countryFilter = document.getElementById('country-filter').value;
+                const conditionFilter = document.getElementById('condition-filter').value;
+                const rarityFilter = document.getElementById('rarity-filter').value;
+                const sortFilter = document.getElementById('sort-filter').value;
+
+                let filtered = [...(this.allItems[this.currentCategory] || [])];
+
+                // Apply search filter
+                if (search) {
+                    filtered = filtered.filter(item => 
+                        item.name.toLowerCase().includes(search) ||
+                        item.description.toLowerCase().includes(search) ||
+                        item.country.toLowerCase().includes(search)
+                    );
+                }
+
+                // Apply other filters
+                if (yearFilter) {
+                    filtered = filtered.filter(item => {
+                        const year = parseInt(item.year);
+                        switch(yearFilter) {
+                            case '2020s': return year >= 2020;
+                            case '2010s': return year >= 2010 && year < 2020;
+                            case '2000s': return year >= 2000 && year < 2010;
+                            case '1990s': return year >= 1990 && year < 2000;
+                            case '1980s': return year >= 1980 && year < 1990;
+                            case '1970s': return year >= 1970 && year < 1980;
+                            case '1960s': return year >= 1960 && year < 1970;
+                            case '1950s': return year >= 1950 && year < 1960;
+                            case 'Pre-1950': return year < 1950;
+                            default: return true;
+                        }
+                    });
+                }
+
+                if (countryFilter) {
+                    filtered = filtered.filter(item => item.country === countryFilter);
+                }
+
+                if (conditionFilter) {
+                    filtered = filtered.filter(item => item.condition === conditionFilter);
+                }
+
+                if (rarityFilter) {
+                    filtered = filtered.filter(item => item.rarity === rarityFilter);
+                }
+
+                // Apply sorting
+                filtered.sort((a, b) => {
+                    switch(sortFilter) {
+                        case 'name':
+                            return a.name.localeCompare(b.name);
+                        case 'name-desc':
+                            return b.name.localeCompare(a.name);
+                        case 'year':
+                            return parseInt(a.year) - parseInt(b.year);
+                        case 'year-desc':
+                            return parseInt(b.year) - parseInt(a.year);
+                        case 'rarity':
+                            const rarityOrder = {'common': 1, 'uncommon': 2, 'rare': 3, 'very-rare': 4, 'extremely-rare': 5};
+                            return (rarityOrder[a.rarity] || 0) - (rarityOrder[b.rarity] || 0);
+                        case 'condition':
+                            const conditionOrder = {'good': 1, 'fine': 2, 'very-fine': 3, 'excellent': 4, 'near-mint': 5, 'mint': 6};
+                            return (conditionOrder[b.condition] || 0) - (conditionOrder[a.condition] || 0);
+                        default:
+                            return 0;
+                    }
+                });
+
+                this.renderItems(filtered);
+            }
+
+            clearFilters() {
+                document.getElementById('search').value = '';
+                document.getElementById('year-filter').value = '';
+                document.getElementById('country-filter').value = '';
+                document.getElementById('condition-filter').value = '';
+                document.getElementById('rarity-filter').value = '';
+                document.getElementById('sort-filter').value = 'name';
+                
+                this.renderItems(this.allItems[this.currentCategory] || []);
+            }
+
+            openModal(itemId) {
+                const allItemsFlat = [
+                    ...(this.allItems.stamps || []),
+                    ...(this.allItems.coins || []),
+                    ...(this.allItems.currency || [])
+                ];
+                
+                const item = allItemsFlat.find(i => i.id === itemId);
+                if (!item) return;
+
+                this.currentModalItem = item;
+
+                // Populate modal
+                document.getElementById('modalTitle').textContent = item.name;
+                document.getElementById('modalImage').src = item.image;
+                document.getElementById('modalImage').alt = item.name;
+                document.getElementById('modalYear').textContent = item.year;
+                document.getElementById('modalCountry').textContent = item.country;
+                document.getElementById('modalCondition').textContent = this.formatCondition(item.condition);
+                document.getElementById('modalRarity').textContent = this.formatRarity(item.rarity);
+                document.getElementById('modalDescription').textContent = item.description;
+                document.getElementById('modalHistory').textContent = item.history;
+                document.getElementById('modalNotes').textContent = item.notes;
+
+                // Show modal
+                document.getElementById('itemModal').style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+
+            closeModal() {
+                document.getElementById('itemModal').style.display = 'none';
+                document.body.style.overflow = 'auto';
+                this.currentModalItem = null;
+            }
+
+            toggleWishlist(itemId) {
+                const index = this.wishlist.indexOf(itemId);
+                if (index > -1) {
+                    this.wishlist.splice(index, 1);
+                } else {
+                    this.wishlist.push(itemId);
+                }
+                
+                this.saveWishlist();
+                this.updateWishlistDisplay();
+                this.updateStats();
+            }
+
+            addToWishlist() {
+                if (this.currentModalItem) {
+                    this.toggleWishlist(this.currentModalItem.id);
+                }
+            }
+
+            updateWishlistDisplay() {
+                document.querySelectorAll('.wishlist-btn').forEach(btn => {
+                    const itemId = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
+                    btn.classList.toggle('active', this.wishlist.includes(itemId));
+                });
+            }
+
+            loadWishlist() {
+                try {
+                    return JSON.parse(localStorage.getItem('dinky-wishlist') || '[]');
+                } catch {
+                    return [];
+                }
+            }
+
+            saveWishlist() {
+                localStorage.setItem('dinky-wishlist', JSON.stringify(this.wishlist));
+            }
+
+            shareItem() {
+                if (this.currentModalItem && navigator.share) {
+                    navigator.share({
+                        title: this.currentModalItem.name,
+                        text: this.currentModalItem.description,
+                        url: window.location.href
+                    });
+                } else if (this.currentModalItem) {
+                    // Fallback for browsers without native sharing
+                    const url = window.location.href;
+                    const text = `Check out this amazing collectible: ${this.currentModalItem.name}`;
+                    
+                    if (navigator.clipboard) {
+                        navigator.clipboard.writeText(`${text} - ${url}`);
+                        alert('Link copied to clipboard!');
+                    }
+                }
+            }
+
+            updateStats() {
+                const allItemsFlat = [
+                    ...(this.allItems.stamps || []),
+                    ...(this.allItems.coins || []),
+                    ...(this.allItems.currency || [])
+                ];
+
+                const totalItems = allItemsFlat.length;
+                const uniqueCountries = new Set(allItemsFlat.map(item => item.country)).size;
+                const decades = new Set(allItemsFlat.map(item => Math.floor(parseInt(item.year) / 10) * 10)).size;
+                const wishlistCount = this.wishlist.length;
+
+                this.animateCounter('total-items', totalItems);
+                this.animateCounter('countries-count', uniqueCountries);
+                this.animateCounter('decades-count', decades);
+                this.animateCounter('wishlist-count', wishlistCount);
+            }
+
+            animateCounter(elementId, targetValue) {
+                const element = document.getElementById(elementId);
+                const startValue = parseInt(element.textContent) || 0;
+                const duration = 1000;
+                const startTime = Date.now();
+
+                const updateCounter = () => {
+                    const elapsed = Date.now() - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const currentValue = Math.floor(startValue + (targetValue - startValue) * progress);
+                    
+                    element.textContent = currentValue;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCounter);
+                    }
+                };
+
+                updateCounter();
+            }
+        }
+
+        // Global functions for onclick handlers
+        function applyFilters() {
+            collectionManager.applyFilters();
+        }
+
+        function clearFilters() {
+            collectionManager.clearFilters();
+        }
+
+        function closeModal() {
+            collectionManager.closeModal();
+        }
+        
+        // Initialize the application
+        let collectionManager;
+        document.addEventListener('DOMContentLoaded', () => {
+            collectionManager = new CollectionManager();
+        });
+
+        // Performance optimization: Lazy load images
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+    </script>
+</body>
+</html>
