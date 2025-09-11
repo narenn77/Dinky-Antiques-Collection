@@ -3,796 +3,428 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Dinky's Collection Admin Panel</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Lato&display=swap" rel="stylesheet" />
+<title>Dinky's Admin Panel</title>
 <style>
-  /* Root variables and global reset */
-  :root {
-    --primary-color: #8b4513;
-    --secondary-color: #d2b48c;
-    --accent-color: #cd853f;
-    --success-color: #27ae60;
-    --danger-color: #e74c3c;
-    --warning-color: #f39c12;
-    --text-dark: #2c1810;
-    --text-light: #6b4423;
-    --background: #faf8f5;
-    --white: #ffffff;
-    --gray-light: #f8f9fa;
-    --gray-medium: #e9ecef;
-    --shadow: rgba(139,69,19,0.1);
-    --border-radius: 8px;
-    --transition: all 0.3s ease;
-  }
-  * {
-    margin:0; padding:0; box-sizing:border-box;
-  }
-  body {
-    font-family: 'Lato', sans-serif;
-    background-color: var(--background);
-    color: var(--text-dark);
-    line-height: 1.6;
-  }
-  /* Login styles */
-  .login-container {
-    display: flex;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-  }
-  .login-form {
-    background: var(--white);
-    padding: 3rem;
-    border-radius: var(--border-radius);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-  }
-  .login-form h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    color: var(--primary-color);
-    margin-bottom: 2rem;
-  }
-  .login-form .form-group {
-    margin-bottom: 1.5rem;
-    text-align: left;
-  }
-  .login-form label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--text-dark);
-  }
-  .login-form input {
-    padding: 1rem;
-    width: 100%;
-    font-size: 1rem;
-    border: 2px solid var(--gray-medium);
-    border-radius: var(--border-radius);
-    transition: var(--transition);
-  }
-  .login-form input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(139,69,19,0.1);
-  }
-  .login-form button {
-    width: 100%;
-    padding: 1rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border: none;
-    border-radius: var(--border-radius);
-    background: var(--primary-color);
-    color: var(--white);
-    cursor: pointer;
-    transition: var(--transition);
-  }
-  .login-form button:hover {
-    background: var(--accent-color);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    transform: translateY(-3px);
-  }
-  .error-message {
-    color: var(--white);
-    background: var(--danger-color);
-    padding: 1rem;
-    border-radius: var(--border-radius);
-    margin-bottom: 1rem;
-    display: none;
-  }
-  /* Admin layout */
-  .admin-layout {
-    display: flex;
-    height: 100vh;
-    flex-direction: column;
-  }
-  header.admin-header {
-    background: var(--primary-color);
-    color: var(--white);
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  }
-  header.admin-header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-  }
-  .admin-header .controls button {
-    background: transparent;
-    border: 1.5px solid var(--white);
-    border-radius: 6px;
-    color: var(--white);
-    padding: 8px 18px;
-    cursor: pointer;
-    font-weight: 600;
-    margin-left: 10px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  .admin-header .controls button:hover {
-    background-color: var(--white);
-    color: var(--primary-color);
-  }
-  .admin-header .controls button.logout {
-    border-color: var(--danger-color);
-    color: var(--danger-color);
-  }
-  .admin-header .controls button.logout:hover {
-    background-color: var(--danger-color);
-    color: var(--white);
-  }
-  .main-container {
-    flex: 1;
-    display: flex;
-    overflow: hidden;
-  }
-  /* Sidebar */
-  aside.sidebar {
-    width: 260px;
-    background-color: var(--white);
-    padding: 20px 0;
-    box-shadow: 1px 0 6px rgba(0,0,0,0.1);
-    overflow-y: auto;
-  }
-  .sidebar nav ul {
-    list-style: none;
-  }
-  .sidebar nav ul li {
-    margin: 0;
-  }
-  .sidebar nav ul li a {
-    display: flex;
-    align-items: center;
-    padding: 12px 30px;
-    color: var(--text-dark);
-    font-weight: 700;
-    text-decoration: none;
-    border-left: 5px solid transparent;
-    transition: background-color 0.3s ease, border-left-color 0.3s ease;
-  }
-  .sidebar nav ul li a svg {
-    margin-right: 12px;
-    font-size: 18px;
-  }
-  .sidebar nav ul li a.active,
-  .sidebar nav ul li a:hover {
-    background-color: var(--gray-light);
-    border-left-color: var(--primary-color);
-    color: var(--primary-color);
-  }
-  /* Content */
-  main.content {
-    flex: 1;
-    padding: 30px;
-    overflow-y: auto;
-    background-color: var(--background);
-  }
-  main.content > section {
-    display: none;
-  }
-  main.content > section.active {
-    display: block;
-  }
-  /* Buttons */
-  button.btn {
-    font-weight: 600;
-    border-radius: 6px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s ease;
-  }
-  button.btn-primary {
-    background-color: var(--primary-color);
-    color: #fff;
-  }
-  button.btn-primary:hover {
-    background-color: var(--accent-color);
-  }
-  button.btn-danger {
-    background-color: var(--danger-color);
-    color: #fff;
-  }
-  button.btn-danger:hover {
-    background-color: #ab302a;
-  }
-  button.btn-secondary {
-    background-color: var(--gray-medium);
-    color: var(--text-dark);
-  }
-  button.btn-secondary:hover {
-    background-color: var(--gray-light);
-  }
-  /* Form */
-  form {
-    max-width: 700px;
-  }
-  form .form-group {
-    margin-bottom: 1rem;
-  }
-  form label {
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    display: block;
-  }
-  form input, form select, form textarea {
-    width: 100%;
-    padding: 8px 12px;
-    font-size: 1rem;
-    border-radius: 6px;
-    border: 1.5px solid var(--gray-medium);
-    font-family: inherit;
-    transition: border-color 0.3s ease;
-  }
-  form input:focus, form select:focus, form textarea:focus {
-    border-color: var(--primary-color);
-    outline: none;
-  }
-  form textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
-  .form-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    margin-top: 1.5rem;
-  }
-  /* Table */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 10px 0;
-  }
-  table thead tr {
-    background-color: var(--gray-light);
-  }
-  table th, table td {
-    padding: 10px;
-    border: 1px solid var(--gray-medium);
-    text-align: left;
-  }
-  table tbody tr:hover {
-    background-color: var(--gray-light);
-  }
-  /* Responsive */
-  @media (max-width: 900px) {
-    .main-container {
-      flex-direction: column;
-    }
-    aside.sidebar {
-      width: 100%;
-      height: auto;
-      box-shadow: none;
-    }
-  }
+  body { font-family: sans-serif; margin: 0; }
+  .hidden { display: none; }
+  .container { display: flex; height: 100vh; }
+  .sidebar { width: 220px; background: #deb887; padding: 20px; box-sizing: border-box; }
+  .sidebar button { width: 100%; margin-bottom: 10px; padding: 10px; background: #c08040; border: none; color: white; cursor: pointer; }
+  .sidebar button.active { background: #a06020; }
+  .content { flex: 1; padding: 20px; box-sizing: border-box; overflow-y: auto; }
+  form { max-width: 400px; }
+  label { display: block; margin-top: 1em; }
+  input, select, textarea { width: 100%; padding: 8px; margin-top: .5em; box-sizing: border-box; }
+  button.save, button.cancel { margin-top: 1em; padding: 10px 20px; cursor: pointer; }
+  button.cancel { margin-left: 10px; }
 </style>
 </head>
 <body>
 
-<!-- Login Screen -->
-<div id="login-screen" class="login-container">
-  <form id="login-form" class="login-form" onsubmit="handleLogin(event)">
-    <h1><i class="fas fa-shield-alt"></i> Dinky's Admin Login</h1>
-    <div id="login-error" class="error-message"></div>
-    <div class="form-group">
-      <label for="login-username">Username</label>
-      <input id="login-username" type="text" autocomplete="username" required />
-    </div>
-    <div class="form-group">
-      <label for="login-password">Password</label>
-      <input id="login-password" type="password" autocomplete="current-password" required />
-    </div>
-    <button class="btn btn-primary" type="submit"><span id="login-btn-text">Login</span><span id="login-spinner" class="hidden">...</span></button>
-    <p style="margin-top: 1rem; color: #8b4513;">Default: Username: <b>admin</b>, Password: <b>admin123</b></p>
+<div id="loginScreen" style="height: 100vh; display: flex; align-items:center; justify-content:center; background: #8b4513;">
+  <form id="loginForm" style="background: white; padding: 30px; border-radius:10px;" onsubmit="login(event)">
+    <h2>Admin Login</h2>
+    <label>Username <input id="username" required></label>
+    <label>Password <input id="password" type="password" required></label>
+    <button type="submit">Login</button>
+    <p style="color: #8b4513; margin-top: 10px;">Default: admin / admin123</p>
+    <p id="loginError" style="color: red; display: none;">Invalid credentials</p>
   </form>
 </div>
 
-<!-- Admin Dashboard -->
-<div id="admin-dashboard" class="admin-layout" style="display:none;">
-  <header class="admin-header">
-    <h1><i class="fas fa-gem"></i> Dinky's Admin Panel</h1>
-    <div class="controls">
-      <button class="btn btn-primary" onclick="exportData()">Export</button>
-      <button class="btn btn-primary" onclick="document.getElementById('import-file').click()">Import</button>
-      <button class="btn btn-danger" onclick="logout()">Logout</button>
-    </div>
-  </header>
-  <div class="main-container">
-    <aside class="sidebar">
-      <nav>
-        <ul>
-          <li><a href="#" class="menu-item active" data-section="dashboard-section"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-          <li><a href="#" class="menu-item" data-section="stamps-section"><i class="fas fa-stamp"></i> Stamps</a></li>
-          <li><a href="#" class="menu-item" data-section="coins-section"><i class="fas fa-coins"></i> Coins</a></li>
-          <li><a href="#" class="menu-item" data-section="currency-section"><i class="fas fa-money-bill-wave"></i> Currency</a></li>
-          <li><a href="#" class="menu-item" data-section="add-item-section"><i class="fas fa-plus"></i> Add Item</a></li>
-          <li><a href="#" class="menu-item" data-section="countries-section"><i class="fas fa-flag"></i> Countries</a></li>
-          <li><a href="#" class="menu-item" data-section="settings-section"><i class="fas fa-cog"></i> Settings</a></li>
-        </ul>
-      </nav>
-    </aside>
-    <main class="content">
-      <section id="dashboard-section" class="active">
-        <h2>Dashboard Summary</h2>
-        <p><strong>Summary and stats coming soon...</strong></p>
-      </section>
-      <section id="stamps-section" class="hidden">
-        <h2>Manage Stamps</h2>
-        <p>Stamps management coming soon...</p>
-      </section>
-      <section id="coins-section" class="hidden">
-        <h2>Manage Coins</h2>
-        <p>Coins management coming soon...</p>
-      </section>
-      <section id="currency-section" class="hidden">
-        <h2>Manage Currency</h2>
-        <p>Currency management coming soon...</p>
-      </section>
-      <section id="add-item-section" class="hidden">
-        <h2>Add / Edit Item</h2>
-        <form id="item-form" onsubmit="saveItem(event)">
-          <label>Name <input id="item-name" required /></label>
-          <label>Category
-            <select id="item-category" required>
-              <option value="">Select Category</option>
-              <option value="stamps">Stamps</option>
-              <option value="coins">Coins</option>
-              <option value="currency">Currency</option>
+<div id="adminPanel" class="hidden container">
+  <nav class="sidebar">
+    <button class="active" data-section="dashboard">Dashboard</button>
+    <button data-section="items">Items</button>
+    <button data-section="countries">Countries</button>
+    <button data-section="settings">Settings</button>
+    <button style="margin-top: auto; background: #c03020;" id="logoutBtn">Logout</button>
+  </nav>
+  <main class="content">
+    <section id="dashboard" class="section">Welcome to Dashboard</section>
+
+    <section id="items" class="section hidden">
+      <h2>Items</h2>
+      <button onclick="showAddItem()">Add New Item</button>
+      <ul id="itemList"></ul>
+      <div id="itemFormContainer" class="hidden">
+        <h3 id="itemFormTitle">Add Item</h3>
+        <form id="itemForm" onsubmit="saveItem(event)">
+          <label>Name: <input id="itemName" required></label>
+          <label>Category:
+            <select id="itemCategory" required>
+              <option value="">Select</option>
+              <option value="Stamp">Stamp</option>
+              <option value="Coin">Coin</option>
             </select>
           </label>
-          <label>Year <input id="item-year" type="number" required /></label>
-          <label>Country
-            <select id="item-country" required></select>
+          <label>Country:
+            <select id="itemCountry" required></select>
           </label>
-          <label>Condition
-            <select id="item-condition" required>
-              <option value="">Select Condition</option>
-              <option value="mint">Mint</option>
-              <option value="near-mint">Near Mint</option>
-              <option value="excellent">Excellent</option>
-              <option value="very-fine">Very Fine</option>
-              <option value="fine">Fine</option>
-              <option value="good">Good</option>
-            </select>
-          </label>
-          <label>Rarity
-            <select id="item-rarity" required>
-              <option value="">Select Rarity</option>
-              <option value="common">Common</option>
-              <option value="uncommon">Uncommon</option>
-              <option value="rare">Rare</option>
-              <option value="very-rare">Very Rare</option>
-              <option value="extremely-rare">Extremely Rare</option>
-            </select>
-          </label>
-          <label>Image URL <input id="item-image" type="url" /></label>
-          <label>Description <textarea id="item-description" required></textarea></label>
-          <label>Historical Context <textarea id="item-history"></textarea></label>
-          <label>Collector Notes <textarea id="item-notes"></textarea></label>
-          <button type="submit" class="btn btn-primary">Save Item</button>
-          <button type="button" class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
+          <button class="save" type="submit">Save</button>
+          <button class="cancel" type="button" onclick="cancelItemForm()">Cancel</button>
         </form>
-      </section>
-      <section id="countries-section" class="hidden">
-        <h2>Manage Countries</h2>
-        <button class="btn btn-primary" onclick="showAddCountry()">Add Country</button>
-        <table id="countries-table" style="width:100%; margin-top:10px;">
-          <thead>
-            <tr><th>Country</th><th>Actions</th></tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-        <form id="country-form" class="hidden" onsubmit="saveCountry(event)">
-          <label>Country Name <input id="country-name" required /></label>
-          <button type="submit" class="btn btn-primary">Save Country</button>
-          <button type="button" class="btn btn-secondary" onclick="cancelCountry()">Cancel</button>
+      </div>
+    </section>
+
+    <section id="countries" class="section hidden">
+      <h2>Countries</h2>
+      <button onclick="showAddCountry()">Add New Country</button>
+      <ul id="countryList"></ul>
+      <div id="countryFormContainer" class="hidden">
+        <h3 id="countryFormTitle">Add Country</h3>
+        <form id="countryForm" onsubmit="saveCountry(event)">
+          <label>Name: <input id="countryName" required></label>
+          <button class="save" type="submit">Save</button>
+          <button class="cancel" type="button" onclick="cancelCountryForm()">Cancel</button>
         </form>
-      </section>
-      <section id="settings-section" class="hidden">
-        <h2>Settings</h2>
-        <button class="btn btn-primary" onclick="exportData()">Export Data</button>
-        <button class="btn btn-primary" onclick="document.getElementById('import-file').click()">Import Data</button>
-        <input type="file" id="import-file" style="display:none;" onchange="importFile(event)"/>
-        <button class="btn btn-danger" onclick="clearData()">Clear All Data</button>
-        <form onsubmit="changePassword(event)" style="margin-top:20px;">
-          <label>Current Password <input id="current-password" type="password" /></label>
-          <label>New Password <input id="new-password" type="password" /></label>
-          <button type="submit" class="btn btn-primary">Change Password</button>
-        </form>
-      </section>
-    </main>
+      </div>
+    </section>
+
+    <section id="settings" class="section hidden">
+      <h2>Settings</h2>
+      <button onclick="exportData()">Export Data</button>
+      <button onclick="document.getElementById('fileInput').click()">Import Data</button>
+      <input type="file" id="fileInput" accept=".json" style="display:none" onchange="importData(event)">
+      <button onclick="clearData()">Clear All Data</button>
+      <form onsubmit="changePassword(event)">
+        <label>Current Password: <input type="password" id="currentPass"></label>
+        <label>New Password: <input type="password" id="newPass"></label>
+        <button type="submit">Change Password</button>
+      </form>
+    </section>
+  </main>
+</div>
 
 <script>
-  class AdminManager {
-    constructor() {
-      this.collection = { stamps: [], coins: [], currency: [] };
-      this.countries = [];
-      this.editingItemId = null;
-      this.editingItemCategory = null;
-      this.editingCountryIdx = null;
-      this.wishlist = [];
-      this.loadData();
-      this.loadCountries();
-      this.loadWishlist();
-      this.bindEvents();
-      this.renderDashboard();
-      this.renderCountries();
-    }
+  let currentItemEdit = null;
+  let currentCountryEdit = null;
 
-    loadData() {
-      let data = localStorage.getItem("dinky-collection");
-      if(data) this.collection = JSON.parse(data);
-    }
+  const defaultPassword = 'admin123';
 
-    saveData() {
-      localStorage.setItem("dinky-collection", JSON.stringify(this.collection));
-    }
-
-    loadCountries() {
-      let data = localStorage.getItem("dinky-countries");
-      if(data) this.countries = JSON.parse(data);
-      else this.countries = ["USA","UK","Canada","Australia","Germany","France","Japan","China"];
-    }
-
-    saveCountries() {
-      localStorage.setItem("dinky-countries", JSON.stringify(this.countries));
-    }
-
-    loadWishlist() {
-      let data = localStorage.getItem("dinky-wishlist");
-      this.wishlist = data ? JSON.parse(data) : [];
-    }
-
-    saveWishlist() {
-      localStorage.setItem("dinky-wishlist", JSON.stringify(this.wishlist));
-    }
-
-    bindEvents() {
-      document.querySelectorAll(".menu-item").forEach(el => {
-        el.addEventListener("click", e => {
-          e.preventDefault();
-          this.showSection(el.dataset.section);
-        });
-      });
-    }
-
-    showSection(section) {
-      document.querySelectorAll("main.content > section").forEach(s => {
-        s.classList.add("hidden");
-      });
-      document.querySelectorAll(".sidebar .menu-item").forEach(mi => {
-        mi.classList.remove("active");
-      });
-      document.getElementById(`${section}`).classList.remove("hidden");
-      let menuItem = document.querySelector(`.menu-item[data-section="${section}"]`);
-      if(menuItem) menuItem.classList.add("active");
-      // Populate country dropdown if needed
-      if(section === "add-item-section") this.populateCountryDropdown();
-      if(["stamps-section", "coins-section", "currency-section"].includes(section)) this.renderTable(section.replace("-section",""));
-      if(section === "dashboard-section") this.renderDashboard();
-      if(section === "countries-section") this.renderCountries();
-    }
-
-    renderDashboard() {
-      const counts = {
-        stamps: this.collection.stamps.length,
-        coins: this.collection.coins.length,
-        currency: this.collection.currency.length,
-        countries: new Set([...this.collection.stamps, ...this.collection.coins, ...this.collection.currency].map(i => i.country)).size
-      };
-      document.getElementById("stamps-count").textContent = counts.stamps;
-      document.getElementById("coins-count").textContent = counts.coins;
-      document.getElementById("currency-count").textContent = counts.currency;
-      document.getElementById("countries-count").textContent = counts.countries;
-    }
-
-    renderTable(category) {
-      const container = document.getElementById(`${category}-section`);
-      const tableBody = container.querySelector("tbody");
-      tableBody.innerHTML = "";
-      this.collection[category].forEach(item => {
-        let tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${item.name}</td>
-          <td>${item.year}</td>
-          <td>${item.country}</td>
-          <td>${item.condition}</td>
-          <td>${item.rarity}</td>
-          <td>
-            <button onclick="adminManager.editItem('${category}', '${item.id}')">Edit</button>
-            <button onclick="adminManager.deleteItem('${category}', '${item.id}')">Delete</button>
-          </td>
-        `;
-        tableBody.appendChild(tr);
-      });
-    }
-
-    populateCountryDropdown() {
-      const select = document.getElementById("item-country");
-      select.innerHTML = '<option value="">Select Country</option>';
-      this.countries.forEach(c => {
-        let option = document.createElement("option");
-        option.value = c;
-        option.textContent = c;
-        select.appendChild(option);
-      });
-    }
-
-    showAddCountry() {
-      this.editingCountryIdx = null;
-      document.getElementById("country-form").reset();
-      document.getElementById("country-form").classList.remove("hidden");
-      document.querySelector("#countries-section table").classList.add("hidden");
-    }
-
-    saveCountry(e) {
-      e.preventDefault();
-      const val = document.getElementById("country-name").value.trim();
-      if(!val) return alert("Enter country name");
-      if(this.editingCountryIdx !== null){
-        this.countries[this.editingCountryIdx] = val;
-      } else {
-        if(this.countries.includes(val)) return alert("Country exists");
-        this.countries.push(val);
-      }
-      this.saveCountries();
-      this.renderCountries();
-      document.getElementById("country-form").classList.add("hidden");
-      document.querySelector("#countries-section table").classList.remove("hidden");
-      this.editingCountryIdx = null;
-    }
-
-    cancelCountry() {
-      document.getElementById("country-form").classList.add("hidden");
-      document.querySelector("#countries-section table").classList.remove("hidden");
-      this.editingCountryIdx = null;
-    }
-
-    editCountry(idx) {
-      this.editingCountryIdx = idx;
-      document.getElementById("country-name").value = this.countries[idx];
-      document.getElementById("country-form").classList.remove("hidden");
-      document.querySelector("#countries-section table").classList.add("hidden");
-    }
-
-    deleteCountry(idx) {
-      if(!confirm("Delete country?")) return;
-      this.countries.splice(idx, 1);
-      this.saveCountries();
-      this.renderCountries();
-    }
-
-    editItem(category, id) {
-      this.editingItemId = id;
-      this.editingItemCategory = category;
-      let item = this.collection[category].find(i => i.id === id);
-      if(!item) return alert("Item not found");
-      document.getElementById("item-name").value = item.name;
-      document.getElementById("item-category").value = category;
-      document.getElementById("item-year").value = item.year;
-      document.getElementById("item-country").value = item.country;
-      document.getElementById("item-condition").value = item.condition;
-      document.getElementById("item-rarity").value = item.rarity;
-      document.getElementById("item-image").value = item.image || "";
-      document.getElementById("item-description").value = item.description || "";
-      document.getElementById("item-history").value = item.history || "";
-      document.getElementById("item-notes").value = item.notes || "";
-      this.showSection("add-item-section");
-    }
-
-    saveItem(e) {
-      e.preventDefault();
-      const id = this.editingItemId || `item_${Date.now()}`;
-      const category = document.getElementById("item-category").value;
-      if(!category) return alert("Select category");
-      let item = {
-        id: id,
-        name: document.getElementById("item-name").value,
-        category: category,
-        year: document.getElementById("item-year").value,
-        country: document.getElementById("item-country").value,
-        condition: document.getElementById("item-condition").value,
-        rarity: document.getElementById("item-rarity").value,
-        image: document.getElementById("item-image").value,
-        description: document.getElementById("item-description").value,
-        history: document.getElementById("item-history").value,
-        notes: document.getElementById("item-notes").value
-      };
-      if(this.editingItemId){
-        let idx = this.collection[this.editingItemCategory].findIndex(i => i.id === this.editingItemId);
-        if(idx !== -1){
-          if(category !== this.editingItemCategory) {
-            this.collection[this.editingItemCategory].splice(idx, 1);
-            this.collection[category].push(item);
-          } else {
-            this.collection[category][idx] = item;
-          }
-        }
-      } else {
-        this.collection[category].push(item);
-      }
-      this.saveData();
-      this.renderTable(category);
-      this.renderDashboard();
-      this.editingItemId = null;
-      this.editingItemCategory = null;
-      this.showSection("dashboard-section");
-    }
-
-    deleteItem(category, id) {
-      if(!confirm("Delete item?")) return;
-      let idx = this.collection[category].findIndex(i => i.id === id);
-      if(idx === -1) return;
-      this.collection[category].splice(idx, 1);
-      this.saveData();
-      this.renderTable(category);
-      this.renderDashboard();
-    }
-
-    cancelEdit() {
-      this.editingItemId = null;
-      this.editingItemCategory = null;
-      this.showSection("dashboard-section");
-    }
-  }
-
-  var adminManager;
-
-  function handleLogin(e) {
+  function login(e) {
     e.preventDefault();
-    let username = document.getElementById("login-username").value.trim();
-    let password = document.getElementById("login-password").value.trim();
-    document.getElementById("login-btn-text").style.display = "none";
-    document.getElementById("login-spinner").style.display = "inline";
-    setTimeout(() => {
-      let savedPassword = localStorage.getItem("admin-password") || "admin123";
-      if(username === "admin" && password === savedPassword){
-        document.getElementById("login-screen").style.display = "none";
-        document.getElementById("admin-dashboard").style.display = "flex";
-        adminManager = new AdminManager();
-      } else {
-        document.getElementById("login-error").style.display = "block";
-        document.getElementById("login-btn-text").style.display = "inline";
-        document.getElementById("login-spinner").style.display = "none";
-      }
-    }, 1000);
+    const user = document.getElementById('username').value.trim();
+    const pass = document.getElementById('password').value.trim();
+    const error = document.getElementById('loginError');
+    if(user === 'admin' && pass === (localStorage.getItem('adminPass')|| defaultPassword)) {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('adminPanel').classList.remove('hidden');
+      initializeApp();
+    } else {
+      error.style.display = 'block';
+    }
   }
 
   function logout() {
-    if(!confirm("Logout?")) return;
-    adminManager = null;
-    document.getElementById("login-screen").style.display = "flex";
-    document.getElementById("admin-dashboard").style.display = "none";
-    document.getElementById("login-error").style.display = "none";
-    document.getElementById("login-username").value = "";
-    document.getElementById("login-password").value = "";
+    if(confirm('Logout?')) {
+      document.getElementById('loginScreen').style.display = 'flex';
+      document.getElementById('adminPanel').classList.add('hidden');
+      clearForms();
+      currentItemEdit = null;
+      currentCountryEdit = null;
+    }
   }
 
+  function initializeApp() {
+    loadData();
+    loadCountries();
+    bindMenu();
+    showSection('dashboard');
+  }
+
+  // Sidebar Menu
+  function bindMenu() {
+    document.querySelectorAll('.sidebar button[data-section]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const sec = btn.getAttribute('data-section');
+        showSection(sec);
+      });
+    });
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+  }
+
+  function showSection(name) {
+    document.querySelectorAll('main .section').forEach(s => s.classList.add('hidden'));
+    document.getElementById(name).classList.remove('hidden');
+    document.querySelectorAll('.sidebar button').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.sidebar button[data-section="${name}"]`).classList.add('active');
+  }
+
+  // Data Handling
+  function loadData() {
+    // Load items
+    let data = localStorage.getItem('collection');
+    if(data) window.collection = JSON.parse(data);
+    else window.collection = { stamps: [], coins: [] };
+    renderItemsList();
+  }
+
+  function saveData() {
+    localStorage.setItem('collection', JSON.stringify(window.collection));
+    renderItemsList();
+  }
+
+  function loadCountries() {
+    let data = localStorage.getItem('countries');
+    if(data) window.countries = JSON.parse(data);
+    else window.countries = ['USA', 'UK', 'France', 'Germany', 'Japan'];
+    renderCountryList();
+  }
+
+  function saveCountries() {
+    localStorage.setItem('countries', JSON.stringify(window.countries));
+    renderCountryList();
+  }
+
+  // Items
+  function renderItemsList() {
+    let ul = document.getElementById('itemList');
+    ul.innerHTML = '';
+    ['stamps', 'coins'].forEach(cat => {
+      if(collection[cat]) {
+        collection[cat].forEach(item => {
+          let li = document.createElement('li');
+          li.textContent = `${item.name} (${cat})`;
+          let editBtn = document.createElement('button');
+          editBtn.textContent = 'Edit';
+          editBtn.addEventListener('click', () => editItem(cat, item.id));
+          let delBtn = document.createElement('button');
+          delBtn.textContent = 'Delete';
+          delBtn.addEventListener('click', () => deleteItem(cat, item.id));
+          li.appendChild(editBtn);
+          li.appendChild(delBtn);
+          ul.appendChild(li);
+        });
+      }
+    });
+  }
+
+  function showAddItem() {
+    currentItemEdit = null;
+    document.getElementById('itemForm').reset();
+    showSection('add-item-section');
+    populateCountryOptions();
+  }
+
+  function editItem(cat, id) {
+    currentItemEdit = { cat, id };
+    const item = collection[cat].find(i => i.id === id);
+    if(!item) return alert('Item not found');
+    document.getElementById('itemName').value = item.name;
+    document.getElementById('itemCategory').value = cat;
+    document.getElementById('itemYear').value = item.year;
+    document.getElementById('itemCountry').value = item.country;
+    document.getElementById('itemCondition').value = item.condition;
+    document.getElementById('itemRarity').value = item.rarity;
+    document.getElementById('itemImage').value = item.image || '';
+    document.getElementById('itemDescription').value = item.description;
+    document.getElementById('itemHistory').value = item.history || '';
+    document.getElementById('itemNotes').value = item.notes || '';
+    showSection('add-item-section');
+    populateCountryOptions();
+  }
+
+  function saveItem(e) {
+    e.preventDefault();
+    const name = document.getElementById('itemName').value.trim();
+    const cat = document.getElementById('itemCategory').value;
+    if(!name || !cat) return alert('Name and category required.');
+    let dataItem = {
+      id: currentItemEdit ? currentItemEdit.id : (Date.now().toString()),
+      name,
+      category: cat,
+      year: document.getElementById('itemYear').value.trim(),
+      country: document.getElementById('itemCountry').value,
+      condition: document.getElementById('itemCondition').value,
+      rarity: document.getElementById('itemRarity').value,
+      image: document.getElementById('itemImage').value.trim(),
+      description: document.getElementById('itemDescription').value.trim(),
+      history: document.getElementById('itemHistory').value.trim(),
+      notes: document.getElementById('itemNotes').value.trim()
+    };
+    if(currentItemEdit) {
+      // Update existing
+      let idx = collection[currentItemEdit.cat].findIndex(i => i.id === currentItemEdit.id);
+      if(idx !== -1) {
+        if(currentItemEdit.cat === cat) {
+          collection[cat][idx] = dataItem;
+        } else {
+          collection[currentItemEdit.cat].splice(idx,1);
+          collection[cat].push(dataItem);
+        }
+      }
+    } else {
+      collection[cat].push(dataItem);
+    }
+    saveData();
+    currentItemEdit = null;
+    showSection('items');
+  }
+
+  function deleteItem(cat, id) {
+    if(!confirm('Delete this item?')) return;
+    let idx = collection[cat].findIndex(i => i.id === id);
+    if(idx !== -1) {
+      collection[cat].splice(idx,1);
+      saveData();
+    }
+  }
+
+  function cancelItemForm() {
+    currentItemEdit = null;
+    showSection('items');
+  }
+
+  // Countries
+  function renderCountryList() {
+    let ul = document.getElementById('countryList');
+    ul.innerHTML = '';
+    countries.forEach((c, idx) => {
+      let li = document.createElement('li');
+      li.textContent = c + ' ';
+      let editBtn = document.createElement('button');
+      editBtn.textContent = 'Edit';
+      editBtn.addEventListener('click', () => editCountry(idx));
+      let delBtn = document.createElement('button');
+      delBtn.textContent = 'Delete';
+      delBtn.addEventListener('click', () => deleteCountry(idx));
+      li.appendChild(editBtn);
+      li.appendChild(delBtn);
+      ul.appendChild(li);
+    });
+  }
+
+  function showAddCountry() {
+    currentCountryEdit = null;
+    document.getElementById('countryForm').reset();
+    document.getElementById('countryForm').classList.remove('hidden');
+    document.getElementById('countryList').classList.add('hidden');
+  }
+
+  function saveCountry(e) {
+    e.preventDefault();
+    const val = document.getElementById('countryName').value.trim();
+    if(!val) return alert('Please enter a country name.');
+    if(currentCountryEdit === null) {
+      if(countries.includes(val)) return alert('Country already exists.');
+      countries.push(val);
+    } else {
+      countries[currentCountryEdit] = val;
+    }
+    currentCountryEdit = null;
+    saveCountries();
+    renderCountryList();
+    cancelCountryForm();
+  }
+
+  function cancelCountryForm() {
+    document.getElementById('countryForm').classList.add('hidden');
+    document.getElementById('countryList').classList.remove('hidden');
+  }
+
+  function editCountry(idx) {
+    currentCountryEdit = idx;
+    document.getElementById('countryName').value = countries[idx];
+    document.getElementById('countryForm').classList.remove('hidden');
+    document.getElementById('countryList').classList.add('hidden');
+  }
+
+  function deleteCountry(idx) {
+    if(!confirm('Delete country?')) return;
+    countries.splice(idx,1);
+    saveCountries();
+    renderCountryList();
+  }
+
+  // Helpers
+  function populateCountryOptions() {
+    let select = document.getElementById('itemCountry');
+    select.innerHTML = '<option value="">Select country</option>';
+    countries.forEach(c => {
+      let opt = document.createElement('option');
+      opt.value = c;
+      opt.textContent = c;
+      select.appendChild(opt);
+    });
+  }
+
+  // Data functions
   function exportData() {
     if(!adminManager) return;
-    let dataStr = JSON.stringify(adminManager.collection, null, 2);
-    let blob = new Blob([dataStr], {type:"application/json"});
+    let data = JSON.stringify(adminManager.collection, null, 2);
+    let blob = new Blob([data], {type: "application/json"});
     let url = URL.createObjectURL(blob);
-    let a = document.createElement("a");
+    let a = document.createElement('a');
     a.href = url;
-    a.download = "dinky_collection_" + new Date().toISOString().slice(0, 10) + ".json";
+    a.download = 'dinky-backup-' + new Date().toISOString().split('T')[0] + '.json';
     a.click();
-    a.remove();
     URL.revokeObjectURL(url);
   }
 
-  function importFile(event) {
+  function importData(e) {
     if(!adminManager) return;
-    let file = event.target.files[0];
-    if(!file) return;
+    let f = e.target.files[0];
+    if(!f) return;
     let reader = new FileReader();
-    reader.onload = function(e){
+    reader.onload = function(evt) {
       try {
-        let json = JSON.parse(e.target.result);
-        if(!json.stamps || !json.coins || !json.currency) throw "Invalid data structure";
-        adminManager.collection = json;
+        let data = JSON.parse(evt.target.result);
+        if(!data.stamps || !data.coins || !data.currency) throw 'Invalid data';
+        adminManager.collection = data;
         adminManager.saveData();
-        adminManager.renderTable("stamps");
-        adminManager.renderTable("coins");
-        adminManager.renderTable("currency");
-        adminManager.renderDashboard();
-        alert("Data imported successfully.");
-        event.target.value = "";
+        adminManager.renderTable('stamps');
+        adminManager.renderTable('coins');
+        adminManager.renderTable('currency');
+        adminManager.renderItemsList();
+        alert('Data imported');
       } catch {
-        alert("Invalid JSON file.");
+        alert('Invalid JSON file');
       }
+      e.target.value = null;
     };
-    reader.readAsText(file);
+    reader.readAsText(f);
   }
 
-  function clearData(){
+  function clearData() {
     if(!adminManager) return;
-    if(!confirm("This will delete all data permanently. Continue?")) return;
+    if(!confirm('Clear all data?')) return;
     adminManager.collection = { stamps: [], coins: [], currency: [] };
     adminManager.saveData();
-    adminManager.renderTable("stamps");
-    adminManager.renderTable("coins");
-    adminManager.renderTable("currency");
-    adminManager.renderDashboard();
-    alert("All data cleared.");
+    adminManager.renderTable('stamps');
+    adminManager.renderTable('coins');
+    adminManager.renderTable('currency');
+    adminManager.renderItemsList();
   }
 
-  function changePassword(e){
+  function changePassword(e) {
     e.preventDefault();
-    if(!adminManager) return;
-    let curr = document.getElementById("current-password").value;
-    let newp = document.getElementById("new-password").value;
-    let saved = localStorage.getItem("admin-password") || "admin123";
-    if(curr !== saved) return alert("Current password is incorrect");
-    if(newp.length <6) return alert("New password must be 6 or more characters");
-    localStorage.setItem("admin-password", newp);
-    alert("Password changed successfully!");
+    let current = document.getElementById('currentPass').value;
+    let newp = document.getElementById('newPass').value;
+    let saved = localStorage.getItem('adminPass') || 'admin123';
+    if(current !== saved) return alert('Wrong current password');
+    if(newp.length < 6) return alert('Password must be min 6 characters');
+    localStorage.setItem('adminPass', newp);
+    alert('Password changed');
     e.target.reset();
   }
 
-  function saveItem(e){
-    if(adminManager) adminManager.saveItem(e);
-  }
+  // Initialization
+  let adminManager;
 
-  function cancelEdit(){
-    if(adminManager) adminManager.cancelEdit();
-  }
-
-  function editItem(category, id){
-    if(adminManager) adminManager.editItem(category, id);
-  }
-
-  function deleteItem(category, id){
-    if(adminManager) adminManager.deleteItem(category, id);
-  }
-
-  function showAddCountry(){
-    if(adminManager) adminManager.showAddCountry();
-  }
-
-  function saveCountry(e){
-    if(adminManager) adminManager.saveCountry(e);
-  }
-
-  function cancelCountry(){
-    if(adminManager) adminManager.cancelCountry();
-  }
-
-  function editCountry(i){
-    if(adminManager) adminManager.editCountry(i);
-  }
-
-  function deleteCountry(i){
-    if(adminManager) adminManager.deleteCountry(i);
-  }
+  document.querySelector('#loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const user = document.getElementById('username').value.trim();
+    const pass = document.getElementById('password').value.trim();
+    const error = document.getElementById('loginError');
+    if(user === 'admin' && pass === (localStorage.getItem('adminPass') || 'admin123')) {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('adminPanel').style.display = 'flex';
+      adminManager = new AdminManager();
+    } else {
+      error.style.display = 'block';
+    }
+  });
 
 </script>
 </body>
