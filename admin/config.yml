@@ -1,1 +1,48 @@
+backend:
+  name: github
+  repo: narenn77/Dinky-Antiques-Collection   # replace with your repo name
+  branch: main                               # or master, depending on your default branch
+
+media_folder: "images/uploads"               # where uploaded images will go
+public_folder: "/images/uploads"             # path for the website to use
+
+collections:
+  - name: "stamps"
+    label: "Stamps"
+    folder: "content/stamps"
+    create: true
+    slug: "{{year}}-{{country}}"
+    fields:
+      - { name: "title", label: "Title", widget: "string" }
+      - { name: "country", label: "Country", widget: "string" }
+      - { name: "year", label: "Year", widget: "number" }
+      - { name: "description", label: "Description", widget: "text" }
+      - { name: "image", label: "Front Image", widget: "image" }
+      - { name: "imageBack", label: "Back Image", widget: "image", required: false }
+
+  - name: "coins"
+    label: "Coins"
+    folder: "content/coins"
+    create: true
+    slug: "{{year}}-{{country}}"
+    fields:
+      - { name: "title", label: "Title", widget: "string" }
+      - { name: "country", label: "Country", widget: "string" }
+      - { name: "year", label: "Year", widget: "number" }
+      - { name: "description", label: "Description", widget: "text" }
+      - { name: "image", label: "Front Image", widget: "image" }
+      - { name: "imageBack", label: "Back Image", widget: "image", required: false }
+
+  - name: "notes"
+    label: "Currency Notes"
+    folder: "content/notes"
+    create: true
+    slug: "{{year}}-{{country}}"
+    fields:
+      - { name: "title", label: "Title", widget: "string" }
+      - { name: "country", label: "Country", widget: "string" }
+      - { name: "year", label: "Year", widget: "number" }
+      - { name: "description", label: "Description", widget: "text" }
+      - { name: "image", label: "Front Image", widget: "image" }
+      - { name: "imageBack", label: "Back Image", widget: "image", required: false }
 
